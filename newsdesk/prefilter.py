@@ -42,6 +42,9 @@ def assign_tracks(item: Item, source: Source, compiled=None) -> list[str]:
 
     data-ai counts only alongside an aid signal (or a data-ai source), and nl
     only alongside aid or data-ai, so generic tech or Dutch news is excluded.
+    nl needs an NL keyword, a curated NL source, or Dutch language from a .nl
+    publisher: Dutch-language search results also include Belgian and
+    machine-translated foreign pages.
     """
     hits = matches(f"{item.title} {item.excerpt}", compiled)
     if not source.prefilter:
@@ -54,7 +57,8 @@ def assign_tracks(item: Item, source: Source, compiled=None) -> list[str]:
             tracks.add("data-ai")
     if not tracks & {"aid", "data-ai"}:
         return []
-    if "nl" in hits or item.lang == "nl" or "nl" in source.tracks:
+    dutch_publisher = item.lang == "nl" and (item.publisher_domain or "").endswith(".nl")
+    if "nl" in hits or dutch_publisher or (not source.prefilter and "nl" in source.tracks):
         tracks.add("nl")
     if "data-ai" in hits and "aid" in tracks:
         tracks.add("data-ai")

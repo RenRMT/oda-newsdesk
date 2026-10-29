@@ -3,6 +3,7 @@ from collections import Counter
 from datetime import datetime, timedelta
 
 from newsdesk import ROOT, config
+from newsdesk.cluster import build_clusters, describe, is_hot, needs_description, rare_tokens
 from newsdesk.dedupe import dedupe
 from newsdesk.embed import Embedder, VectorCache
 from newsdesk.enrich import enrich, estimate_cost, select_for_enrichment
@@ -49,7 +50,7 @@ def ingest(store: Store, now: datetime, dry_run: bool = False) -> tuple[list[Ite
         kept = 0
         for entry in res.entries:
             item = normalise(entry, src, now)
-            if not item.title or item.lang not in settings["languages"]:
+            if not item.title or item.lang not in settings["languages"] or config.excluded(item):
                 continue
             item.tracks = assign_tracks(item, src)
             if item.tracks:
@@ -91,11 +92,14 @@ def ingest(store: Store, now: datetime, dry_run: bool = False) -> tuple[list[Ite
     return new_items, run
 
 
-def _score(store: Store, items: list[Item], now: datetime, settings: dict) -> None:
+def _embedding(settings: dict) -> tuple[Embedder, VectorCache]:
     emb_cfg = settings["embedding"]
     cache_dir = ROOT / emb_cfg["cache_dir"]
-    embedder = Embedder(emb_cfg["model"], cache_dir)
-    cache = VectorCache(cache_dir / "vectors.npz")
+    return Embedder(emb_cfg["model"], cache_dir), VectorCache(cache_dir / "vectors.npz")
+
+
+def _score(store: Store, items: list[Item], now: datetime, settings: dict) -> None:
+    embedder, cache = _embedding(settings)
     score_items(items, embedder, Scorer(embedder.embed, config.tracks()), cache)
     keep = {i.id for i in store.load_items(since=now - timedelta(days=14))} | {i.id for i in items}
     cache.save(keep)
@@ -105,6 +109,7 @@ def enrich_step(store: Store, now: datetime, run: dict, backend: str | None = No
     settings = config.settings()
     llm_cfg = settings["llm"]
     recent = store.load_items(since=now - timedelta(days=llm_cfg["retry_window_days"]))
+    recent = [i for i in recent if not config.excluded(i)]
     todo = select_for_enrichment(recent, now, config.threshold_for, llm_cfg)
     if not todo:
         log.info("nothing to enrich")
@@ -122,11 +127,45 @@ def enrich_step(store: Store, now: datetime, run: dict, backend: str | None = No
     log.info("enriched %d items: %s", len(done), {k: stats[k] for k in ("ok", "refused", "invalid", "error")})
 
 
+def cluster_step(store: Store, now: datetime, run: dict, use_llm: bool = True, backend: str | None = None) -> None:
+    """Group recent visible items into stories, score them, and describe hot ones with the LLM."""
+    settings = config.settings()
+    hot_cfg = settings["hot"]
+    corpus = store.load_items(since=now - timedelta(days=settings["site_window_days"]))
+    window = now - timedelta(days=hot_cfg["window_days"])
+    items = [i for i in corpus if i.published >= window and config.shown(i)]
+
+    embedder, cache = _embedding(settings)
+    vectors = score_items(items, embedder, None, cache)
+    cache.save({i.id for i in corpus if i.fetched >= now - timedelta(days=14)} | set(vectors))
+
+    weights = {s.id: s.weight for s in config.sources()}
+    clusters = build_clusters(items, vectors, rare_tokens(corpus, hot_cfg["anchor_max_df"]), now, hot_cfg,
+                              lambda i: weights.get(i.source_id, 1.0), store.load_clusters())
+    hot = [c for c in clusters if is_hot(c, hot_cfg)]
+    stats = {"clusters": len(clusters), "hot": len(hot)}
+    todo = [c for c in hot if needs_description(c)][: hot_cfg["max_llm_per_run"]]
+    if use_llm and todo:
+        llm_cfg = settings["llm"]
+        try:
+            llm = get_backend(llm_cfg, "enrich", backend)
+        except BackendUnavailable as e:
+            log.warning("cluster headlines skipped: %s", e)
+        else:
+            by_id = {i.id: i for i in items}
+            stats["llm"] = describe(todo, by_id, llm, llm_cfg["concurrency"].get(llm.name, 1))
+            stats["llm"]["cost_usd"] = estimate_cost(stats["llm"], llm_cfg["pricing"])
+    store.save_clusters(clusters, now)
+    run["hot"] = stats
+    log.info("%d multi-publisher clusters, %d hot", len(clusters), len(hot))
+
+
 def run_all(store: Store, now: datetime, use_llm: bool = True, backend: str | None = None) -> None:
     _, run = ingest(store, now)
     try:
         if use_llm:
             enrich_step(store, now, run, backend)
+        cluster_step(store, now, run, use_llm, backend)
     finally:
         store.add_run_stats(run)  # new items are already stored; always record the run
 

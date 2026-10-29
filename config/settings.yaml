@@ -45,6 +45,31 @@ dedupe:
   title_window_days: 3
   seen_retention_days: 60
 
-hot: {window_days: 7, sim_threshold: 0.82, min_sources: 3}
+# Hot stories: visible items from the last window_days are grouped greedily. An item joins
+# a cluster when its cosine similarity to the centroid is >= sim_threshold, it shares a track,
+# and it shares a rare word (one in <= anchor_max_df of the last 30 days' items). Tuned on
+# real data: 0.82 found nothing; below 0.70 unrelated "aid cuts" stories merge.
+hot:
+  window_days: 7
+  sim_threshold: 0.70
+  anchor_max_df: 0.05
+  min_sources: 3          # distinct publishers for a story to be "hot"
+  rising_velocity: 2      # new publishers in 24h for a "rising" badge
+  max_llm_per_run: 20     # hot clusters (re)described per run; cached until membership changes
+
+# Items dropped at fetch time and hidden if already stored. Publishers are the ids shown
+# in data/items (slug of the Google News publisher name for catch-all queries).
+# Title patterns are case-insensitive regexes; the LLM's on_topic check catches the rest.
+exclude:
+  publishers:
+    - vietnam-vn          # machine-translated Vietnamese state media in the NL Google News results
+  title_patterns:
+    - '\bvacature'
+    - '\bvacanc(y|ies)\b'
+    - '\bjob (opening|vacancy|posting)'
+    - '\bwe(''re| are) hiring\b'
+    - '\b\d+\s*(uur|hours) per (week|wk)\b'
+    - '\((m/v|m/v/x|m/f|m/f/d|v/m)\)'
+    - '\bcareer hub\b'
 
 site_window_days: 30      # items exported to recent.json

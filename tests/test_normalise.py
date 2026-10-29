@@ -42,6 +42,9 @@ def test_normalise_uses_entry_publisher_override():
     entry = RawEntry(source_id="gn", title="Aid cuts bite", url="https://x.org/a", publisher="devex", publisher_name="Devex")
     item = normalise(entry, src, NOW)
     assert item.publisher == "devex" and item.publisher_name == "Devex"
+    assert item.publisher_domain == "x.org"  # no publisher URL: the item's own host
+    entry.publisher_url = "https://www.devex.com"
+    assert normalise(entry, src, NOW).publisher_domain == "devex.com"
 
 
 def test_gnews_url_built_from_query():

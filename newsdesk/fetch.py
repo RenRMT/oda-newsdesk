@@ -46,11 +46,12 @@ def parse_feed(content: bytes, source: Source) -> list[RawEntry]:
         title = e.get("title")
         if not link or not title:
             continue
-        publisher = publisher_name = None
+        publisher = publisher_name = publisher_url = None
         if source.type == "gnews":
             # Titles come as "Headline - Publisher"; strip the suffix. Generic
             # queries credit each item to its own publisher, site: queries to the source.
             item_publisher = (e.get("source") or {}).get("title")
+            publisher_url = (e.get("source") or {}).get("href")
             if item_publisher:
                 title = re.sub(rf"\s+-\s+{re.escape(item_publisher)}\s*$", "", title)
                 if source.publisher is None:
@@ -64,6 +65,7 @@ def parse_feed(content: bytes, source: Source) -> list[RawEntry]:
                 published=_struct_to_dt(e.get("published_parsed") or e.get("updated_parsed")),
                 publisher=publisher,
                 publisher_name=publisher_name,
+                publisher_url=publisher_url,
             )
         )
     return out

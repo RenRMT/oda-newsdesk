@@ -19,7 +19,7 @@ def test_parse_gnews_generic_takes_item_publisher():
     src = Source(id="gn", name="GN", type="gnews", q="aid")
     e = parse_feed((FIXTURES / "gnews.xml").read_bytes(), src)[0]
     assert e.title == "Netherlands slashes aid budget"
-    assert e.publisher == "nrc" and e.publisher_name == "NRC"
+    assert e.publisher == "nrc" and e.publisher_name == "NRC" and e.publisher_url == "https://www.nrc.nl"
     assert e.summary == ""
 
 

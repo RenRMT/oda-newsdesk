@@ -46,6 +46,7 @@ class RawEntry(BaseModel):
     published: datetime | None = None
     publisher: str | None = None  # overrides the source's publisher (gnews, reliefweb)
     publisher_name: str | None = None
+    publisher_url: str | None = None  # publisher home page (gnews); else the item URL's host is used
     lang: str | None = None
 
 
@@ -72,6 +73,7 @@ class Item(BaseModel):
     source_id: str
     publisher: str
     publisher_name: str
+    publisher_domain: str | None = None
     lang: str
     published: datetime
     fetched: datetime

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 from newsdesk import DATA_DIR
-from newsdesk.models import Item
+from newsdesk.models import Cluster, Item
 
 MAX_RUNS_KEPT = 90
 
@@ -68,6 +68,14 @@ class Store:
 
     def save_fetch_state(self, state: dict) -> None:
         self._write("fetch_state.json", state)
+
+    def load_clusters(self) -> list[Cluster]:
+        return [Cluster.model_validate(c) for c in self._read("clusters/current.json", {"clusters": []})["clusters"]]
+
+    def save_clusters(self, clusters: list[Cluster], now: datetime) -> None:
+        (self.dir / "clusters").mkdir(exist_ok=True)
+        self._write("clusters/current.json",
+                    {"generated": now.isoformat(), "clusters": [c.model_dump(mode="json") for c in clusters]})
 
     def load_stats(self) -> dict:
         return self._read("stats.json", {"runs": []})

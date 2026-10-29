@@ -10,6 +10,7 @@ python -m newsdesk fetch --dry-run         # per-source counts, relevance scores
 python -m newsdesk run                     # fetch + score + LLM-enrich + build site/
 python -m newsdesk run --no-llm            # same, without the LLM step
 python -m newsdesk enrich --backend ollama # (re)enrich recent items with a specific backend
+python -m newsdesk cluster --no-llm        # regroup the last 7 days into hot stories
 python -m http.server -d site              # view at http://localhost:8000
 python -m pytest -q
 ```
@@ -24,8 +25,9 @@ python -m pytest -q
 | `config/keywords.yaml` | EN/NL keyword prefilter per track. |
 | `config/tracks.yaml` | Track labels, descriptions, and seed headlines for the embedding relevance score. |
 | `config/calendar.yaml` | Recurring dates shown under "Coming up". |
-| `config/settings.yaml` | Relevance thresholds, retention, and LLM backend, models and pricing. |
+| `config/settings.yaml` | Relevance thresholds, retention, excluded publishers and vacancy title patterns, hot-story tuning, and LLM backend, models and pricing. |
 | `prompts/enrich.md` | Editorial instructions for the LLM: on-topic test, summary, type, hook criteria. |
+| `prompts/cluster.md` | Instructions for the headline, summary and angle of a hot story. |
 
 ## How items flow
 
@@ -34,7 +36,8 @@ python -m pytest -q
 3. **Deduplicate.** Drop repeated URLs and near-identical titles.
 4. **Relevance score.** Compare each item with the seed headlines using a multilingual MiniLM model running locally on CPU. Items below the threshold are stored but hidden.
 5. **LLM enrichment.** For relevant items, the LLM writes an English summary, decides whether the item is on topic, and assigns tracks, type and region, plus an optional blog hook. If it refuses, fails, or is unavailable, the item is still shown with its original excerpt. The Stats page shows these outcomes and the estimated cost.
-6. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml`.
+6. **Hot stories.** Group the visible items of the last 7 days into stories. An item joins a story when its embedding is close to the story's centroid, it shares a track, and it shares a rare word such as a place or organisation name. A story covered by at least 3 distinct publishers is "hot". Its score counts each publisher once, weighted by source and decayed with age. The LLM writes a neutral headline, summary and angle for each hot story, and these are reused until the story gains or loses items. Stories are saved in `data/clusters/current.json`.
+7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`.
 
 The LLM backend can be switched in `settings.yaml` (`llm.backend`) or per run with `--backend`. `anthropic` (Claude Haiku) needs `ANTHROPIC_API_KEY`. `ollama` needs a local Ollama server, which phase 4 sets up inside the workflow.
 

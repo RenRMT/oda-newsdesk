@@ -69,6 +69,11 @@ def to_utc(dt: datetime | None, fallback: datetime) -> datetime:
     return min(dt, fallback)
 
 
+def domain(url: str) -> str:
+    host = urlsplit(url).netloc.lower()
+    return host[4:] if host.startswith("www.") else host
+
+
 def normalise(entry: RawEntry, source: Source, now: datetime) -> Item:
     title = strip_html(entry.title)
     excerpt = truncate(strip_html(entry.summary))
@@ -82,6 +87,7 @@ def normalise(entry: RawEntry, source: Source, now: datetime) -> Item:
         source_id=source.id,
         publisher=entry.publisher or source.publisher_id,
         publisher_name=entry.publisher_name or source.name,
+        publisher_domain=domain(entry.publisher_url or url),
         lang=entry.lang or detect_lang(f"{title} {excerpt}", source.lang),
         published=to_utc(entry.published, now),
         fetched=now,

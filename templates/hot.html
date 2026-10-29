@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_item.html" import story_card with context %}
+{% block title %}Hot stories · {{ site.title }}{% endblock %}
+{% block content %}
+<section>
+  <h2>Hot stories <span class="muted">· {{ hot | length }} in the last 7 days</span></h2>
+  <p class="muted">Stories covered by at least {{ min_sources }} independent publishers, ranked by how many publishers covered them and how recently. Repeat items from one publisher count once, and generic Google News queries count half. "Rising" means at least two new publishers in the last 24 hours. The bars show publishers per day. <a href="{{ root }}feed-hot.xml">RSS</a></p>
+  {% for s in hot %}{{ story_card(s, open=true) }}{% else %}<p>No hot stories right now.</p>{% endfor %}
+</section>
+{% if developing %}
+<section>
+  <h2>Developing <span class="muted">· covered by 2 publishers</span></h2>
+  {% for s in developing %}{{ story_card(s) }}{% endfor %}
+</section>
+{% endif %}
+{% endblock %}
