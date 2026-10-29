@@ -1,6 +1,14 @@
-// Client-side filters, starring (localStorage) and copy-as-Markdown.
+// Client-side filters, starring (localStorage), copy-as-Markdown and theme toggle.
 (function () {
   const STAR_KEY = "newsdesk.starred";
+  const THEME_KEY = "newsdesk.theme";
+
+  const toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    const t = document.documentElement.dataset.theme;
+    const dark = t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    toggle.setAttribute("aria-pressed", dark);
+  }
 
   function loadStars() {
     try { return new Set(JSON.parse(localStorage.getItem(STAR_KEY) || "[]")); }
@@ -17,7 +25,7 @@
     const star = el.querySelector(".star");
     const on = stars.has(el.dataset.id);
     star.setAttribute("aria-pressed", on);
-    star.textContent = on ? "★" : "☆";
+    star.textContent = on ? "Starred" : "Star";
   });
 
   document.addEventListener("click", (ev) => {
@@ -30,15 +38,20 @@
       on ? stars.add(id) : stars.delete(id);
       saveStars(stars);
       btn.setAttribute("aria-pressed", on);
-      btn.textContent = on ? "★" : "☆";
+      btn.textContent = on ? "Starred" : "Star";
     } else if (btn.classList.contains("copy") && item) {
       const d = item.dataset;
       let md = `**[${d.title}](${d.url})** — ${d.publisher}\n\n${d.summary || ""}`.trim() + "\n";
       if (d.hook) md += `\n> Angle: ${d.hook}\n`;
       navigator.clipboard.writeText(md).then(
-        () => { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy MD"), 1200); },
-        () => { btn.textContent = "Copy failed"; }
+        () => { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy as Markdown"), 1200); },
+        () => { btn.textContent = "Clipboard not available"; }
       );
+    } else if (btn.classList.contains("theme-toggle")) {
+      const dark = btn.getAttribute("aria-pressed") !== "true";
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+      btn.setAttribute("aria-pressed", dark);
+      try { localStorage.setItem(THEME_KEY, dark ? "dark" : "light"); } catch { /* storage unavailable */ }
     } else if (btn.classList.contains("f")) {
       btn.setAttribute("aria-pressed", btn.getAttribute("aria-pressed") !== "true");
       applyFilters();
@@ -75,7 +88,7 @@
       h.hidden = !any;
     });
     const count = document.querySelector(".filters .count");
-    if (count) count.textContent = `${shown} shown`;
+    if (count) count.textContent = `${shown} of ${items.length} shown`;
   }
   applyFilters();
 })();

@@ -1,28 +1,39 @@
 {% extends "base.html" %}
 {% from "_item.html" import item_card, story_card, filters with context %}
 {% block content %}
+<header class="page-head">
+  <h1>Aid, data and the Netherlands, this week</h1>
+  <p class="lead">What I'm reading on development cooperation, humanitarian aid, and data and AI in the sector. English and Dutch sources, updated three times a day.</p>
+</header>
+
 {% if events %}
-<section class="coming-up" aria-label="Coming up">
-  <h2>Coming up</h2>
+<section class="coming-up" aria-labelledby="h-coming-up">
+  <div class="section-head"><h2 id="h-coming-up">Coming up</h2></div>
   <ul>
     {% for e in events[:6] %}
-    <li><span class="when">{% if e.approx %}~{% endif %}{{ e.when | date('%d %b') }}</span> {{ e.name }}
-      <span class="in">{% if e.in_days == 0 %}today{% else %}in {{ e.in_days }}d{% endif %}</span></li>
+    <li><span class="when">{% if e.approx %}~{% endif %}{{ e.when | date('%d %b') }}</span><span>{{ e.name }}</span>
+      <span class="in">{% if e.in_days == 0 %}today{% else %}in {{ e.in_days }} days{% endif %}</span></li>
     {% endfor %}
   </ul>
 </section>
 {% endif %}
 
 {% if hot %}
-<section class="hot" aria-label="Hot now">
-  <h2>Hot now <span class="muted">· {{ hot_count }} stories · <a href="{{ root }}hot/index.html">all</a></span></h2>
-  {% for s in hot %}{{ story_card(s) }}{% endfor %}
+<section class="hot" aria-labelledby="h-hot">
+  <div class="section-head">
+    <h2 id="h-hot">Hot now</h2>
+    <a href="{{ root }}hot/index.html">All {{ hot_count }} hot stories</a>
+  </div>
+  <div class="stories">{% for s in hot %}{{ story_card(s) }}{% endfor %}</div>
 </section>
 {% endif %}
 
 {% if hooks %}
-<section class="hooks" aria-label="Blog hooks">
-  <h2>Blog hooks <span class="muted">· {{ hook_count }} this week · <a href="{{ root }}hooks/index.html">all</a></span></h2>
+<section class="hooks" aria-labelledby="h-hooks">
+  <div class="section-head">
+    <h2 id="h-hooks">Blog hooks</h2>
+    <a href="{{ root }}hooks/index.html">All {{ hook_count }} hooks this week</a>
+  </div>
   <ul class="hook-list">
     {% for i in hooks %}
     <li><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.enrichment.hook.angle }}</a>
@@ -32,12 +43,15 @@
 </section>
 {% endif %}
 
-<section>
-  <h2>Last 7 days <span class="muted">· {{ items | length }} items</span></h2>
+<section aria-labelledby="h-week">
+  <div class="section-head">
+    <h2 id="h-week">Last 7 days</h2>
+    <span class="muted mono">{{ items | length }} items</span>
+  </div>
   {{ filters(true, tracks) }}
   <div class="list">
     {% for day, group in days %}
-    <h4 class="day">{{ day.strftime('%A %d %B') }}</h4>
+    <h4 class="day eyebrow">{{ day.strftime('%A %d %B') }}</h4>
     {% for i in group %}{{ item_card(i, tracks) }}{% endfor %}
     {% endfor %}
   </div>

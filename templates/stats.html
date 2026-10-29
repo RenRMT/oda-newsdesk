@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 {% block title %}Stats · {{ site.title }}{% endblock %}
 {% block content %}
-<section>
-  <h2>Source health</h2>
+<header class="page-head">
+  <h1>Stats</h1>
+  <p class="lead">How the sources, the language model and each run are doing. I use this page to tune thresholds and spot broken feeds.</p>
+</header>
+<section aria-labelledby="h-health">
+  <div class="section-head"><h2 id="h-health">Source health</h2></div>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Source</th><th>Last run</th><th class="num">Fetched</th><th class="num">Relevant</th><th class="num">New (7d)</th><th>Last OK</th><th>Error</th></tr></thead>
     <tbody>
     {% for h in health if h.source.enabled %}
     <tr class="{{ 'dead' if h.dead }}">
-      <td>{{ h.source.name }}{% if h.dead %} <span class="badge-dead">dead</span>{% endif %}</td>
+      <td>{{ h.source.name }}{% if h.dead %} <span class="tag tag-dead">dead</span>{% endif %}</td>
       <td>{{ h.last.status or '—' }}</td>
       <td class="num">{{ h.last.fetched if h.last else '—' }}</td>
       <td class="num">{{ h.last.relevant if h.last else '—' }}</td>
@@ -21,17 +25,21 @@
     </tbody>
   </table>
   </div>
+</section>
 
-  <h2>LLM enrichment <span class="muted">· last {{ llm_week.runs }} runs</span></h2>
-  <p>
+<section aria-labelledby="h-llm">
+  <div class="section-head"><h2 id="h-llm">LLM enrichment</h2><span class="muted mono">last {{ llm_week.runs }} runs</span></div>
+  <p class="lead">
     {{ llm_week.attempted }} items: {{ llm_week.ok }} ok, {{ llm_week.refused }} refused,
     {{ llm_week.invalid }} invalid, {{ llm_week.error }} errors ·
     {{ '{:,}'.format(llm_week.input_tokens + llm_week.cache_read_input_tokens) }} input /
     {{ '{:,}'.format(llm_week.output_tokens) }} output tokens ·
     {{ llm_week.headlines }} hot-story headlines · ≈ ${{ '%.3f' | format(llm_week.cost_usd) }} in total
   </p>
+</section>
 
-  <h2>Recent runs</h2>
+<section aria-labelledby="h-runs">
+  <div class="section-head"><h2 id="h-runs">Recent runs</h2></div>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Run (UTC)</th><th class="num">New</th><th class="num">Failed sources</th><th class="num">Hot</th><th>LLM</th><th class="num">ok / ref / inv / err</th><th class="num">Cost $</th></tr></thead>
@@ -48,9 +56,11 @@
     </tbody>
   </table>
   </div>
+</section>
 
-  <h2>Recently hidden <span class="muted">· last 3 days, for tuning</span></h2>
-  <p class="muted">Items below the relevance threshold, excluded in <code>settings.yaml</code>, or judged off-topic by the LLM. If good items show up here, add seed sentences in <code>config/tracks.yaml</code> or lower the threshold.</p>
+<section aria-labelledby="h-hidden">
+  <div class="section-head"><h2 id="h-hidden">Recently hidden</h2><span class="muted mono">last 3 days</span></div>
+  <p class="lead">Items below the relevance threshold, excluded in <code>settings.yaml</code>, or judged off-topic by the LLM. When good items show up here, I add seed sentences in <code>config/tracks.yaml</code> or lower the threshold.</p>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Item</th><th>Source</th><th class="num">Score</th><th>Reason</th></tr></thead>

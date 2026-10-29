@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ site.title }}{% endblock %}</title>
+<script>try { var t = localStorage.getItem("newsdesk.theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
 <link rel="stylesheet" href="{{ root }}static/style.css">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ root }}feed.xml">
 </head>
@@ -11,7 +15,7 @@
 <header class="masthead">
   <div class="wrap">
     <a class="brand" href="{{ root }}index.html">{{ site.title }}</a>
-    <nav>
+    <nav aria-label="Main">
       <a href="{{ root }}index.html" {% if page == 'home' %}aria-current="page"{% endif %}>Latest</a>
       <a href="{{ root }}hot/index.html" {% if page == 'hot' %}aria-current="page"{% endif %}>Hot</a>
       <a href="{{ root }}hooks/index.html" {% if page == 'hooks' %}aria-current="page"{% endif %}>Hooks</a>
@@ -21,13 +25,16 @@
       <a href="{{ root }}stats/index.html" {% if page == 'stats' %}aria-current="page"{% endif %}>Stats</a>
       <a href="{{ root }}about/index.html" {% if page == 'about' %}aria-current="page"{% endif %}>About</a>
     </nav>
+    <button type="button" class="theme-toggle" aria-pressed="false" aria-label="Toggle dark mode">
+      <span class="track" aria-hidden="true"><span class="knob"></span></span>
+    </button>
   </div>
 </header>
 <main class="wrap">
 {% block content %}{% endblock %}
 </main>
-<footer class="wrap foot">
-  Updated {{ now | date('%d %b %Y %H:%M') }} UTC · <a href="{{ root }}feed.xml">RSS</a>
+<footer class="foot">
+  <div class="wrap">Updated {{ now | date('%d %b %Y, %H:%M') }} UTC · <a href="{{ root }}feed.xml">RSS feed of all items</a></div>
 </footer>
 <script src="{{ root }}static/app.js"></script>
 </body>

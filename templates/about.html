@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% block title %}About · {{ site.title }}{% endblock %}
 {% block content %}
+<header class="page-head">
+  <h1>About</h1>
+  <p class="lead">I built this newsdesk to follow three areas of my work in one place, from English and Dutch sources. It updates three times a day.</p>
+</header>
 <section class="prose">
-  <h2>About</h2>
-  <p>A personal newsdesk tracking three areas, with English and Dutch sources. It's updated three times a day.</p>
   <dl>
     {% for key, t in tracks.items() %}
-    <dt><span class="chip chip-{{ key }}">{{ t.label }}</span></dt>
+    <dt><span class="tag tag-{{ key }}">{{ t.label }}</span></dt>
     <dd>{{ t.description }}</dd>
     {% endfor %}
   </dl>
 
-  <h3>Sources</h3>
+  <h2>Sources</h2>
   <div class="table-wrap">
   <table>
-    <thead><tr><th>Source</th><th>Via</th><th>Lang</th><th>Tracks</th><th>Filter</th></tr></thead>
+    <thead><tr><th>Source</th><th>Via</th><th>Language</th><th>Tracks</th><th>Filter</th></tr></thead>
     <tbody>
     {% for s in sources if s.enabled %}
     <tr><td>{{ s.name }}</td><td>{{ 'Google News' if s.type == 'gnews' else s.type | upper }}</td><td>{{ s.lang | upper }}</td>
@@ -24,14 +26,14 @@
   </table>
   </div>
 
-  <h3>Inclusion criteria</h3>
-  <p>Sources that are on-topic by nature are included in full. For all other sources an item needs at least one keyword match:</p>
+  <h2>Inclusion criteria</h2>
+  <p>Sources that are on topic by nature are included in full. For every other source, an item needs at least one keyword match:</p>
   <ul>
     <li><strong>Aid & humanitarian:</strong> an aid keyword.</li>
-    <li><strong>Aid × data × AI:</strong> a data/AI keyword together with an aid signal, or from a data/AI source.</li>
-    <li><strong>Netherlands:</strong> a Dutch signal (keyword, Dutch language or Dutch source) together with one of the tracks above.</li>
+    <li><strong>Aid × data × AI:</strong> a data or AI keyword together with an aid signal, or any item from a data or AI source.</li>
+    <li><strong>Netherlands:</strong> a Dutch signal (a keyword, Dutch language or a Dutch source) together with one of the tracks above.</li>
   </ul>
-  <p>Every item that passes is then scored by a multilingual embedding model for similarity to example headlines for each track. Items from curated sources need a score of {{ thresholds.curated }}, and keyword matches need {{ thresholds.keyword }}. A language model then reads each item that passes. It writes the summary, decides whether the item is really on topic, assigns tracks and type, and flags possible blog hooks.</p>
+  <p>A multilingual embedding model then scores every item that passes for similarity to example headlines for each track. Items from curated sources need a score of {{ thresholds.curated }}; keyword matches need {{ thresholds.keyword }}. A language model reads each item that clears the bar. It writes the summary, checks whether the item is really on topic, assigns tracks and a type, and flags possible blog hooks.</p>
   {% for key, spec in keywords.items() %}
   <details><summary>{{ tracks[key].label }} keywords</summary>
     <p class="kw">{{ ((spec.terms or []) + (spec.terms_cs or [])) | join(' · ') }}</p>
