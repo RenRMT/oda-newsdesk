@@ -21,15 +21,15 @@ class Scorer:
         return [{t: round(float(sims[t][i]), 3) for t in self.tracks} for i in range(len(vecs))]
 
 
-def score_items(items: list[Item], embedder, scorer: Scorer, cache) -> dict[str, np.ndarray]:
-    """Set item.relevance in place; returns id -> vector for all items."""
+def score_items(items: list[Item], embedder, scorer: Scorer | None, cache) -> dict[str, np.ndarray]:
+    """Set item.relevance in place (unless scorer is None); returns id -> vector for all items."""
     known = cache.get([i.id for i in items])
     todo = [i for i in items if i.id not in known]
     if todo:
         vecs = embedder.embed([item_text(i) for i in todo])
         cache.put([i.id for i in todo], vecs)
         known.update(zip((i.id for i in todo), vecs))
-    if items:
+    if items and scorer:
         matrix = np.stack([known[i.id] for i in items])
         for item, rel in zip(items, scorer.score(matrix)):
             item.relevance = rel

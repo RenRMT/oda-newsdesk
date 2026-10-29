@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_item.html" import item_card, filters %}
+{% from "_item.html" import item_card, filters with context %}
 {% block title %}Blog hooks · {{ site.title }}{% endblock %}
 {% block content %}
 <section>

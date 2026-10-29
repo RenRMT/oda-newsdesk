@@ -1,3 +1,4 @@
+import re
 from functools import cache
 from pathlib import Path
 
@@ -30,6 +31,26 @@ def _curated_ids() -> frozenset[str]:
 def threshold_for(item) -> float:
     t = settings()["relevance_threshold"]
     return t["curated"] if item.source_id in _curated_ids() else t["keyword"]
+
+
+@cache
+def _exclude_title() -> re.Pattern | None:
+    patterns = settings().get("exclude", {}).get("title_patterns") or []
+    return re.compile("|".join(f"(?:{p})" for p in patterns), re.I) if patterns else None
+
+
+def excluded(item) -> str | None:
+    """Why an item is excluded by settings.exclude, or None."""
+    if item.publisher in (settings().get("exclude", {}).get("publishers") or []):
+        return "blocked publisher"
+    pattern = _exclude_title()
+    if pattern and pattern.search(item.title):
+        return "vacancy/job title"
+    return None
+
+
+def shown(item) -> bool:
+    return excluded(item) is None and item.visible(threshold_for(item))
 
 
 @cache

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_item.html" import item_card, filters %}
+{% from "_item.html" import item_card, story_card, filters with context %}
 {% block content %}
 {% if events %}
 <section class="coming-up" aria-label="Coming up">
@@ -10,6 +10,13 @@
       <span class="in">{% if e.in_days == 0 %}today{% else %}in {{ e.in_days }}d{% endif %}</span></li>
     {% endfor %}
   </ul>
+</section>
+{% endif %}
+
+{% if hot %}
+<section class="hot" aria-label="Hot now">
+  <h2>Hot now <span class="muted">· {{ hot_count }} stories · <a href="{{ root }}hot/index.html">all</a></span></h2>
+  {% for s in hot %}{{ story_card(s) }}{% endfor %}
 </section>
 {% endif %}
 

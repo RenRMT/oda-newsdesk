@@ -10,7 +10,8 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from newsdesk import SITE_DIR, STATIC_DIR, TEMPLATES_DIR, TRACKS, config
 from newsdesk.calendar_events import upcoming
-from newsdesk.models import Item
+from newsdesk.cluster import is_hot
+from newsdesk.models import Cluster, Item
 from newsdesk.store import Store
 
 FEED_SIZE = 50
@@ -54,6 +55,10 @@ def _rss(title: str, link: str, items: list[Item], now: datetime) -> str:
             + f"<description>{escape(desc)}</description>"
             "</item>"
         )
+    return _channel(title, link, entries, now)
+
+
+def _channel(title: str, link: str, entries: list[str], now: datetime) -> str:
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n<rss version="2.0"><channel>'
         f"<title>{escape(title)}</title><link>{escape(link)}</link>"
@@ -62,6 +67,62 @@ def _rss(title: str, link: str, items: list[Item], now: datetime) -> str:
         + "".join(entries)
         + "</channel></rss>\n"
     )
+
+
+def _story(c: Cluster, items: dict[str, Item], now: datetime, hot_cfg: dict) -> dict:
+    members = sorted((items[i] for i in c.item_ids), key=lambda i: i.published)
+    names = {i.publisher: i.publisher_name for i in members}
+    days = [(now - timedelta(days=d)).date() for d in range(6, -1, -1)]
+    daily = [len({i.publisher for i in members if i.published.date() == d}) for d in days]
+    return {
+        "cluster": c,
+        "members": members,
+        "headline": c.headline or members[0].title,
+        "summary": c.summary,
+        "hook_angle": c.hook_angle,
+        "url": members[0].url,
+        "publishers": [names[p] for p in c.publishers],
+        "hot": is_hot(c, hot_cfg),
+        "rising": c.velocity_24h >= hot_cfg["rising_velocity"],
+        "daily": list(zip(days, daily)),
+        "daily_max": max(daily) or 1,
+    }
+
+
+def _stories(clusters: list[Cluster], items: list[Item], now: datetime, hot_cfg: dict) -> list[dict]:
+    """Clusters whose items are still visible, as template-ready dicts; sets item.cluster_id for hot ones."""
+    by_id = {i.id: i for i in items}
+    out = []
+    for c in clusters:
+        c.item_ids = [i for i in c.item_ids if i in by_id]
+        c.publishers = [p for p in c.publishers if any(by_id[i].publisher == p for i in c.item_ids)]
+        if len(c.publishers) < 2:
+            continue
+        story = _story(c, by_id, now, hot_cfg)
+        if story["hot"]:
+            for i in story["members"]:
+                i.cluster_id = c.id
+        out.append(story)
+    return out
+
+
+def _hot_rss(title: str, link: str, stories: list[dict], now: datetime) -> str:
+    entries = []
+    for s in stories[:FEED_SIZE]:
+        desc = s["summary"] or s["headline"]
+        desc += f"\n\nCovered by {len(s['publishers'])} publishers: {', '.join(s['publishers'])}."
+        if s["hook_angle"]:
+            desc += f"\n\nHook: {s['hook_angle']}"
+        entries.append(
+            "<item>"
+            f"<title>{escape(s['headline'])}</title>"
+            f"<link>{escape(s['url'])}</link>"
+            f"<guid isPermaLink=\"false\">hot-{s['cluster'].id}</guid>"
+            f"<pubDate>{format_datetime(s['cluster'].first_seen)}</pubDate>"
+            f"<description>{escape(desc)}</description>"
+            "</item>"
+        )
+    return _channel(title, link, entries, now)
 
 
 def _source_health(store: Store, settings: dict) -> list[dict]:
@@ -91,11 +152,13 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     tracks = config.tracks()
     loaded = store.load_items(since=now - timedelta(days=settings["site_window_days"]))
     loaded.sort(key=lambda i: i.published, reverse=True)
-    items = [i for i in loaded if i.visible(config.threshold_for(i))]
+    items = [i for i in loaded if config.shown(i)]
     shown_ids = {i.id for i in items}
     hidden = [i for i in loaded if i.id not in shown_ids and i.fetched >= now - timedelta(days=3)]
     week = [i for i in items if i.published >= now - timedelta(days=7)]
     hooks = [i for i in week if i.enrichment and i.enrichment.hook.flag]
+    stories = _stories(store.load_clusters(), items, now, settings["hot"])
+    hot = [s for s in stories if s["hot"]]
 
     if out.exists():
         shutil.rmtree(out)
@@ -121,7 +184,10 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         target.write_text(html, encoding="utf-8")
 
     days = [(d, list(g)) for d, g in groupby(week, key=lambda i: i.published.date())]
-    render("index.html", "index.html", items=week, days=days, hooks=hooks[:6], hook_count=len(hooks), page="home")
+    render("index.html", "index.html", items=week, days=days, hooks=hooks[:6], hook_count=len(hooks),
+           hot=hot[:5], hot_count=len(hot), page="home")
+    render("hot.html", "hot/index.html", hot=hot, developing=[s for s in stories if not s["hot"]],
+           min_sources=settings["hot"]["min_sources"], page="hot")
     render("hooks.html", "hooks/index.html", items=hooks, page="hooks")
     for t in TRACKS:
         render("track.html", f"track/{t}/index.html", items=[i for i in items if t in i.tracks], track=t, page=t)
@@ -129,7 +195,7 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
            thresholds=settings["relevance_threshold"], page="about")
     runs = store.load_stats()["runs"][-30:]
     render("stats.html", "stats/index.html", health=_source_health(store, settings), runs=runs,
-           llm_week=_llm_summary(runs[-21:]), hidden=hidden[:80], threshold_for=config.threshold_for, page="stats")
+           llm_week=_llm_summary(runs[-21:]), hidden=hidden[:80], threshold_for=config.threshold_for, excluded=config.excluded, page="stats")
 
     (out / "data").mkdir()
     (out / "data" / "recent.json").write_text(json.dumps([_item_json(i) for i in items], ensure_ascii=False), encoding="utf-8")
@@ -142,12 +208,16 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
             _rss(f"{title} – {tracks[t]['label']}", link, [i for i in items if t in i.tracks], now), encoding="utf-8"
         )
     (out / "feed-hooks.xml").write_text(_rss(f"{title} – Blog hooks", link, hooks, now), encoding="utf-8")
+    (out / "feed-hot.xml").write_text(_hot_rss(f"{title} – Hot stories", link, hot, now), encoding="utf-8")
 
 
 def _llm_summary(runs: list[dict]) -> dict:
     keys = ("attempted", "ok", "refused", "invalid", "error", "input_tokens", "output_tokens", "cache_read_input_tokens")
-    total = {k: 0 for k in keys} | {"cost_usd": 0.0, "runs": 0}
+    total = {k: 0 for k in keys} | {"cost_usd": 0.0, "runs": 0, "headlines": 0}
     for r in runs:
+        hot_llm = (r.get("hot") or {}).get("llm") or {}
+        total["headlines"] += hot_llm.get("ok", 0)
+        total["cost_usd"] += hot_llm.get("cost_usd") or 0
         llm = r.get("llm") or {}
         if "attempted" not in llm:
             continue

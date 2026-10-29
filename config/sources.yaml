@@ -202,7 +202,7 @@
 - id: partos
   name: Partos
   type: gnews
-  q: site:partos.nl
+  q: site:partos.nl/nieuws OR site:partos.nl/en  # news and English blogs; not /vacature/ or /agenda/
   lang: nl
   tracks: [aid, nl]
   prefilter: false

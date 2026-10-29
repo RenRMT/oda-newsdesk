@@ -13,6 +13,7 @@
     <a class="brand" href="{{ root }}index.html">{{ site.title }}</a>
     <nav>
       <a href="{{ root }}index.html" {% if page == 'home' %}aria-current="page"{% endif %}>Latest</a>
+      <a href="{{ root }}hot/index.html" {% if page == 'hot' %}aria-current="page"{% endif %}>Hot</a>
       <a href="{{ root }}hooks/index.html" {% if page == 'hooks' %}aria-current="page"{% endif %}>Hooks</a>
       {% for key, t in tracks.items() %}
       <a href="{{ root }}track/{{ key }}/index.html" {% if page == key %}aria-current="page"{% endif %}>{{ t.label }}</a>
