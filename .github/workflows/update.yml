@@ -29,7 +29,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90   # an ollama run enriches up to 60 items on CPU
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -56,6 +56,15 @@ jobs:
           path: .cache/vectors.npz
           key: vectors-${{ github.run_id }}
           restore-keys: vectors-
+
+      - name: Resolve LLM backend
+        id: llm
+        run: python -m newsdesk backend-info ${{ inputs.backend && format('--backend {0}', inputs.backend) || '' }} >> "$GITHUB_OUTPUT"
+
+      - if: steps.llm.outputs.name == 'ollama' && inputs.no_llm != true
+        uses: ./.github/actions/setup-ollama
+        with:
+          model: ${{ steps.llm.outputs.model }}
 
       - name: Fetch, enrich and build
         run: |

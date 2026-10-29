@@ -8,7 +8,7 @@ from newsdesk.dedupe import dedupe
 from newsdesk.embed import Embedder, VectorCache
 from newsdesk.enrich import enrich, estimate_cost, select_for_enrichment
 from newsdesk.fetch import fetch_all
-from newsdesk.llm import BackendUnavailable, get_backend
+from newsdesk.llm import BackendUnavailable, backend_name, get_backend
 from newsdesk.models import Item
 from newsdesk.normalise import normalise
 from newsdesk.prefilter import assign_tracks
@@ -110,7 +110,9 @@ def enrich_step(store: Store, now: datetime, run: dict, backend: str | None = No
     llm_cfg = settings["llm"]
     recent = store.load_items(since=now - timedelta(days=llm_cfg["retry_window_days"]))
     recent = [i for i in recent if not config.excluded(i)]
-    todo = select_for_enrichment(recent, now, config.threshold_for, llm_cfg)
+    # Local CPU models are ~10x slower than the API, so each backend has its own per-run cap.
+    cap = llm_cfg["max_items_per_run"][backend_name(llm_cfg, "enrich", backend)]
+    todo = select_for_enrichment(recent, now, config.threshold_for, {**llm_cfg, "max_items_per_run": cap})
     if not todo:
         log.info("nothing to enrich")
         return

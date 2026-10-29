@@ -3,8 +3,9 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
-from newsdesk import DATA_DIR, SITE_DIR
+from newsdesk import DATA_DIR, SITE_DIR, config, evaluate
 from newsdesk.build import build
+from newsdesk.llm import BackendUnavailable, backend_name, get_backend
 from newsdesk.pipeline import cluster_step, enrich_step, ingest, run_all
 from newsdesk.store import Store
 
@@ -18,14 +19,25 @@ def main(argv=None) -> None:
     p_cluster = sub.add_parser("cluster", help="group recent items into hot stories")
     p_build = sub.add_parser("build", help="render the static site to site/")
     p_run = sub.add_parser("run", help="fetch + enrich + build")
+    p_eval = sub.add_parser("eval", help="score an LLM backend against hand labels in data/eval/labels.yaml")
+    p_eval.add_argument("--make-sheet", type=int, metavar="N", help="top the labelling sheet up to N items and exit")
+    p_eval.add_argument("--model", help="override the configured enrich model")
+    p_eval.add_argument("--limit", type=int, help="only the first N labelled items")
+    p_info = sub.add_parser("backend-info", help="print the resolved enrich backend and model (for CI)")
     for p in (p_run, p_cluster):
         p.add_argument("--no-llm", action="store_true", help="skip LLM calls")
-    for p in (p_enrich, p_run, p_cluster):
+    for p in (p_enrich, p_run, p_cluster, p_eval, p_info):
         p.add_argument("--backend", choices=["anthropic", "ollama"], help="override llm.backend")
-    for p in (p_fetch, p_enrich, p_cluster, p_run, p_build):
+    for p in (p_fetch, p_enrich, p_cluster, p_run, p_build, p_eval):
         p.add_argument("--data-dir", type=Path, default=DATA_DIR)
         p.add_argument("--site-dir", type=Path, default=SITE_DIR)
     args = parser.parse_args(argv)
+
+    if args.cmd == "backend-info":
+        llm_cfg = config.settings()["llm"]
+        name = backend_name(llm_cfg, "enrich", args.backend)
+        print(f"name={name}\nmodel={llm_cfg['models'][name]['enrich']}")
+        return
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
     for noisy in ("httpx", "httpx2", "anthropic", "openai"):
@@ -50,3 +62,33 @@ def main(argv=None) -> None:
     elif args.cmd == "run":
         run_all(store, now, use_llm=not args.no_llm, backend=args.backend)
         build(store, now, args.site_dir)
+    elif args.cmd == "eval":
+        _eval(store, now, args)
+
+
+def _eval(store: Store, now: datetime, args) -> None:
+    eval_dir = args.data_dir / "eval"
+    sheet = eval_dir / "labels.yaml"
+    items = store.load_items()
+    if args.make_sheet:
+        # The same pool the enrich step sees: relevant, not excluded. LLM off-topic verdicts stay in.
+        pool = [i for i in items if not config.excluded(i) and (i.score or 0) >= config.threshold_for(i)]
+        added, total = evaluate.make_sheet(pool, sheet, args.make_sheet)
+        print(f"added {added} items to {sheet} ({total} in total, {len(evaluate.labelled(evaluate.load_sheet(sheet)))} labelled)")
+        return
+    rows = evaluate.labelled(evaluate.load_sheet(sheet))[: args.limit]
+    if not rows:
+        raise SystemExit(f"no labelled items in {sheet}; run `eval --make-sheet 60` and fill it in")
+    llm_cfg = config.settings()["llm"]
+    try:
+        llm = get_backend(llm_cfg, "enrich", args.backend, args.model)
+    except BackendUnavailable as e:
+        raise SystemExit(f"backend unavailable: {e}")
+    preds, stats, seconds = evaluate.run_eval(rows, {i.id: i for i in items}, llm,
+                                             llm_cfg["concurrency"].get(llm.name, 1))
+    text = evaluate.report(rows, preds, stats, seconds, llm_cfg["pricing"], now)
+    path = evaluate.report_path(eval_dir, stats, now)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8", newline="\n")
+    print(text)
+    print(f"report written to {path}")
