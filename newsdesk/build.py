@@ -41,6 +41,8 @@ def _rss(title: str, link: str, items: list[Item], now: datetime) -> str:
     entries = []
     for i in items[:FEED_SIZE]:
         desc = i.enrichment.summary_en if i.enrichment else i.excerpt
+        if i.enrichment and i.enrichment.hook.flag:
+            desc += f"\n\nHook: {i.enrichment.hook.angle} ({i.enrichment.hook.why_now})"
         entries.append(
             "<item>"
             f"<title>{escape(i.title)}</title>"
@@ -87,9 +89,13 @@ def _source_health(store: Store, settings: dict) -> list[dict]:
 def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     settings = config.settings()
     tracks = config.tracks()
-    items = store.load_items(since=now - timedelta(days=settings["site_window_days"]))
-    items.sort(key=lambda i: i.published, reverse=True)
+    loaded = store.load_items(since=now - timedelta(days=settings["site_window_days"]))
+    loaded.sort(key=lambda i: i.published, reverse=True)
+    items = [i for i in loaded if i.visible(config.threshold_for(i))]
+    shown_ids = {i.id for i in items}
+    hidden = [i for i in loaded if i.id not in shown_ids and i.fetched >= now - timedelta(days=3)]
     week = [i for i in items if i.published >= now - timedelta(days=7)]
+    hooks = [i for i in week if i.enrichment and i.enrichment.hook.flag]
 
     if out.exists():
         shutil.rmtree(out)
@@ -115,11 +121,15 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         target.write_text(html, encoding="utf-8")
 
     days = [(d, list(g)) for d, g in groupby(week, key=lambda i: i.published.date())]
-    render("index.html", "index.html", items=week, days=days, page="home")
+    render("index.html", "index.html", items=week, days=days, hooks=hooks[:6], hook_count=len(hooks), page="home")
+    render("hooks.html", "hooks/index.html", items=hooks, page="hooks")
     for t in TRACKS:
         render("track.html", f"track/{t}/index.html", items=[i for i in items if t in i.tracks], track=t, page=t)
-    render("about.html", "about/index.html", sources=config.sources(), keywords=config.keywords(), page="about")
-    render("stats.html", "stats/index.html", health=_source_health(store, settings), runs=store.load_stats()["runs"][-30:], page="stats")
+    render("about.html", "about/index.html", sources=config.sources(), keywords=config.keywords(),
+           thresholds=settings["relevance_threshold"], page="about")
+    runs = store.load_stats()["runs"][-30:]
+    render("stats.html", "stats/index.html", health=_source_health(store, settings), runs=runs,
+           llm_week=_llm_summary(runs[-21:]), hidden=hidden[:80], threshold_for=config.threshold_for, page="stats")
 
     (out / "data").mkdir()
     (out / "data" / "recent.json").write_text(json.dumps([_item_json(i) for i in items], ensure_ascii=False), encoding="utf-8")
@@ -131,3 +141,19 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         (out / f"feed-{t}.xml").write_text(
             _rss(f"{title} – {tracks[t]['label']}", link, [i for i in items if t in i.tracks], now), encoding="utf-8"
         )
+    (out / "feed-hooks.xml").write_text(_rss(f"{title} – Blog hooks", link, hooks, now), encoding="utf-8")
+
+
+def _llm_summary(runs: list[dict]) -> dict:
+    keys = ("attempted", "ok", "refused", "invalid", "error", "input_tokens", "output_tokens", "cache_read_input_tokens")
+    total = {k: 0 for k in keys} | {"cost_usd": 0.0, "runs": 0}
+    for r in runs:
+        llm = r.get("llm") or {}
+        if "attempted" not in llm:
+            continue
+        total["runs"] += 1
+        for k in keys:
+            total[k] += llm.get(k, 0)
+        total["cost_usd"] += llm.get("cost_usd") or 0
+    total["cost_usd"] = round(total["cost_usd"], 3)
+    return total

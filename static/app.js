@@ -33,7 +33,8 @@
       btn.textContent = on ? "★" : "☆";
     } else if (btn.classList.contains("copy") && item) {
       const d = item.dataset;
-      const md = `**[${d.title}](${d.url})** — ${d.publisher}\n\n${d.summary || ""}`.trim() + "\n";
+      let md = `**[${d.title}](${d.url})** — ${d.publisher}\n\n${d.summary || ""}`.trim() + "\n";
+      if (d.hook) md += `\n> Angle: ${d.hook}\n`;
       navigator.clipboard.writeText(md).then(
         () => { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy MD"), 1200); },
         () => { btn.textContent = "Copy failed"; }
@@ -46,6 +47,8 @@
 
   const q = document.querySelector(".filters .q");
   if (q) q.addEventListener("input", applyFilters);
+  const typeSel = document.querySelector(".filters .type-filter");
+  if (typeSel) typeSel.addEventListener("change", applyFilters);
 
   function applyFilters() {
     const pressed = [...document.querySelectorAll(".filters .f[aria-pressed='true']")];
@@ -53,12 +56,14 @@
     const lang = pressed.find((b) => b.dataset.lang)?.dataset.lang;
     const starredOnly = pressed.some((b) => b.dataset.starred);
     const text = (q?.value || "").trim().toLowerCase();
+    const type = typeSel?.value || "";
     let shown = 0;
     items.forEach((el) => {
       const d = el.dataset;
       const ok =
         (!tracks.length || tracks.some((t) => d.tracks.split(" ").includes(t))) &&
         (!lang || d.lang === lang) &&
+        (!type || d.type === type) &&
         (!starredOnly || stars.has(d.id)) &&
         (!text || (d.title + " " + d.publisher + " " + d.summary).toLowerCase().includes(text));
       el.hidden = !ok;

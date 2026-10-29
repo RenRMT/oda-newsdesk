@@ -1,13 +1,22 @@
-# Track definitions. `seeds` are used in phase 2 to build embedding centroids.
+# Track definitions. `seeds` are example headlines; an item's relevance to a
+# track is its highest embedding similarity to any of that track's seeds.
+# Add seeds (EN and NL) to pull in more of what you want to see.
 aid:
   label: Aid & humanitarian
   description: International development cooperation and humanitarian aid.
   seeds:
     - Donor governments announce cuts to official development assistance budgets.
     - Humanitarian agencies scale up emergency response as famine conditions spread.
-    - Localisation of humanitarian aid and funding to local NGOs.
-    - OECD DAC statistics on aid flows to least developed countries.
-    - UN appeal for humanitarian funding remains severely underfunded.
+    - UN humanitarian appeal remains severely underfunded as needs grow.
+    - Localisation of humanitarian aid and direct funding to local NGOs.
+    - OECD DAC statistics show a fall in global aid flows.
+    - Aid workers killed as access to conflict zone is blocked.
+    - Refugees and displaced people face cuts to food rations.
+    - Reform of the humanitarian system and the future of the UN aid agencies.
+    - Evaluation finds development programme failed to reach the poorest.
+    - Global health funding gap after donor withdrawals.
+    - Ontwikkelingshulp en noodhulp voor mensen in conflictgebieden.
+    - Hulporganisaties waarschuwen voor hongersnood door bezuinigingen.
 data-ai:
   label: Aid × data × AI
   description: Data, digital technology and artificial intelligence in aid and development.
@@ -17,6 +26,11 @@ data-ai:
     - Predictive analytics and early warning models trigger anticipatory action.
     - Biometric registration and digital identity in aid distribution raise concerns.
     - Satellite imagery and machine learning used to map disaster damage.
+    - AI chatbots provide information to crisis-affected communities.
+    - Digital public infrastructure and data sharing in development cooperation.
+    - Cyber attack on humanitarian organisation exposes beneficiary data.
+    - Humanitarian Data Exchange publishes new datasets on crisis needs.
+    - Kunstmatige intelligentie en data in ontwikkelingssamenwerking.
 nl:
   label: Netherlands
   description: Dutch policy, organisations and activities in aid, development and data/AI.
@@ -26,3 +40,6 @@ nl:
     - Dutch Relief Alliance launches joint response to humanitarian crisis.
     - The Hague-based Centre for Humanitarian Data publishes new guidance.
     - Tweede Kamer debatteert over de BHO-begroting.
+    - Nederlandse ngo's ontslaan personeel na wegvallen subsidies.
+    - The Netherlands pledges humanitarian funding at donor conference.
+    - Giro555 start actie voor slachtoffers van ramp.
