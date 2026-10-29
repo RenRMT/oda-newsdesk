@@ -1,0 +1,268 @@
+# Fields:
+#   id, name, lang (en | nl)
+#   type: rss      -> url
+#         gnews    -> q (Google News search; "when:14d" and locale are added from lang)
+#         reliefweb-> query (ReliefWeb API v2; needs an approved RELIEFWEB_APPNAME)
+#   tracks: default track hints (aid, data-ai, nl)
+#   prefilter: false -> source is on-topic by nature, skip keyword filter (default true)
+#   weight: ranking / hot-score weight (generic aggregator queries 0.5)
+#   publisher: id used to count independent sources. Defaults to the source id;
+#              for gnews sources without it, the publisher is taken per item.
+#   enabled: false to switch off without deleting
+#
+# Sites that block feed readers (403) or have no working feed are read through a
+# Google News `site:` query. Those items have no excerpt, only a title.
+
+# --- Aid / humanitarian -------------------------------------------------------
+- id: reliefweb-policy
+  name: ReliefWeb – policy & analysis
+  type: rss
+  url: https://reliefweb.int/updates/rss.xml?search=%28localisation+OR+%22aid+cuts%22+OR+%22humanitarian+reset%22+OR+%22anticipatory+action%22+OR+%22grand+bargain%22+OR+evaluation%29
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  publisher: reliefweb
+  weight: 0.8
+- id: reliefweb-data
+  name: ReliefWeb – data & AI
+  type: rss
+  url: https://reliefweb.int/updates/rss.xml?search=%28%22artificial+intelligence%22+OR+%22machine+learning%22+OR+%22humanitarian+data%22+OR+%22data+responsibility%22+OR+%22predictive+analytics%22%29
+  lang: en
+  tracks: [aid, data-ai]
+  prefilter: false
+  publisher: reliefweb
+  weight: 0.8
+- id: reliefweb-api
+  name: ReliefWeb API
+  type: reliefweb
+  query: '(policy OR analysis OR evaluation OR funding OR "aid cuts" OR localisation OR "anticipatory action")'
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  weight: 0.8
+  enabled: false   # enable once an appname is approved: https://apidoc.reliefweb.int/parameters#appname
+- id: tnh
+  name: The New Humanitarian
+  type: rss
+  url: https://www.thenewhumanitarian.org/rss/all.xml
+  lang: en
+  tracks: [aid]
+  prefilter: false
+- id: devex
+  name: Devex
+  type: gnews
+  q: site:devex.com
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  publisher: devex
+- id: un-news-humanitarian
+  name: UN News – Humanitarian Aid
+  type: rss
+  url: https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  publisher: un-news
+- id: odi
+  name: ODI Global
+  type: gnews
+  q: site:odi.org
+  lang: en
+  tracks: [aid]
+  publisher: odi
+- id: cgd
+  name: Center for Global Development
+  type: gnews
+  q: site:cgdev.org
+  lang: en
+  tracks: [aid]
+  publisher: cgd
+- id: bond
+  name: Bond
+  type: rss
+  url: https://www.bond.org.uk/feed/
+  lang: en
+  tracks: [aid]
+  prefilter: false
+- id: alnap
+  name: ALNAP
+  type: gnews
+  q: site:alnap.org
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  publisher: alnap
+- id: devinit
+  name: Development Initiatives
+  type: gnews
+  q: site:devinit.org
+  lang: en
+  tracks: [aid]
+  prefilter: false
+  publisher: devinit
+- id: oecd-dac
+  name: OECD development finance (Google News)
+  type: gnews
+  q: OECD ("official development assistance" OR "development assistance committee" OR "ODA")
+  lang: en
+  tracks: [aid]
+  weight: 0.5
+
+# --- Data / AI ----------------------------------------------------------------
+- id: humdata-centre
+  name: Centre for Humanitarian Data
+  type: gnews
+  q: site:centre.humdata.org
+  lang: en
+  tracks: [data-ai]
+  prefilter: false
+  publisher: humdata-centre
+- id: ictworks
+  name: ICTworks
+  type: rss
+  url: https://www.ictworks.org/feed/
+  lang: en
+  tracks: [data-ai]
+  prefilter: false
+- id: merltech
+  name: MERL Tech
+  type: rss
+  url: https://merltech.org/feed/
+  lang: en
+  tracks: [data-ai]
+  prefilter: false
+- id: nethope
+  name: NetHope
+  type: gnews
+  q: site:nethope.org
+  lang: en
+  tracks: [data-ai]
+  prefilter: false
+  publisher: nethope
+- id: icrc-law-policy
+  name: ICRC Law & Policy Blog
+  type: rss
+  url: https://blogs.icrc.org/law-and-policy/feed/
+  lang: en
+  tracks: [aid, data-ai]
+- id: data-org
+  name: data.org
+  type: gnews
+  q: site:data.org
+  lang: en
+  tracks: [data-ai]
+  publisher: data-org
+- id: cdac
+  name: CDAC Network
+  type: gnews
+  q: site:cdacnetwork.org
+  lang: en
+  tracks: [data-ai]
+  prefilter: false
+  publisher: cdac
+
+# --- Netherlands --------------------------------------------------------------
+- id: rijksoverheid-os
+  name: Rijksoverheid – ontwikkelingssamenwerking
+  type: gnews
+  q: site:rijksoverheid.nl (ontwikkelingssamenwerking OR ontwikkelingshulp OR noodhulp OR "buitenlandse handel en ontwikkelingshulp")
+  lang: nl
+  tracks: [aid, nl]
+  prefilter: false
+  publisher: rijksoverheid
+- id: government-nl
+  name: Government.nl – development
+  type: gnews
+  q: site:government.nl ("development cooperation" OR "development aid" OR "humanitarian")
+  lang: en
+  tracks: [aid, nl]
+  prefilter: false
+  publisher: rijksoverheid
+- id: tweedekamer
+  name: Tweede Kamer
+  type: gnews
+  q: site:tweedekamer.nl (ontwikkelingshulp OR "buitenlandse handel en ontwikkelingshulp" OR noodhulp)
+  lang: nl
+  tracks: [aid, nl]
+  publisher: tweedekamer
+- id: viceversa
+  name: Vice Versa
+  type: rss
+  url: https://www.viceversaonline.nl/feed/
+  lang: nl
+  tracks: [aid, nl]
+  prefilter: false
+- id: oneworld
+  name: OneWorld
+  type: rss
+  url: https://www.oneworld.nl/feed/
+  lang: nl
+  tracks: [nl]
+- id: partos
+  name: Partos
+  type: gnews
+  q: site:partos.nl
+  lang: nl
+  tracks: [aid, nl]
+  prefilter: false
+  publisher: partos
+- id: dra
+  name: Dutch Relief Alliance
+  type: rss
+  url: https://dutchrelief.org/feed/
+  lang: en
+  tracks: [aid, nl]
+  prefilter: false
+- id: "510"
+  name: 510 (Netherlands Red Cross)
+  type: gnews
+  q: site:510.global
+  lang: en
+  tracks: [data-ai, nl]
+  prefilter: false
+  publisher: "510"
+- id: clingendael
+  name: Clingendael
+  type: rss
+  url: https://www.clingendael.org/rss.xml
+  lang: en
+  tracks: [nl]
+- id: thebroker
+  name: The Broker
+  type: gnews
+  q: site:thebrokeronline.eu
+  lang: en
+  tracks: [aid, nl]
+  prefilter: false
+  publisher: thebroker
+
+# --- Catch-all Google News queries -------------------------------------------
+- id: gnews-nl-os
+  name: Google News NL – ontwikkelingssamenwerking
+  type: gnews
+  q: ontwikkelingssamenwerking OR ontwikkelingshulp OR noodhulp
+  lang: nl
+  tracks: [aid, nl]
+  weight: 0.5
+- id: gnews-dutch-aid
+  name: Google News – Dutch aid
+  type: gnews
+  q: (Dutch OR Netherlands) ("development aid" OR "humanitarian aid" OR "development cooperation")
+  lang: en
+  tracks: [aid, nl]
+  weight: 0.5
+- id: gnews-humanitarian-ai
+  name: Google News – humanitarian AI
+  type: gnews
+  q: ("humanitarian" OR "development aid") ("AI" OR "artificial intelligence" OR "data")
+  lang: en
+  tracks: [data-ai]
+  weight: 0.5
+- id: gnews-aid-cuts
+  name: Google News – aid cuts
+  type: gnews
+  q: '"aid cuts" OR "ODA cuts" OR "foreign aid budget"'
+  lang: en
+  tracks: [aid]
+  weight: 0.5

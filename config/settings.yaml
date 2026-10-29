@@ -1,0 +1,30 @@
+site:
+  title: ODA Newsdesk
+  base_url: ""            # e.g. https://newsdesk.example.org (used in RSS links)
+  cname: ""               # custom domain for GitHub Pages; empty = none
+
+languages: [en, nl]       # items detected in other languages are dropped
+
+backend: anthropic        # anthropic | ollama (phase 2+)
+models:
+  anthropic: {enrich: claude-haiku-5-5, digest: claude-sonnet-5-5}
+  ollama: {enrich: "", digest: ""}
+digest_backend: anthropic
+
+relevance_threshold: 0.45
+max_llm_items_per_run: 60
+
+fetch:
+  timeout_s: 15
+  retries: 2
+  max_age_days: 14        # ignore entries older than this
+  dead_after_failures: 3  # consecutive failed runs before a feed is flagged dead
+
+dedupe:
+  title_similarity: 92    # rapidfuzz token_sort_ratio
+  title_window_days: 3
+  seen_retention_days: 60
+
+hot: {window_days: 7, sim_threshold: 0.82, min_sources: 3}
+
+site_window_days: 30      # items exported to recent.json

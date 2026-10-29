@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}About · {{ site.title }}{% endblock %}
+{% block content %}
+<section class="prose">
+  <h2>About</h2>
+  <p>A personal newsdesk tracking three areas, with English and Dutch sources. It's updated three times a day.</p>
+  <dl>
+    {% for key, t in tracks.items() %}
+    <dt><span class="chip chip-{{ key }}">{{ t.label }}</span></dt>
+    <dd>{{ t.description }}</dd>
+    {% endfor %}
+  </dl>
+
+  <h3>Sources</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Source</th><th>Via</th><th>Lang</th><th>Tracks</th><th>Filter</th></tr></thead>
+    <tbody>
+    {% for s in sources if s.enabled %}
+    <tr><td>{{ s.name }}</td><td>{{ 'Google News' if s.type == 'gnews' else s.type | upper }}</td><td>{{ s.lang | upper }}</td>
+        <td>{{ s.tracks | join(', ') }}</td><td>{{ 'keywords' if s.prefilter else 'all items' }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Inclusion criteria</h3>
+  <p>Sources that are on-topic by nature are included in full. For all other sources an item needs at least one keyword match:</p>
+  <ul>
+    <li><strong>Aid & humanitarian:</strong> an aid keyword.</li>
+    <li><strong>Aid × data × AI:</strong> a data/AI keyword together with an aid signal, or from a data/AI source.</li>
+    <li><strong>Netherlands:</strong> a Dutch signal (keyword, Dutch language or Dutch source) together with one of the tracks above.</li>
+  </ul>
+  {% for key, spec in keywords.items() %}
+  <details><summary>{{ tracks[key].label }} keywords</summary>
+    <p class="kw">{{ ((spec.terms or []) + (spec.terms_cs or [])) | join(' · ') }}</p>
+  </details>
+  {% endfor %}
+</section>
+{% endblock %}

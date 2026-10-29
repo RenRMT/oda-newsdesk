@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Test</title><link>https://example.org</link>
+<item><title>Aid cuts deepen crisis</title><link>https://example.org/a?utm_source=rss</link>
+<description>&lt;p&gt;Funding &amp;amp; access&lt;/p&gt;</description><pubDate>Tue, 27 Oct 2026 08:00:00 GMT</pubDate></item>
+<item><title>Second story</title><link>https://example.org/b</link><pubDate>Mon, 26 Oct 2026 08:00:00 GMT</pubDate></item>
+<item><title></title><link>https://example.org/no-title</link></item>
+</channel></rss>

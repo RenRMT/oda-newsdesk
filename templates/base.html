@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.title }}{% endblock %}</title>
+<link rel="stylesheet" href="{{ root }}static/style.css">
+<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ root }}feed.xml">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="{{ root }}index.html">{{ site.title }}</a>
+    <nav>
+      <a href="{{ root }}index.html" {% if page == 'home' %}aria-current="page"{% endif %}>Latest</a>
+      {% for key, t in tracks.items() %}
+      <a href="{{ root }}track/{{ key }}/index.html" {% if page == key %}aria-current="page"{% endif %}>{{ t.label }}</a>
+      {% endfor %}
+      <a href="{{ root }}stats/index.html" {% if page == 'stats' %}aria-current="page"{% endif %}>Stats</a>
+      <a href="{{ root }}about/index.html" {% if page == 'about' %}aria-current="page"{% endif %}>About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+{% block content %}{% endblock %}
+</main>
+<footer class="wrap foot">
+  Updated {{ now | date('%d %b %Y %H:%M') }} UTC · <a href="{{ root }}feed.xml">RSS</a>
+</footer>
+<script src="{{ root }}static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% from "_item.html" import item_card, filters %}
+{% block content %}
+{% if events %}
+<section class="coming-up" aria-label="Coming up">
+  <h2>Coming up</h2>
+  <ul>
+    {% for e in events[:6] %}
+    <li><span class="when">{% if e.approx %}~{% endif %}{{ e.when | date('%d %b') }}</span> {{ e.name }}
+      <span class="in">{% if e.in_days == 0 %}today{% else %}in {{ e.in_days }}d{% endif %}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<section>
+  <h2>Last 7 days <span class="muted">· {{ items | length }} items</span></h2>
+  {{ filters(true, tracks) }}
+  <div class="list">
+    {% for day, group in days %}
+    <h4 class="day">{{ day.strftime('%A %d %B') }}</h4>
+    {% for i in group %}{{ item_card(i, tracks) }}{% endfor %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,73 @@
+# Keyword prefilter. `terms` match case-insensitively on word boundaries;
+# `terms_cs` match case-sensitively (acronyms). A trailing * matches any suffix.
+aid:
+  terms:
+    - development aid
+    - development cooperation
+    - development assistance
+    - official development assistance
+    - foreign aid
+    - aid cuts
+    - aid budget
+    - humanitarian*
+    - relief operation*
+    - famine
+    - refugee*
+    - displaced
+    - displacement
+    - localisation
+    - localization
+    - grand bargain
+    - anticipatory action
+    - cash transfer*
+    - global health
+    - food insecurity
+    - ontwikkelingssamenwerking
+    - ontwikkelingshulp
+    - ontwikkelingsbudget
+    - noodhulp
+    - humanitair*
+    - vluchteling*
+    - hongersnood
+    - giro555
+  terms_cs: [ODA, DAC, OCHA, UNHCR, UNICEF, WFP, USAID, FCDO, NGO, NGOs, INGO, BHO, SDG, SDGs]
+data-ai:
+  terms:
+    - artificial intelligence
+    - machine learning
+    - generative ai
+    - large language model*
+    - chatbot*
+    - algorithm*
+    - data protection
+    - data responsibility
+    - humanitarian data
+    - open data
+    - predictive analytics
+    - early warning
+    - digital identity
+    - biometric*
+    - digital public infrastructure
+    - satellite imagery
+    - kunstmatige intelligentie
+    - algoritme*
+    - datagedreven
+  terms_cs: [AI, LLM, LLMs, HDX, DPI, GenAI, IATI]
+nl:
+  terms:
+    - netherlands
+    - dutch
+    - the hague
+    - nederland*
+    - den haag
+    - kabinet
+    - tweede kamer
+    - minister voor buitenlandse handel
+    - partos
+    - cordaid
+    - oxfam novib
+    - icco
+    - spark
+    - rode kruis
+    - red cross netherlands
+  terms_cs: [BZ, RVO]

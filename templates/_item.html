@@ -1,0 +1,39 @@
+{% macro item_card(i, tracks) -%}
+<article class="item" data-id="{{ i.id }}" data-tracks="{{ i.tracks | join(' ') }}" data-lang="{{ i.lang }}"
+         data-title="{{ i.title }}" data-url="{{ i.url }}" data-publisher="{{ i.publisher_name }}"
+         data-summary="{{ i.enrichment.summary_en if i.enrichment else i.excerpt }}">
+  <div class="meta">
+    <span class="pub">{{ i.publisher_name }}</span>
+    <time datetime="{{ i.published.isoformat() }}" title="{{ i.published | date('%d %b %Y %H:%M') }}">{{ i.published | ago }}</time>
+    {% if i.lang != 'en' %}<span class="lang">{{ i.lang | upper }}</span>{% endif %}
+    {% for t in i.tracks %}<span class="chip chip-{{ t }}">{{ tracks[t].label }}</span>{% endfor %}
+  </div>
+  <h3><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.title }}</a></h3>
+  {% if i.enrichment %}
+  <p class="summary">{{ i.enrichment.summary_en }}</p>
+  {% elif i.excerpt %}
+  <p class="summary">{{ i.excerpt }}</p>
+  {% endif %}
+  {% if i.enrichment and i.enrichment.hook.flag %}
+  <p class="hook"><strong>Hook:</strong> {{ i.enrichment.hook.angle }} <em>{{ i.enrichment.hook.why_now }}</em></p>
+  {% endif %}
+  <div class="actions">
+    <button type="button" class="star" aria-pressed="false" title="Star">☆</button>
+    <button type="button" class="copy" title="Copy as Markdown">Copy MD</button>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro filters(show_tracks, tracks) -%}
+<div class="filters" role="toolbar" aria-label="Filters">
+  <input type="search" class="q" placeholder="Filter…" aria-label="Filter items">
+  {% if show_tracks %}
+  {% for key, t in tracks.items() %}
+  <button type="button" class="f" data-track="{{ key }}" aria-pressed="false">{{ t.label }}</button>
+  {% endfor %}
+  {% endif %}
+  <button type="button" class="f" data-lang="nl" aria-pressed="false">Dutch only</button>
+  <button type="button" class="f" data-starred="1" aria-pressed="false">★ Starred</button>
+  <span class="count"></span>
+</div>
+{%- endmacro %}

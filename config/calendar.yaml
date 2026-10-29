@@ -1,0 +1,37 @@
+# Recurring hook dates. `date` is MM-DD for fixed days; `rule` for movable ones.
+# Approximate entries use `approx: true` and show as "around".
+- name: Prinsjesdag (Dutch budget incl. BHO)
+  rule: third-tuesday-september
+  tracks: [aid, nl]
+- name: OECD preliminary ODA statistics
+  date: "04-15"
+  approx: true
+  tracks: [aid]
+- name: World Refugee Day
+  date: "06-20"
+  tracks: [aid]
+- name: Grand Bargain annual meeting
+  date: "06-15"
+  approx: true
+  tracks: [aid]
+- name: World Humanitarian Day
+  date: "08-19"
+  tracks: [aid]
+- name: UN General Assembly high-level week
+  date: "09-22"
+  approx: true
+  tracks: [aid]
+- name: World Food Day
+  date: "10-16"
+  tracks: [aid]
+- name: BHO begrotingsbehandeling Tweede Kamer
+  date: "11-15"
+  approx: true
+  tracks: [aid, nl]
+- name: Global Humanitarian Overview launch
+  date: "12-04"
+  approx: true
+  tracks: [aid]
+- name: Human Rights Day
+  date: "12-10"
+  tracks: [aid]

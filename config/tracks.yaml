@@ -1,0 +1,28 @@
+# Track definitions. `seeds` are used in phase 2 to build embedding centroids.
+aid:
+  label: Aid & humanitarian
+  description: International development cooperation and humanitarian aid.
+  seeds:
+    - Donor governments announce cuts to official development assistance budgets.
+    - Humanitarian agencies scale up emergency response as famine conditions spread.
+    - Localisation of humanitarian aid and funding to local NGOs.
+    - OECD DAC statistics on aid flows to least developed countries.
+    - UN appeal for humanitarian funding remains severely underfunded.
+data-ai:
+  label: Aid × data × AI
+  description: Data, digital technology and artificial intelligence in aid and development.
+  seeds:
+    - Humanitarian organisations pilot generative AI tools for needs assessments.
+    - Responsible data practices and data protection for refugees and affected people.
+    - Predictive analytics and early warning models trigger anticipatory action.
+    - Biometric registration and digital identity in aid distribution raise concerns.
+    - Satellite imagery and machine learning used to map disaster damage.
+nl:
+  label: Netherlands
+  description: Dutch policy, organisations and activities in aid, development and data/AI.
+  seeds:
+    - De Nederlandse regering bezuinigt op ontwikkelingssamenwerking.
+    - Minister voor Buitenlandse Handel en Ontwikkelingshulp presenteert nieuwe beleidsnota.
+    - Dutch Relief Alliance launches joint response to humanitarian crisis.
+    - The Hague-based Centre for Humanitarian Data publishes new guidance.
+    - Tweede Kamer debatteert over de BHO-begroting.
