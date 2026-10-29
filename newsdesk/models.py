@@ -56,6 +56,8 @@ class Hook(BaseModel):
 
 
 class Enrichment(BaseModel):
+    on_topic: bool = True
+    tracks: list[Track] = Field(default_factory=list)
     summary_en: str
     type: Literal["news", "report", "policy", "opinion", "event"]
     region: str = ""
@@ -78,8 +80,21 @@ class Item(BaseModel):
     relevance: dict[str, float] = Field(default_factory=dict)
     enrichment: Enrichment | None = None
     llm_status: LLMStatus = "skipped"
+    llm_attempts: int = 0
     backend: str | None = None
     cluster_id: str | None = None
+
+    @property
+    def score(self) -> float | None:
+        """Best aid/data-ai relevance; None if the item was never scored."""
+        if not self.relevance:
+            return None
+        return max(self.relevance.get("aid", 0.0), self.relevance.get("data-ai", 0.0))
+
+    def visible(self, threshold: float) -> bool:
+        if self.enrichment is not None and not self.enrichment.on_topic:
+            return False
+        return self.score is None or self.score >= threshold
 
 
 class Cluster(BaseModel):

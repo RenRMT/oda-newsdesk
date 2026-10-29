@@ -4,6 +4,18 @@ on:
   schedule:
     - cron: "0 5,12,18 * * *"
   workflow_dispatch:
+    inputs:
+      backend:
+        description: "LLM backend override (blank = config)"
+        required: false
+        default: ""
+        type: choice
+        options: ["", anthropic, ollama]
+      no_llm:
+        description: "Skip LLM enrichment"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -31,9 +43,28 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Fetch and build
-        run: python -m newsdesk run
+      # Embedding model files rarely change: cache them under a fixed key.
+      - uses: actions/cache@v4
+        with:
+          path: .cache/fastembed
+          key: fastembed-${{ hashFiles('config/settings.yaml') }}
+          restore-keys: fastembed-
+
+      # Item vectors change every run: save a new cache each run, restore the latest.
+      - uses: actions/cache@v4
+        with:
+          path: .cache/vectors.npz
+          key: vectors-${{ github.run_id }}
+          restore-keys: vectors-
+
+      - name: Fetch, enrich and build
+        run: |
+          args=""
+          if [ "${{ inputs.no_llm }}" = "true" ]; then args="--no-llm"; fi
+          if [ -n "${{ inputs.backend }}" ]; then args="$args --backend ${{ inputs.backend }}"; fi
+          python -m newsdesk run $args
         env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           RELIEFWEB_APPNAME: ${{ vars.RELIEFWEB_APPNAME }}
 
       - name: Commit data

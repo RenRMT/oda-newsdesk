@@ -13,6 +13,18 @@
 </section>
 {% endif %}
 
+{% if hooks %}
+<section class="hooks" aria-label="Blog hooks">
+  <h2>Blog hooks <span class="muted">· {{ hook_count }} this week · <a href="{{ root }}hooks/index.html">all</a></span></h2>
+  <ul class="hook-list">
+    {% for i in hooks %}
+    <li><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.enrichment.hook.angle }}</a>
+      <span class="muted">{{ i.enrichment.hook.why_now }} · {{ i.publisher_name }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
 <section>
   <h2>Last 7 days <span class="muted">· {{ items | length }} items</span></h2>
   {{ filters(true, tracks) }}

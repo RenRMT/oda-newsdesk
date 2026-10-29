@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_item.html" import item_card, filters %}
+{% block title %}Blog hooks · {{ site.title }}{% endblock %}
+{% block content %}
+<section>
+  <h2>Blog hooks <span class="muted">· {{ items | length }} in the last 7 days</span></h2>
+  <p class="muted">Items the editor model flagged as timely and worth commenting on. Each has a suggested angle. These are starting points, not conclusions. <a href="{{ root }}feed-hooks.xml">RSS</a></p>
+  {{ filters(true, tracks) }}
+  <div class="list">
+    {% for i in items %}{{ item_card(i, tracks) }}{% endfor %}
+  </div>
+</section>
+{% endblock %}

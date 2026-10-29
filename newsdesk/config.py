@@ -23,6 +23,16 @@ def sources() -> tuple[Source, ...]:
 
 
 @cache
+def _curated_ids() -> frozenset[str]:
+    return frozenset(s.id for s in sources() if not s.prefilter)
+
+
+def threshold_for(item) -> float:
+    t = settings()["relevance_threshold"]
+    return t["curated"] if item.source_id in _curated_ids() else t["keyword"]
+
+
+@cache
 def keywords() -> dict:
     return _load("keywords.yaml")
 

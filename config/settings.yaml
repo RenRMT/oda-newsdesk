@@ -5,14 +5,34 @@ site:
 
 languages: [en, nl]       # items detected in other languages are dropped
 
-backend: anthropic        # anthropic | ollama (phase 2+)
-models:
-  anthropic: {enrich: claude-haiku-5-5, digest: claude-sonnet-5-5}
-  ollama: {enrich: "", digest: ""}
-digest_backend: anthropic
+embedding:
+  model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  cache_dir: .cache       # model files + vector cache; persisted via actions/cache
 
-relevance_threshold: 0.45
-max_llm_items_per_run: 60
+# Items whose best aid/data-ai similarity to the track seeds is below the
+# threshold are stored but hidden, and not sent to the LLM. Curated sources
+# (prefilter: false) get a low bar that only drops navigation/job/author pages;
+# the LLM's on_topic judgment does the rest. Tune using the Stats page.
+relevance_threshold:
+  curated: 0.25
+  keyword: 0.40
+
+llm:
+  backend: anthropic      # anthropic | ollama
+  digest_backend: anthropic
+  models:
+    anthropic: {enrich: claude-haiku-5-5, digest: claude-sonnet-5-5}
+    ollama: {enrich: "", digest: ""}   # chosen in phase 4
+  ollama_base_url: http://localhost:11434/v1
+  effort: low             # anthropic output_config.effort for enrichment
+  max_items_per_run: 150
+  concurrency: {anthropic: 4, ollama: 1}
+  retry_window_days: 2    # skipped/failed items this recent are (re)tried
+  max_attempts: 2
+  # USD per 1M tokens [input, output], for the cost estimate on the Stats page
+  pricing:
+    claude-haiku-5-5: [0.10, 0.50]
+    claude-sonnet-5-5: [2.00, 10.00]
 
 fetch:
   timeout_s: 15
