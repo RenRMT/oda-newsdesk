@@ -9,8 +9,8 @@
     <time datetime="{{ i.published.isoformat() }}" title="{{ i.published | date('%d %b %Y %H:%M') }}">{{ i.published | ago }}</time>
     {% if i.lang != 'en' %}<span class="lang">{{ i.lang | upper }}</span>{% endif %}
     {% if i.enrichment %}<span class="type">{{ i.enrichment.type }}</span>{% if i.enrichment.region %}<span class="region">{{ i.enrichment.region }}</span>{% endif %}{% endif %}
-    {% for t in i.tracks %}<span class="chip chip-{{ t }}">{{ tracks[t].label }}</span>{% endfor %}
-    {% if i.cluster_id %}<a class="hot-chip" href="{{ root }}hot/index.html#story-{{ i.cluster_id }}">Hot story</a>{% endif %}
+    {% for t in i.tracks %}<span class="tag tag-{{ t }}">{{ tracks[t].label }}</span>{% endfor %}
+    {% if i.cluster_id %}<a class="tag tag-hot" href="{{ root }}hot/index.html#story-{{ i.cluster_id }}">Part of a hot story</a>{% endif %}
   </div>
   <h3><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.title }}</a></h3>
   {% if i.enrichment %}
@@ -19,11 +19,11 @@
   <p class="summary">{{ i.excerpt }}</p>
   {% endif %}
   {% if i.enrichment and i.enrichment.hook.flag %}
-  <p class="hook"><strong>Hook:</strong> {{ i.enrichment.hook.angle }} <em>{{ i.enrichment.hook.why_now }}</em></p>
+  <p class="hook"><span class="key">Hook</span><span>{{ i.enrichment.hook.angle }} <span class="why">{{ i.enrichment.hook.why_now }}</span></span></p>
   {% endif %}
   <div class="actions">
-    <button type="button" class="star" aria-pressed="false" title="Star">☆</button>
-    <button type="button" class="copy" title="Copy as Markdown">Copy MD</button>
+    <button type="button" class="star" aria-pressed="false">Star</button>
+    <button type="button" class="copy">Copy as Markdown</button>
   </div>
 </article>
 {%- endmacro %}
@@ -33,16 +33,16 @@
   <div class="meta">
     <span class="pub">{{ s.publishers | length }} publishers</span>
     <time datetime="{{ s.cluster.last_seen.isoformat() }}">latest {{ s.cluster.last_seen | ago }}</time>
-    {% if s.rising %}<span class="rising">Rising · +{{ s.cluster.velocity_24h }} in 24h</span>{% endif %}
+    {% if s.rising %}<span class="tag tag-rising">Rising ▲ +{{ s.cluster.velocity_24h }} in 24h</span>{% endif %}
     <span class="spark" title="Publishers per day, last 7 days">
       {%- for d, n in s.daily %}<span style="height: {{ (2 + 14 * n / s.daily_max) | round | int }}px" title="{{ d.strftime('%a %d %b') }}: {{ n }}"></span>{% endfor -%}
     </span>
   </div>
   <h3><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.headline }}</a></h3>
   {% if s.summary %}<p class="summary">{{ s.summary }}</p>{% endif %}
-  {% if s.hook_angle %}<p class="hook"><strong>Angle:</strong> {{ s.hook_angle }}</p>{% endif %}
+  {% if s.hook_angle %}<p class="hook"><span class="key">Angle</span><span>{{ s.hook_angle }}</span></p>{% endif %}
   <details{% if open %} open{% endif %}>
-    <summary>{{ s.publishers | join(', ') }}</summary>
+    <summary>{{ s.publishers | join(' · ') }}</summary>
     <ul class="sources">
       {% for i in s.members %}
       <li><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.title }}</a> <span class="muted">· {{ i.publisher_name }} · {{ i.published | date('%d %b') }}</span></li>
@@ -54,18 +54,18 @@
 
 {% macro filters(show_tracks, tracks) -%}
 <div class="filters" role="toolbar" aria-label="Filters">
-  <input type="search" class="q" placeholder="Filter…" aria-label="Filter items">
+  <input type="search" class="q" placeholder="Search titles, publishers and summaries" aria-label="Search items">
   {% if show_tracks %}
   {% for key, t in tracks.items() %}
   <button type="button" class="f" data-track="{{ key }}" aria-pressed="false">{{ t.label }}</button>
   {% endfor %}
   {% endif %}
   <button type="button" class="f" data-lang="nl" aria-pressed="false">Dutch only</button>
+  <button type="button" class="f" data-starred="1" aria-pressed="false">Starred</button>
   <select class="type-filter" aria-label="Item type">
     <option value="">All types</option>
     {% for t in ['news', 'report', 'policy', 'opinion', 'event'] %}<option value="{{ t }}">{{ t | capitalize }}</option>{% endfor %}
   </select>
-  <button type="button" class="f" data-starred="1" aria-pressed="false">★ Starred</button>
   <span class="count"></span>
 </div>
 {%- endmacro %}

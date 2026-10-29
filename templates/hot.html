@@ -2,15 +2,23 @@
 {% from "_item.html" import story_card with context %}
 {% block title %}Hot stories · {{ site.title }}{% endblock %}
 {% block content %}
+<header class="page-head">
+  <p class="eyebrow mark">{{ hot | length }} stories, last 7 days</p>
+  <h1>Hot stories</h1>
+  <p class="lead">Stories that at least {{ min_sources }} independent publishers covered, ranked by how many and how recently. Repeat items from one publisher count once, and generic Google News queries count half. Rising means at least two new publishers in the last 24 hours. The bars show publishers per day. <a href="{{ root }}feed-hot.xml">RSS feed of hot stories</a></p>
+</header>
 <section>
-  <h2>Hot stories <span class="muted">· {{ hot | length }} in the last 7 days</span></h2>
-  <p class="muted">Stories covered by at least {{ min_sources }} independent publishers, ranked by how many publishers covered them and how recently. Repeat items from one publisher count once, and generic Google News queries count half. "Rising" means at least two new publishers in the last 24 hours. The bars show publishers per day. <a href="{{ root }}feed-hot.xml">RSS</a></p>
-  {% for s in hot %}{{ story_card(s, open=true) }}{% else %}<p>No hot stories right now.</p>{% endfor %}
+  <div class="stories">
+  {% for s in hot %}{{ story_card(s, open=true) }}{% else %}<div class="empty"><p>No story reached {{ min_sources }} publishers this week.</p></div>{% endfor %}
+  </div>
 </section>
 {% if developing %}
-<section>
-  <h2>Developing <span class="muted">· covered by 2 publishers</span></h2>
-  {% for s in developing %}{{ story_card(s) }}{% endfor %}
+<section aria-labelledby="h-developing">
+  <div class="section-head">
+    <h2 id="h-developing">Developing</h2>
+    <span class="muted mono">covered by 2 publishers</span>
+  </div>
+  <div class="stories">{% for s in developing %}{{ story_card(s) }}{% endfor %}</div>
 </section>
 {% endif %}
 {% endblock %}
