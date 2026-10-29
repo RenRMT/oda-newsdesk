@@ -1,0 +1,38 @@
+name: Set up Ollama
+description: Install Ollama, restore or pull a model, and serve it on localhost:11434 (CPU only).
+
+inputs:
+  model:
+    description: "Ollama model tag, e.g. gemma3:4b"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    # Model files are large and immutable per tag: cache them under a fixed key per model.
+    - uses: actions/cache@v4
+      with:
+        path: ~/.ollama/models
+        key: ollama-${{ inputs.model }}
+
+    - name: Install and start Ollama
+      shell: bash
+      env:
+        MODEL: ${{ inputs.model }}
+      run: |
+        curl -fsSL https://ollama.com/install.sh | sh
+        # The installer starts a systemd service that keeps models under /usr/share/ollama.
+        # Stop it and serve as the runner user so models land in the cached ~/.ollama/models.
+        sudo systemctl stop ollama || true
+        sudo systemctl disable ollama || true
+        # The enrich prompt plus an item is ~1.5k tokens; the default context may be smaller.
+        OLLAMA_CONTEXT_LENGTH=8192 OLLAMA_KEEP_ALIVE=-1 nohup ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
+        for i in $(seq 1 30); do
+          curl -sf http://localhost:11434/api/version && break
+          sleep 1
+        done
+        curl -sf http://localhost:11434/api/version || { cat "$RUNNER_TEMP/ollama.log"; exit 1; }
+        echo
+        ollama pull "$MODEL"
+        # Load the model once so the first item doesn't pay the load time.
+        ollama run "$MODEL" "Reply with OK." > /dev/null

@@ -11,6 +11,8 @@ python -m newsdesk run                     # fetch + score + LLM-enrich + build 
 python -m newsdesk run --no-llm            # same, without the LLM step
 python -m newsdesk enrich --backend ollama # (re)enrich recent items with a specific backend
 python -m newsdesk cluster --no-llm        # regroup the last 7 days into hot stories
+python -m newsdesk eval --make-sheet 60    # create/top up data/eval/labels.yaml for hand labelling
+python -m newsdesk eval --backend ollama --model gemma3:4b   # score a backend against the labels
 python -m http.server -d site              # view at http://localhost:8000
 python -m pytest -q
 ```
@@ -39,7 +41,14 @@ python -m pytest -q
 6. **Hot stories.** Group the visible items of the last 7 days into stories. An item joins a story when its embedding is close to the story's centroid, it shares a track, and it shares a rare word such as a place or organisation name. A story covered by at least 3 distinct publishers is "hot". Its score counts each publisher once, weighted by source and decayed with age. The LLM writes a neutral headline, summary and angle for each hot story, and these are reused until the story gains or loses items. Stories are saved in `data/clusters/current.json`.
 7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`.
 
-The LLM backend can be switched in `settings.yaml` (`llm.backend`) or per run with `--backend`. `anthropic` (Claude Haiku) needs `ANTHROPIC_API_KEY`. `ollama` needs a local Ollama server, which phase 4 sets up inside the workflow.
+The LLM backend can be switched in `settings.yaml` (`llm.backend`) or per run with `--backend`. `anthropic` (Claude Haiku) needs `ANTHROPIC_API_KEY`. `ollama` runs a small open model on the GitHub runner's CPU: when the resolved backend is `ollama`, the `update` workflow installs Ollama, restores the model from the Actions cache (or pulls it), and serves it locally. It is free but slow, about 15–25 seconds per item, so it enriches at most 60 items per run (`llm.max_items_per_run`).
+
+## Choosing a backend
+
+1. Label the sheet. `data/eval/labels.yaml` holds 60 real items. For each one, set `on_topic` and `hook` to true or false and correct `tracks`, then commit the file. Rows with `on_topic: null` are skipped, so a partly labelled sheet still works.
+2. Run the **eval** workflow from the Actions tab once per candidate: backend `anthropic`, then backend `ollama` with models such as `gemma3:4b`, `qwen3:4b` or `llama3.2:3b`. You can also run `python -m newsdesk eval` locally if you have Ollama or an API key.
+3. Each run writes a report to `data/eval/reports/` and to the run summary. A report covers on-topic accuracy and off-topic precision/recall, track and hook precision/recall, refusals, invalid JSON, summaries containing disclaimers, runtime and cost. It also lists every disagreement with the model's summary, so you can judge translation quality and tone.
+4. Set `llm.backend` and `llm.models.ollama.enrich` in `settings.yaml` to the winner.
 
 ## GitHub setup
 

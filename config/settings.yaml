@@ -22,10 +22,12 @@ llm:
   digest_backend: anthropic
   models:
     anthropic: {enrich: claude-haiku-5-5, digest: claude-sonnet-5-5}
-    ollama: {enrich: "", digest: ""}   # chosen in phase 4
+    # Local models run on the 4-vCPU GitHub runner (CPU only). Compare candidates with the
+    # eval workflow before switching llm.backend; see README "Choosing a backend".
+    ollama: {enrich: "gemma3:4b", digest: "llama3.1:8b"}
   ollama_base_url: http://localhost:11434/v1
   effort: low             # anthropic output_config.effort for enrichment
-  max_items_per_run: 150
+  max_items_per_run: {anthropic: 150, ollama: 60}   # ollama: ~15-25 s per item on CPU
   concurrency: {anthropic: 4, ollama: 1}
   retry_window_days: 2    # skipped/failed items this recent are (re)tried
   max_attempts: 2

@@ -1,10 +1,14 @@
 from newsdesk.llm.base import BackendUnavailable, LLMBackend
 
 
-def get_backend(llm_cfg: dict, role: str = "enrich", backend: str | None = None) -> LLMBackend:
-    """Build the configured backend for `role` ("enrich" or "digest")."""
-    name = backend or (llm_cfg["backend"] if role == "enrich" else llm_cfg["digest_backend"])
-    model = llm_cfg["models"][name][role]
+def backend_name(llm_cfg: dict, role: str = "enrich", backend: str | None = None) -> str:
+    return backend or (llm_cfg["backend"] if role == "enrich" else llm_cfg["digest_backend"])
+
+
+def get_backend(llm_cfg: dict, role: str = "enrich", backend: str | None = None, model: str | None = None) -> LLMBackend:
+    """Build the configured backend for `role` ("enrich" or "digest"); `model` overrides the configured one."""
+    name = backend_name(llm_cfg, role, backend)
+    model = model or llm_cfg["models"][name][role]
     if not model:
         raise BackendUnavailable(f"no {role} model configured for backend '{name}'")
     if name == "anthropic":
