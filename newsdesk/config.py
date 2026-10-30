@@ -41,7 +41,11 @@ def _exclude_title() -> re.Pattern | None:
 
 def excluded(item) -> str | None:
     """Why an item is excluded by settings.exclude, or None."""
-    if item.publisher in (settings().get("exclude", {}).get("publishers") or []):
+    exclude = settings().get("exclude", {})
+    if item.publisher in (exclude.get("publishers") or []):
+        return "blocked publisher"
+    domain = item.publisher_domain or ""
+    if any(domain == d or domain.endswith("." + d) for d in exclude.get("domains") or []):
         return "blocked publisher"
     pattern = _exclude_title()
     if pattern and pattern.search(item.title):
