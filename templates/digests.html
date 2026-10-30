@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Weekly digest · {{ site.title }}{% endblock %}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow mark">{{ digests | length }} digests</p>
+  <h1>Weekly digest</h1>
+  <p class="lead">Every Monday a language model reads the past week's hot stories, top items and hooks, and writes the trends, Dutch news, notable publications and five blog ideas. It may only cite items from the newsdesk. <a href="{{ root }}feed-digest.xml">RSS feed of digests</a></p>
+</header>
+<section>
+  {% if digests %}
+  <ul class="digest-list">
+    {% for d in digests %}
+    <li><a href="{{ root }}digest/{{ d.week }}/index.html">{{ d.title }}</a>
+      <span class="muted mono">{{ d.week }}{% if d.meta.status != 'ok' %} · without model{% endif %}</span></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="empty"><p>No digest yet. The first one appears after the Monday run.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

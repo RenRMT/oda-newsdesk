@@ -58,6 +58,7 @@ class Hook(BaseModel):
 
 class Enrichment(BaseModel):
     on_topic: bool = True
+    aggregator: bool = False  # content farm, reposter or multi-topic roundup
     tracks: list[Track] = Field(default_factory=list)
     summary_en: str
     type: Literal["news", "report", "policy", "opinion", "event"]
@@ -94,7 +95,7 @@ class Item(BaseModel):
         return max(self.relevance.get("aid", 0.0), self.relevance.get("data-ai", 0.0))
 
     def visible(self, threshold: float) -> bool:
-        if self.enrichment is not None and not self.enrichment.on_topic:
+        if self.enrichment is not None and (not self.enrichment.on_topic or self.enrichment.aggregator):
             return False
         return self.score is None or self.score >= threshold
 

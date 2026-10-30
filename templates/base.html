@@ -19,9 +19,12 @@
       <a href="{{ root }}index.html" {% if page == 'home' %}aria-current="page"{% endif %}>Latest</a>
       <a href="{{ root }}hot/index.html" {% if page == 'hot' %}aria-current="page"{% endif %}>Hot</a>
       <a href="{{ root }}hooks/index.html" {% if page == 'hooks' %}aria-current="page"{% endif %}>Hooks</a>
+      <a href="{{ root }}digest/index.html" {% if page == 'digest' %}aria-current="page"{% endif %}>Digest</a>
       {% for key, t in tracks.items() %}
       <a href="{{ root }}track/{{ key }}/index.html" {% if page == key %}aria-current="page"{% endif %}>{{ t.label }}</a>
       {% endfor %}
+      <a href="{{ root }}trends/index.html" {% if page == 'trends' %}aria-current="page"{% endif %}>Trends</a>
+      <a href="{{ root }}search/index.html" {% if page == 'search' %}aria-current="page"{% endif %}>Search</a>
       <a href="{{ root }}stats/index.html" {% if page == 'stats' %}aria-current="page"{% endif %}>Stats</a>
       <a href="{{ root }}about/index.html" {% if page == 'about' %}aria-current="page"{% endif %}>About</a>
     </nav>

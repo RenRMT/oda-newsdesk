@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Search · {{ site.title }}{% endblock %}
+{% block content %}
+<header class="page-head">
+  <h1>Search</h1>
+  <p class="lead">Search the last 30 days of items by title, summary, publisher or region. Matching tolerates small typos and word beginnings.</p>
+</header>
+<section class="search" data-src="{{ root }}data/recent.json">
+  <div class="filters">
+    <label class="visually-hidden" for="search-q">Search items</label>
+    <input id="search-q" class="q" type="search" placeholder="e.g. famine, AIV, data protection" autocomplete="off" autofocus>
+    <span class="count muted mono" aria-live="polite"></span>
+  </div>
+  <div class="list results"></div>
+</section>
+<script src="{{ root }}static/vendor/minisearch.js"></script>
+<script src="{{ root }}static/search.js"></script>
+{% endblock %}

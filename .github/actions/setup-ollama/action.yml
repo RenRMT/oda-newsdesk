@@ -5,6 +5,10 @@ inputs:
   model:
     description: "Ollama model tag, e.g. gemma3:4b"
     required: true
+  context_length:
+    description: "Context window in tokens"
+    required: false
+    default: "8192"
 
 runs:
   using: composite
@@ -19,14 +23,15 @@ runs:
       shell: bash
       env:
         MODEL: ${{ inputs.model }}
+        CONTEXT_LENGTH: ${{ inputs.context_length }}
       run: |
         curl -fsSL https://ollama.com/install.sh | sh
         # The installer starts a systemd service that keeps models under /usr/share/ollama.
         # Stop it and serve as the runner user so models land in the cached ~/.ollama/models.
         sudo systemctl stop ollama || true
         sudo systemctl disable ollama || true
-        # The enrich prompt plus an item is ~1.5k tokens; the default context may be smaller.
-        OLLAMA_CONTEXT_LENGTH=8192 OLLAMA_KEEP_ALIVE=-1 nohup ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
+        # The enrich prompt plus an item is ~1.5k tokens, a digest ~8k plus output; the default context may be smaller.
+        OLLAMA_CONTEXT_LENGTH="$CONTEXT_LENGTH" OLLAMA_KEEP_ALIVE=-1 nohup ollama serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
         for i in $(seq 1 30); do
           curl -sf http://localhost:11434/api/version && break
           sleep 1

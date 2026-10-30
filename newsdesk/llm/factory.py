@@ -17,11 +17,12 @@ def get_backend(llm_cfg: dict, role: str = "enrich", backend: str | None = None,
         from newsdesk.llm.anthropic_backend import AnthropicBackend
 
         try:
-            return AnthropicBackend(model, effort=llm_cfg.get("effort") if role == "enrich" else None)
+            return AnthropicBackend(model, effort=llm_cfg.get("effort" if role == "enrich" else "digest_effort"))
         except anthropic.AnthropicError as e:  # e.g. no credentials configured
             raise BackendUnavailable(str(e)) from e
     if name == "ollama":
         from newsdesk.llm.openai_compat import OpenAICompatBackend
 
-        return OpenAICompatBackend(model, llm_cfg["ollama_base_url"])
+        # One digest call reads ~6k tokens and writes ~2k: well over the enrich timeout on CPU.
+        return OpenAICompatBackend(model, llm_cfg["ollama_base_url"], timeout=300 if role == "enrich" else 3600)
     raise ValueError(f"unknown LLM backend: {name}")

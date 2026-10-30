@@ -11,6 +11,8 @@ python -m newsdesk run                     # fetch + score + LLM-enrich + build 
 python -m newsdesk run --no-llm            # same, without the LLM step
 python -m newsdesk enrich --backend ollama # (re)enrich recent items with a specific backend
 python -m newsdesk cluster --no-llm        # regroup the last 7 days into hot stories
+python -m newsdesk digest                  # write this week's digest to data/digests/ and rebuild site/
+python -m newsdesk digest --no-llm         # same, as a plain digest without a model
 python -m newsdesk eval --make-sheet 60    # create/top up data/eval/labels.yaml for hand labelling
 python -m newsdesk eval --backend ollama --model gemma3:4b   # score a backend against the labels
 python -m http.server -d site              # view at http://localhost:8000
@@ -30,6 +32,7 @@ python -m pytest -q
 | `config/settings.yaml` | Relevance thresholds, retention, excluded publishers and vacancy title patterns, hot-story tuning, and LLM backend, models and pricing. |
 | `prompts/enrich.md` | Editorial instructions for the LLM: on-topic test, summary, type, hook criteria. |
 | `prompts/cluster.md` | Instructions for the headline, summary and angle of a hot story. |
+| `prompts/digest.md` | Instructions for the weekly digest. |
 
 ## How items flow
 
@@ -39,7 +42,17 @@ python -m pytest -q
 4. **Relevance score.** Compare each item with the seed headlines using a multilingual MiniLM model running locally on CPU. Items below the threshold are stored but hidden.
 5. **LLM enrichment.** For relevant items, the LLM writes an English summary, decides whether the item is on topic, and assigns tracks, type and region, plus an optional blog hook. If it refuses, fails, or is unavailable, the item is still shown with its original excerpt. The Stats page shows these outcomes and the estimated cost.
 6. **Hot stories.** Group the visible items of the last 7 days into stories. An item joins a story when its embedding is close to the story's centroid, it shares a track, and it shares a rare word such as a place or organisation name. A story covered by at least 3 distinct publishers is "hot". Its score counts each publisher once, weighted by source and decayed with age. The LLM writes a neutral headline, summary and angle for each hot story, and these are reused until the story gains or loses items. Stories are saved in `data/clusters/current.json`.
-7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`.
+7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`. The site also has a search page (MiniSearch over the last 30 days, in the browser) and a monthly trends page.
+
+Items the LLM judges to be from an aggregator, content farm or multi-topic roundup are hidden like off-topic ones and listed on Stats as "LLM: aggregator". The domain block list in `settings.yaml` (`exclude.domains`) stays the first filter, because items the LLM never sees are not checked. Add domains that keep showing up there.
+
+## Weekly digest
+
+The `digest` workflow runs on Monday at 05:30 UTC. It gives the digest model (Claude Sonnet, `llm.models.*.digest`) the past week's top 10 stories, the top 25 items per track, the item hooks and the next four weeks of calendar dates. The model returns trends, hot-story notes, an NL corner, notable publications and five blog hooks, citing material by reference only. The Markdown and its links are generated from those references, so the digest cannot link to anything that is not on the newsdesk. It is saved as `data/digests/YYYY-Www.md` and published under `/digest/` and in `feed-digest.xml`.
+
+Without `ANTHROPIC_API_KEY` the workflow uses the local Ollama digest model (`llama3.1:8b`, about 20–40 minutes on the runner). If no model works, it writes a plain digest from the stories, item summaries and hooks.
+
+To get the digest by email, point an RSS-to-email service such as Buttondown or Blogtrottr at `<site>/feed-digest.xml`.
 
 The LLM backend can be switched in `settings.yaml` (`llm.backend`) or per run with `--backend`. `anthropic` (Claude Haiku) needs `ANTHROPIC_API_KEY`. `ollama` runs a small open model on the GitHub runner's CPU: when the resolved backend is `ollama`, the `update` workflow installs Ollama, restores the model from the Actions cache (or pulls it), and serves it locally. It is free but slow, about 15–25 seconds per item, so it enriches at most 60 items per run (`llm.max_items_per_run`).
 
@@ -55,7 +68,7 @@ The LLM backend can be switched in `settings.yaml` (`llm.backend`) or per run wi
 1. Push to a **public** repo. Actions minutes are free for public repos.
 2. Go to Settings → Pages and set the source to **GitHub Actions**.
 3. Add the repository secret `ANTHROPIC_API_KEY` under Settings → Secrets and variables → Actions. Without it, runs still work but skip the LLM step.
-4. Run the `update` workflow once manually from the Actions tab.
+4. Run the `update` workflow once manually from the Actions tab. Run `digest` manually too if you want a digest before the first Monday.
 5. Optional: to use a custom domain, set `site.cname` in `settings.yaml` and add a DNS CNAME to `<user>.github.io`.
 6. Optional: if ReliefWeb approves an API appname, set it as the repository variable `RELIEFWEB_APPNAME` and enable the `reliefweb-api` source.
 

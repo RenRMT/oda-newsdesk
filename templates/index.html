@@ -4,6 +4,7 @@
 <header class="page-head">
   <h1>Aid, data and the Netherlands, this week</h1>
   <p class="lead">What I'm reading on development cooperation, humanitarian aid, and data and AI in the sector. English and Dutch sources, updated three times a day.</p>
+  {% if latest_digest %}<p class="digest-link"><span class="key">Weekly digest</span> <a href="{{ root }}digest/{{ latest_digest.week }}/index.html">{{ latest_digest.title }}</a></p>{% endif %}
 </header>
 
 {% if events %}

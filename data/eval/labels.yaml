@@ -2,6 +2,7 @@
 #   on_topic: true/false  - would you want this on the newsdesk at all?
 #   tracks:   the tracks that apply (aid, data-ai, nl); pre-filled with the keyword guess
 #   hook:     true/false  - would you consider writing a blog post on it now?
+#   aggregator: true/false - is the publisher a content farm, reposter or roundup? (optional)
 #   note:     optional
 # Items with on_topic: null are unlabelled and skipped. Re-running --make-sheet keeps your
 # labels and only tops the sheet up to the requested size.
@@ -9,206 +10,243 @@
 - id: 12a22ce1b2c5805f
   title: Wie het voedsel beheert, heeft de macht
   publisher: Vice Versa
+  domain: ''
   lang: nl
   excerpt: Op 16 oktober 1945 tekenden tientallen landen in Quebec de grondwet van de FAO, de Voedsel- en Landbouw…
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 8bef5758282e7dd4
   title: Nederland verhoogt steun voor wereldwijde strijd tegen honger
   publisher: Rijksoverheid – ontwikkelingssamenwerking
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 42919dfb2059f6ef
   title: Vooral alleenstaande doet beroep op noodhulp
   publisher: RD.nl
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: d6a88371f59cdd2b
   title: Steeds meer landen draaien geldkraan voor noodhulp dicht en dat merken mensen in Gaza nu | Nieuws
   publisher: AD.nl
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 2ee7ad7419d53e12
   title: 'Wereldvoedselprogramma schroeft noodhulp in Gaza terug: half miljoen mensen verliezen voedselhulp'
   publisher: AD.nl
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: a49ed8d16a4a5748
   title: Conventionele wapens | FOD Buitenlandse Zaken - Buitenlandse Handel en Ontwikkelingssamenwerking
   publisher: FPS Foreign Affairs
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 85ed056626ad0669
   title: 'Advies: ontwikkelingssamenwerking is achterhaald en moet anders'
   publisher: Dagblad010
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: e4f0a6a9dce815c5
   title: 'UNHCR: tien veelbelovende huisvestingspraktijken voor vluchtelingen in Europa'
   publisher: UNHCR - The UN Refugee Agency
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: e01b283ef054158b
   title: Ontwikkelingshulp moet op de schop, ‘Europa dreigt irrelevant te worden’
   publisher: bnr.nl
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 817b42e30241a40b
   title: Dorcas start noodhulp aan gevluchte gezinnen in Jemen
   publisher: Cvandaag
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 371e3976795b9651
   title: De wereld verandert. De weg naar een wereld zonder honger ook?
   publisher: Partos
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 7a8144d295b381b4
   title: Ontwikkelingssamenwerking moet op de schop, maar oude kliek zorgt niet voor vernieuwing
   publisher: EWmagazine.nl
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 3f4ce04d70ca7a86
   title: Noodhulp voor winkels in Marseille, Frankrijk, na rellen en plunderingen
   publisher: cedarnews.net
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 4cb1f05ff2f82995
   title: Aan min. BHO - Verzoek kabinetsreactie op het bericht 'VN-tak schrapt noodhulp voor half miljoen Palestijnen
     in Gaza vanwege geldtekort'
   publisher: Tweede Kamer
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 9d7b939c0e936d77
   title: Een bredere dialoog over Internationale Samenwerking
   publisher: Partos
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 99f2946daf5b7a9e
   title: 'Webinar: Moving forward with the Power Awareness Tool'
   publisher: Partos
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 01b6d0e7dc2355a5
   title: Noodhulp na aanval op vogelopvang in Oekraïne
   publisher: Animals Today
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 2832ef18eee8612a
   title: 'Lede trekt 2.000 euro uit voor noodhulp in Nepal, maar N-VA stemt tegen: “Eerst armoede in eigen gemeente
     aanpakken”'
   publisher: Dender Journaal
+  domain: ''
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: ff3696987a064553
   title: Best practices for AI across the evaluation lifecycle
   publisher: Bond
+  domain: ''
   lang: en
   excerpt: How can AI make evaluation more efficient without compromising responsible practice? Lucia Soldà and
     Angela Keenan share practical lessons from a Bond workshop on using AI across the evaluation lifecycle. The
@@ -218,22 +256,26 @@
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 989fa0e3752cdb64
   title: Who Governs in a Crisis? Artificial Intelligence, Power, and Governance in Humanitarian Response
   publisher: TRENDS Research
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 8f6cd6c51053d686
   title: 'Keeping the Human in the loop: Balancing AI capabilities with Human Judgement in Evaluation'
   publisher: MERL Tech
+  domain: ''
   lang: en
   excerpt: Artificial intelligence is creating new opportunities across the evaluation cycle, from evaluation design
     and data analysis to synthesis and reporting, while raising important questions about human judgment, contextual
@@ -243,22 +285,26 @@
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 57100943eaaca47d
   title: Connecting people to humanitarian assistance with responsible AI
   publisher: Cisco Blogs
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 1332be2d92fef2b3
   title: IFC Checked Sama’s Fire Exits. Nobody Checked the Client Exit.
   publisher: ICTworks
+  domain: ''
   lang: en
   excerpt: In June 2011, I wrote that microtasking gave youth a value chain they could use to climb out of poverty.
     On April 16, 2026, Sama issued redundancy notices to 1,108 Nairobi staff because one client, Meta, ended one
@@ -268,22 +314,26 @@
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: f7761cfd8258b4ed
   title: 'Anthropic IPO: Firm uses ‘catastrophic’ word 10 times in document to highlight ‘humanitarian’ AI risks'
   publisher: The Economic Times
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 0f3870475dba5980
   title: Rethinking Humanitarianism | Why the WFP cyber-attack matters
   publisher: The New Humanitarian
+  domain: ''
   lang: en
   excerpt: How the WFP Gaza data breach connects questions about surveillance, the rush for AI solutions, the pursuit
     of data, and corporate tech partnerships.
@@ -291,11 +341,13 @@
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 8a0935b03fb2f7a6
   title: The Path to Mobile Money Growth Goes Through Utility Bills
   publisher: ICTworks
+  domain: ''
   lang: en
   excerpt: 'Mobile money will not grow much further until people use it to pay their utility bills. That is where
     digital development’s clearest success story is stuck. Across Africa, people use mobile money every day to send
@@ -305,11 +357,13 @@
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: e4455f31bc787509
   title: 'Apply Now: $150,000 for Economic Prosperity Digital Solutions'
   publisher: ICTworks
+  domain: ''
   lang: en
   excerpt: 'In 2024, 79% of adults worldwide held a financial account. Only 56% could reliably find extra money
     in an emergency. The World Bank’s Global Findex 2025 reports both numbers, and the 23-point gap between them
@@ -319,89 +373,105 @@
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: e2a2e8c7402aee91
   title: Can AI cut EU compliance costs for African cocoa farmers?
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 79bd4193ebd09bff
   title: 'A Week Can Change Everything: A New Collaboration For Cash Assistance In Chad'
   publisher: 510 (Netherlands Red Cross)
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai, nl]
   on_topic: null
   tracks: [data-ai, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 2726eca18bfa8b76
   title: AI Governance Specialist (GTA)
   publisher: data.org
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai]
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 6d46b845a203f231
   title: The Social Good AI Hub
   publisher: data.org
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai]
   on_topic: null
   tracks: [data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 4041269f0656f1ae
   title: 'Devex Newswire: The high bar and hazy realities of AI in development'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: f0f67441f47bba2b
   title: 'AI Energy Group Powers a Humanitarian Mission: Bunkering the Chinese Naval Hospital Ship Auspicious Ark
     in Ghana'
   publisher: Ship & Bunker
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
   on_topic: null
   tracks: [aid, data-ai]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 0fcca70dc7d63e85
   title: Search for funding
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: dac0aa77756b15ce
   title: Inklings | MSF’s sexual abuse scandal, and a UN secretary-general smokescreen?
   publisher: The New Humanitarian
+  domain: ''
   lang: en
   excerpt: 'Notes on aid: MSF didn’t report the full scale of abuse, everyone has something to “reset”, and how
     to break a secretary-general logjam.'
@@ -409,99 +479,117 @@
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 13950fab72089d7e
   title: Lower-income countries are missing the private capital boom. Now what?
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: fd3ed63d1481a9f1
   title: '‘They don’t care about us’: Trump food aid cuts leave Americans struggling and angry'
   publisher: Malay Mail
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 47c68f855016ce04
   title: UAE diplomat enters race for UN secretary-general
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: b8b08e366c06d184
   title: Watch Global Aid Cuts Deepen Humanitarian Strain
   publisher: Bloomberg.com
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 6e558e37a125ad8a
   title: 'Devex Debrief: A faith-based funding playbook'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: a51292f44c43c2ac
   title: Vladimir Putin, the Humanitarian
   publisher: The Atlantic
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 40b96208a97407fa
   title: Humanitarian aid cuts are putting millions of lives at risk in Yemen
   publisher: https://www.concern.org.uk/
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: d7c214860f3d953e
   title: 'Devex Newswire: Big news on who''s behind Anthropic''s Public Benefit Fund'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 5e05acb179c04d62
   title: 'Sudan conflict: Peace efforts resume to end ‘drone war’ fuelling humanitarian crisis'
   publisher: UN News – Humanitarian Aid
+  domain: ''
   lang: en
   excerpt: Talks to halt the fighting in Sudan and alleviate the humanitarian crisis there continued in Geneva on
     Wednesday, where nearly two dozen countries convened to discuss a pathway to a ceasefire and transition to peaceful
@@ -510,11 +598,13 @@
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 3ffb8a112ce293ac
   title: 'Security Council LIVE: Sudan’s war spreads as drones and hunger take a deadly toll'
   publisher: UN News – Humanitarian Aid
+  domain: ''
   lang: en
   excerpt: As drone strikes kill civilians from El Obeid to Blue Nile and famine risk spreads across Darfur and
     Kordofan, the Security Council meets on Sudan – the world’s largest hunger and displacement crisis. Ambassadors
@@ -524,170 +614,201 @@
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 7d8e417ed9eb168d
   title: 3 questions global health leaders must address following WHS 2026
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: ae44289020ff3406
   title: Afghanistan's hunger crisis deepens as aid cuts leave millions without enough food
   publisher: Daily Gate City
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: d64b25024b8664ec
   title: 'Devex Dish: Inside a $137M bet on preventing child malnutrition'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 1f999c7d48ea9539
   title: 'Devex CheckUp: Ebola reaches Africa’s most populous country'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 7fb85515efb3cdce
   title: 'A Route-Based Snapshot: Data & Trends for Refugees from Myanmar (as of 30 September 2026)'
   publisher: ReliefWeb
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: d47644d60faea893
   title: 'One year on: UK aid cuts are leaving millions at risk'
   publisher: https://www.concern.org.uk/
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 6c1ed87a32f66d66
   title: Inter-American Development Bank considers axing climate finance target
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 23f6a129027098ac
   title: 'Devex CheckUp: Former Global Fund ED Mark Dybul returns for second term'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 73a19d12dff56a2a
   title: Development Assistance Committee head on ‘a time of paradigm change’
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: b3a09397a8ba4188
   title: 'Gaza Crisis Explained: Aid Cuts, Renewed Violence and Two Elections That Could Shape 2027'
   publisher: fish4news.co.uk
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: e026f8a902515886
   title: Is tuberculosis eradication actually in sight?
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 81b163af440c9078
   title: 'Devex Newswire: The tough realities facing Trump’s global health deals'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 96dcf7ca002e9349
   title: 'Statement from the Coalition on Atrocity Prevention and Justice for Sudan: one year on from the 26 October
     2025 Atrocity in El Fasher'
   publisher: Government.nl – development
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid, nl]
   on_topic: null
   tracks: [aid, nl]
   hook: null
+  aggregator: null
   note: ''
 
 - id: a48b87e34f77b6ca
   title: 'Devex Newswire: Was USAID’s demise as bad as it seemed?'
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
 
 - id: 6bd42c288a02a804
   title: UN's Jorge Moreira da Silva rings alarm on coming food calamity
   publisher: Devex
+  domain: ''
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
   on_topic: null
   tracks: [aid]
   hook: null
+  aggregator: null
   note: ''
