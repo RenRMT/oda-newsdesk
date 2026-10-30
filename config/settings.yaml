@@ -18,7 +18,7 @@ relevance_threshold:
   keyword: 0.40
 
 llm:
-  backend: anthropic      # anthropic | ollama
+  backend: ollama         # anthropic | ollama
   digest_backend: anthropic   # the digest workflow falls back to ollama when ANTHROPIC_API_KEY is not set
   models:
     anthropic: {enrich: claude-haiku-5-5, digest: claude-sonnet-5-5}
