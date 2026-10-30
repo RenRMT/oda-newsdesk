@@ -4,7 +4,7 @@
    "first_seen": "2026-10-26T04:00:06Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 1.278,
+   "hot_score": 0.929,
    "id": "83a6dbd11f6e02f9",
    "item_ids": [
     "83a6dbd11f6e02f9",
@@ -29,30 +29,32 @@
     "aid",
     "nl"
    ],
-   "velocity_24h": 1
+   "velocity_24h": 0
   },
   {
-   "first_seen": "2026-10-22T20:26:45Z",
+   "first_seen": "2026-10-29T02:10:00Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.07,
-   "id": "342ce4b1db16f8c2",
+   "hot_score": 0.838,
+   "id": "a7cb6431b885a14f",
    "item_ids": [
-    "342ce4b1db16f8c2",
-    "6e0ad40045f15b81"
+    "a7cb6431b885a14f",
+    "71445c3490cc6410",
+    "555dbe1cb2c77b58"
    ],
-   "last_seen": "2026-10-25T10:07:53Z",
+   "last_seen": "2026-10-29T11:49:22Z",
    "llm_status": "skipped",
    "publishers": [
-    "dabanga-radio-tv-online",
-    "a-news"
+    "thisdaylive",
+    "independent-newspaper-nigeria",
+    "the-sun-nigeria"
    ],
    "summary": "",
    "tracks": [
     "aid"
    ],
-   "velocity_24h": 0
+   "velocity_24h": 1
   }
  ],
- "generated": "2026-10-29T19:56:52+00:00"
+ "generated": "2026-10-30T11:13:49+00:00"
 }

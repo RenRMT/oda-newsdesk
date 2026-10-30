@@ -465,6 +465,270 @@
     }
    },
    "ts": "2026-10-29T19:56:52+00:00"
+  },
+  {
+   "hot": {
+    "clusters": 2,
+    "hot": 2,
+    "llm": {
+     "attempted": 0,
+     "backend": "anthropic",
+     "cache_read_input_tokens": 0,
+     "cost_usd": 0.0,
+     "error": 0,
+     "input_tokens": 0,
+     "invalid": 0,
+     "model": "claude-haiku-5-5",
+     "ok": 0,
+     "output_tokens": 0,
+     "refused": 0,
+     "unavailable": "no Anthropic credentials (set ANTHROPIC_API_KEY)"
+    }
+   },
+   "llm": {
+    "attempted": 0,
+    "backend": "anthropic",
+    "cache_read_input_tokens": 0,
+    "cost_usd": 0.0,
+    "error": 0,
+    "input_tokens": 0,
+    "invalid": 0,
+    "model": "claude-haiku-5-5",
+    "ok": 0,
+    "output_tokens": 0,
+    "refused": 0,
+    "unavailable": "no Anthropic credentials (set ANTHROPIC_API_KEY)"
+   },
+   "new_items": 43,
+   "sources": {
+    "510": {
+     "above_threshold": 0,
+     "fetched": 1,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "alnap": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "bond": {
+     "above_threshold": 0,
+     "fetched": 7,
+     "new": 0,
+     "relevant": 7,
+     "status": "ok"
+    },
+    "cdac": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "cgd": {
+     "above_threshold": 0,
+     "fetched": 23,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "clingendael": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "data-org": {
+     "above_threshold": 0,
+     "fetched": 7,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "devex": {
+     "above_threshold": 2,
+     "fetched": 51,
+     "new": 2,
+     "relevant": 49,
+     "status": "ok"
+    },
+    "devinit": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "dra": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "gnews-aid-cuts": {
+     "above_threshold": 2,
+     "fetched": 32,
+     "new": 2,
+     "relevant": 32,
+     "status": "ok"
+    },
+    "gnews-dutch-aid": {
+     "above_threshold": 0,
+     "fetched": 36,
+     "new": 1,
+     "relevant": 4,
+     "status": "ok"
+    },
+    "gnews-humanitarian-ai": {
+     "above_threshold": 13,
+     "fetched": 57,
+     "new": 34,
+     "relevant": 45,
+     "status": "ok"
+    },
+    "gnews-nl-os": {
+     "above_threshold": 2,
+     "fetched": 45,
+     "new": 2,
+     "relevant": 26,
+     "status": "ok"
+    },
+    "government-nl": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "humdata-centre": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "icrc-law-policy": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "ictworks": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "merltech": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "nethope": {
+     "above_threshold": 0,
+     "fetched": 1,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "odi": {
+     "above_threshold": 0,
+     "fetched": 38,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "oecd-dac": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "oneworld": {
+     "above_threshold": 0,
+     "fetched": 8,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "partos": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "reliefweb-data": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "reliefweb-policy": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "rijksoverheid-os": {
+     "above_threshold": 0,
+     "fetched": 3,
+     "new": 0,
+     "relevant": 3,
+     "status": "ok"
+    },
+    "thebroker": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "tnh": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "tweedekamer": {
+     "above_threshold": 0,
+     "fetched": 20,
+     "new": 0,
+     "relevant": 9,
+     "status": "ok"
+    },
+    "un-news-humanitarian": {
+     "above_threshold": 2,
+     "fetched": 12,
+     "new": 2,
+     "relevant": 12,
+     "status": "ok"
+    },
+    "viceversa": {
+     "above_threshold": 0,
+     "error": "ValueError: unparseable feed: <unknown>:2:119: not well-formed (invalid token)",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    }
+   },
+   "ts": "2026-10-30T11:13:49+00:00"
   }
  ]
 }
