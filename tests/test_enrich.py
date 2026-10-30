@@ -143,3 +143,11 @@ def test_anthropic_backend_missing_credentials_is_unavailable():
 def test_anthropic_backend_failure_modes(resp, status):
     r = AnthropicBackend("m", client=FakeClient(resp)).complete_json("s", "u", SCHEMA, 100)
     assert r.status == status
+
+
+def test_aggregator_is_hidden_like_off_topic():
+    i = item("a")
+    apply_result(i, LLMResult("ok", data=GOOD | {"aggregator": True}), "fake")
+    assert i.llm_status == "ok" and i.enrichment.aggregator
+    assert not i.visible(0.4)
+    assert "aggregator" in SCHEMA["required"]

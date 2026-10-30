@@ -10,9 +10,9 @@ class OpenAICompatBackend:
 
     name = "ollama"
 
-    def __init__(self, model: str, base_url: str, client: openai.OpenAI | None = None):
+    def __init__(self, model: str, base_url: str, client: openai.OpenAI | None = None, timeout: float = 300):
         self.model = model
-        self.client = client or openai.OpenAI(base_url=base_url, api_key="unused", timeout=300)
+        self.client = client or openai.OpenAI(base_url=base_url, api_key="unused", timeout=timeout, max_retries=0 if timeout > 300 else 2)
 
     def _call(self, messages: list[dict], schema: dict, max_tokens: int):
         return self.client.chat.completions.create(

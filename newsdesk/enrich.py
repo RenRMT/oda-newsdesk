@@ -16,6 +16,7 @@ SCHEMA = {
     "type": "object",
     "properties": {
         "on_topic": {"type": "boolean"},
+        "aggregator": {"type": "boolean"},
         "tracks": {"type": "array", "items": {"type": "string", "enum": TRACK_ENUM}},
         "summary_en": {"type": "string"},
         "type": {"type": "string", "enum": ["news", "report", "policy", "opinion", "event"]},
@@ -32,7 +33,7 @@ SCHEMA = {
             "additionalProperties": False,
         },
     },
-    "required": ["on_topic", "tracks", "summary_en", "type", "region", "nl_flag", "hook"],
+    "required": ["on_topic", "aggregator", "tracks", "summary_en", "type", "region", "nl_flag", "hook"],
     "additionalProperties": False,
 }
 MAX_TOKENS = 4000  # includes thinking tokens at low effort
@@ -46,7 +47,7 @@ def user_message(item: Item) -> str:
     return "\n".join(
         [
             f"Title: {item.title}",
-            f"Publisher: {item.publisher_name}",
+            f"Publisher: {item.publisher_name}" + (f" ({item.publisher_domain})" if item.publisher_domain else ""),
             f"Published: {item.published:%Y-%m-%d}",
             f"Language: {item.lang}",
             f"Keyword tracks: {', '.join(item.tracks)}",

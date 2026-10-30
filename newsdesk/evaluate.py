@@ -2,7 +2,7 @@
 
 `make_sheet` writes a YAML sheet of real items to label in an editor. `run_eval` enriches the
 labelled items with one backend (on copies; the store is untouched) and `report` scores the
-predictions on the three judgments that drive the site: on_topic, tracks and hook.
+predictions on the judgments that drive the site: on_topic, tracks, hook and aggregator.
 """
 
 import random
@@ -23,11 +23,12 @@ SHEET_HEADER = """\
 #   on_topic: true/false  - would you want this on the newsdesk at all?
 #   tracks:   the tracks that apply (aid, data-ai, nl); pre-filled with the keyword guess
 #   hook:     true/false  - would you consider writing a blog post on it now?
+#   aggregator: true/false - is the publisher a content farm, reposter or roundup? (optional)
 #   note:     optional
 # Items with on_topic: null are unlabelled and skipped. Re-running --make-sheet keeps your
 # labels and only tops the sheet up to the requested size.
 """
-LABELS = ("on_topic", "tracks", "hook", "note")
+LABELS = ("on_topic", "tracks", "hook", "aggregator", "note")
 TRACKS = ("aid", "data-ai", "nl")
 # Phrases that signal a chatty or over-cautious small model rather than a summary.
 DISCLAIMER = re.compile(r"\b(as an ai|i cannot|i can't|i'm sorry|i am unable|disclaimer|sensitive topic)\b", re.I)
@@ -64,12 +65,14 @@ def make_sheet(items: list[Item], path: Path, n: int) -> tuple[int, int]:
             "id": i.id,
             "title": i.title,
             "publisher": i.publisher_name,
+            "domain": i.publisher_domain or "",
             "lang": i.lang,
             "excerpt": i.excerpt[:400],
             "keyword_tracks": list(i.tracks),
             "on_topic": None,
             "tracks": list(i.tracks),
             "hook": None,
+            "aggregator": None,
             "note": "",
         }
         for i in sample(pool, max(0, n - len(rows)))
@@ -145,6 +148,12 @@ def score(rows: list[dict], preds: dict[str, Item]) -> dict:
     out["hook"]["label_rate"] = sum(a for a, _ in hooks) / len(hooks) if hooks else None
     out["hook"]["pred_rate"] = sum(b for _, b in hooks) / len(hooks) if hooks else None
 
+    aggs = [(bool(r.get("aggregator")), p.enrichment.aggregator) for r, p in scored if r.get("aggregator") is not None]
+    out["aggregator"] = _pr(sum(a and b for a, b in aggs), sum(not a and b for a, b in aggs),
+                            sum(a and not b for a, b in aggs))
+    out["aggregator"]["labelled"] = len(aggs)
+    out["aggregator"]["flagged"] = sum(p.enrichment.aggregator for _, p in scored)
+
     out["disclaimers"] = [p.id for _, p in scored if DISCLAIMER.search(p.enrichment.summary_en)]
     return out
 
@@ -190,6 +199,9 @@ def report(rows: list[dict], preds: dict[str, Item], stats: dict, seconds: float
             f"| Hook precision / recall | {_fmt(h['precision'])} / {_fmt(h['recall'])} |",
             f"| Hook rate (labels / model) | {_fmt(h['label_rate'])} / {_fmt(h['pred_rate'])} |",
         ]
+        a = s["aggregator"]
+        lines.append(f"| Aggregator flags (precision / recall over {a['labelled']} labelled) | {a['flagged']} "
+                     f"({_fmt(a['precision'])} / {_fmt(a['recall'])}) |")
 
     lines += ["", "## Disagreements", "",
               "On-topic or hook mismatches, and failures. Read the summaries for tone and translation quality.", ""]
@@ -206,6 +218,9 @@ def report(rows: list[dict], preds: dict[str, Item], stats: dict, seconds: float
             issues.append(f"on_topic label {r['on_topic']}, model {e.on_topic}")
         if r.get("hook") is not None and bool(r["hook"]) != e.hook.flag:
             issues.append(f"hook label {r['hook']}, model {e.hook.flag}")
+        # Unlabelled aggregator flags are listed too, so their precision can be judged by eye.
+        if e.aggregator != bool(r.get("aggregator")) and (e.aggregator or r.get("aggregator") is not None):
+            issues.append(f"aggregator label {r.get('aggregator')}, model {e.aggregator}")
         if DISCLAIMER.search(e.summary_en):
             issues.append("disclaimer")
         if issues:

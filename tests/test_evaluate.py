@@ -5,6 +5,7 @@ import openai
 import pytest
 
 from newsdesk import evaluate
+from newsdesk.enrich import apply_result
 from newsdesk.llm import BackendUnavailable, LLMResult, get_backend
 from newsdesk.llm.openai_compat import OpenAICompatBackend
 from newsdesk.models import Item
@@ -118,3 +119,15 @@ def test_ollama_backend_server_down_is_unavailable():
     down = openai.APIConnectionError(request=SimpleNamespace(method="POST", url="http://x"))
     with pytest.raises(BackendUnavailable):
         OpenAICompatBackend("m", "http://x", client=FakeChat([down])).complete_json("s", "u", {}, 100)
+
+
+def test_score_aggregator_against_labels():
+    rows = [{"id": "a", "on_topic": True, "tracks": ["aid"], "aggregator": True},
+            {"id": "b", "on_topic": True, "tracks": ["aid"], "aggregator": False},
+            {"id": "c", "on_topic": True, "tracks": ["aid"]}]  # not labelled for aggregator
+    preds = {}
+    for id in ("a", "b", "c"):
+        preds[id] = item(id)
+        apply_result(preds[id], LLMResult("ok", data=enrichment() | {"aggregator": True}), "fake")
+    agg = evaluate.score(rows, preds)["aggregator"]
+    assert (agg["tp"], agg["fp"], agg["fn"], agg["labelled"], agg["flagged"]) == (1, 1, 0, 2, 3)

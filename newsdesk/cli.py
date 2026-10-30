@@ -3,7 +3,7 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
-from newsdesk import DATA_DIR, SITE_DIR, config, evaluate
+from newsdesk import DATA_DIR, SITE_DIR, config, digest, evaluate
 from newsdesk.build import build
 from newsdesk.llm import BackendUnavailable, backend_name, get_backend
 from newsdesk.pipeline import cluster_step, enrich_step, ingest, run_all
@@ -23,20 +23,22 @@ def main(argv=None) -> None:
     p_eval.add_argument("--make-sheet", type=int, metavar="N", help="top the labelling sheet up to N items and exit")
     p_eval.add_argument("--model", help="override the configured enrich model")
     p_eval.add_argument("--limit", type=int, help="only the first N labelled items")
-    p_info = sub.add_parser("backend-info", help="print the resolved enrich backend and model (for CI)")
-    for p in (p_run, p_cluster):
+    p_digest = sub.add_parser("digest", help="write this week's digest to data/digests/ and rebuild the site")
+    p_info = sub.add_parser("backend-info", help="print the resolved backend and model for a role (for CI)")
+    p_info.add_argument("--role", choices=["enrich", "digest"], default="enrich")
+    for p in (p_run, p_cluster, p_digest):
         p.add_argument("--no-llm", action="store_true", help="skip LLM calls")
-    for p in (p_enrich, p_run, p_cluster, p_eval, p_info):
+    for p in (p_enrich, p_run, p_cluster, p_eval, p_info, p_digest):
         p.add_argument("--backend", choices=["anthropic", "ollama"], help="override llm.backend")
-    for p in (p_fetch, p_enrich, p_cluster, p_run, p_build, p_eval):
+    for p in (p_fetch, p_enrich, p_cluster, p_run, p_build, p_eval, p_digest):
         p.add_argument("--data-dir", type=Path, default=DATA_DIR)
         p.add_argument("--site-dir", type=Path, default=SITE_DIR)
     args = parser.parse_args(argv)
 
     if args.cmd == "backend-info":
         llm_cfg = config.settings()["llm"]
-        name = backend_name(llm_cfg, "enrich", args.backend)
-        print(f"name={name}\nmodel={llm_cfg['models'][name]['enrich']}")
+        name = backend_name(llm_cfg, args.role, args.backend)
+        print(f"name={name}\nmodel={llm_cfg['models'][name][args.role]}")
         return
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -64,6 +66,21 @@ def main(argv=None) -> None:
         build(store, now, args.site_dir)
     elif args.cmd == "eval":
         _eval(store, now, args)
+    elif args.cmd == "digest":
+        _digest(store, now, args)
+
+
+def _digest(store: Store, now: datetime, args) -> None:
+    llm = None
+    if not args.no_llm:
+        try:
+            llm = get_backend(config.settings()["llm"], "digest", args.backend)
+        except BackendUnavailable as e:
+            logging.warning("digest model unavailable, writing a plain digest: %s", e)
+    path, stats = digest.make_digest(store, now, llm)
+    store.add_run_stats({"ts": now.isoformat(), "new_items": 0, "sources": {}, "digest": stats})
+    print(f"digest written to {path} ({stats['status']})")
+    build(store, now, args.site_dir)
 
 
 def _eval(store: Store, now: datetime, args) -> None:

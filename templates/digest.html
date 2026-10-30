@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ digest.title }} · {{ site.title }}{% endblock %}
+{% block content %}
+<header class="page-head">
+  <p class="eyebrow mark"><a href="{{ root }}digest/index.html">Weekly digest</a> · {{ digest.week }}</p>
+  <h1>{{ digest.title }}</h1>
+  {% if digest.meta.model %}<p class="lead">Written by {{ digest.meta.model }} from this newsdesk's items. Check the linked sources before quoting.</p>{% endif %}
+</header>
+<article class="prose digest">
+{{ digest.html | safe }}
+</article>
+{% endblock %}

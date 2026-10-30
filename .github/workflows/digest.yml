@@ -1,0 +1,88 @@
+name: digest
+
+# Weekly digest of the past 7 days, written to data/digests/YYYY-Www.md and published on the site.
+# Uses Claude (llm.digest_backend) when ANTHROPIC_API_KEY is set, otherwise a local Ollama model.
+on:
+  schedule:
+    - cron: "30 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      backend:
+        description: "LLM backend (blank = anthropic if the API key is set, else ollama)"
+        required: false
+        default: ""
+        type: choice
+        options: ["", anthropic, ollama]
+      no_llm:
+        description: "Write a plain digest without a model"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: newsdesk
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90   # a local 8B model needs ~20-40 min for one digest on CPU
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Resolve LLM backend
+        id: llm
+        run: |
+          backend="$INPUT_BACKEND"
+          if [ -z "$backend" ]; then
+            if [ -n "$ANTHROPIC_API_KEY" ]; then backend=$(python -m newsdesk backend-info --role digest | sed -n 's/^name=//p'); else backend=ollama; fi
+          fi
+          python -m newsdesk backend-info --role digest --backend "$backend" >> "$GITHUB_OUTPUT"
+        env:
+          INPUT_BACKEND: ${{ inputs.backend }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - if: steps.llm.outputs.name == 'ollama' && inputs.no_llm != true
+        uses: ./.github/actions/setup-ollama
+        with:
+          model: ${{ steps.llm.outputs.model }}
+          context_length: "16384"
+
+      - name: Write digest and build
+        run: |
+          args=(--backend "${{ steps.llm.outputs.name }}")
+          if [ "${{ inputs.no_llm }}" = "true" ]; then args+=(--no-llm); fi
+          python -m newsdesk digest "${args[@]}"
+          cat data/digests/$(ls data/digests | sort | tail -1) >> "$GITHUB_STEP_SUMMARY"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit digest
+        run: |
+          git config user.name "newsdesk-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/digests/ data/stats.json
+          git diff --cached --quiet || git commit -m "digest: $(ls data/digests | sort | tail -1 | sed 's/\.md$//')"
+          git pull --rebase && git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

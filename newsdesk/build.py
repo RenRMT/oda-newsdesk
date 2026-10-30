@@ -1,16 +1,19 @@
 import json
 import shutil
+from collections import Counter
 from datetime import datetime, timedelta
 from email.utils import format_datetime
 from itertools import groupby
 from pathlib import Path
 from xml.sax.saxutils import escape
 
+import markdown
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from newsdesk import SITE_DIR, STATIC_DIR, TEMPLATES_DIR, TRACKS, config
 from newsdesk.calendar_events import upcoming
 from newsdesk.cluster import is_hot
+from newsdesk.digest import load_digests
 from newsdesk.models import Cluster, Item
 from newsdesk.store import Store
 
@@ -125,6 +128,45 @@ def _hot_rss(title: str, link: str, stories: list[dict], now: datetime) -> str:
     return _channel(title, link, entries, now)
 
 
+def _digest_rss(title: str, link: str, digests: list[dict], now: datetime) -> str:
+    entries = []
+    for d in digests[:FEED_SIZE]:
+        url = f"{link.rstrip('/')}/digest/{d['week']}/" if link else f"digest/{d['week']}/"
+        generated = datetime.fromisoformat(d["meta"].get("generated") or now.isoformat())
+        entries.append(
+            "<item>"
+            f"<title>{escape(d['title'])}</title>"
+            f"<link>{escape(url)}</link>"
+            f"<guid isPermaLink=\"false\">digest-{d['week']}</guid>"
+            f"<pubDate>{format_datetime(generated)}</pubDate>"
+            f"<description>{escape(d['html'])}</description>"
+            "</item>"
+        )
+    return _channel(title, link, entries, now)
+
+
+def _trends(items: list[Item]) -> list[dict]:
+    """Per published month: shown items per track and type, hooks, and the most frequent regions."""
+    months: dict[str, list[Item]] = {}
+    for i in items:
+        months.setdefault(i.published.strftime("%Y-%m"), []).append(i)
+    rows = []
+    for month in sorted(months, reverse=True):
+        group = months[month]
+        enriched = [i.enrichment for i in group if i.enrichment]
+        regions = Counter(e.region for e in enriched if e.region and e.region != "Global")
+        rows.append({
+            "month": datetime.strptime(month, "%Y-%m"),
+            "total": len(group),
+            "tracks": {t: sum(t in i.tracks for i in group) for t in TRACKS},
+            "types": Counter(e.type for e in enriched),
+            "enriched": len(enriched),
+            "hooks": sum(e.hook.flag for e in enriched),
+            "regions": regions.most_common(5),
+        })
+    return rows
+
+
 def _source_health(store: Store, settings: dict) -> list[dict]:
     state = store.load_fetch_state()
     runs = store.load_stats()["runs"]
@@ -159,6 +201,7 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     hooks = [i for i in week if i.enrichment and i.enrichment.hook.flag]
     stories = _stories(store.load_clusters(), items, now, settings["hot"])
     hot = [s for s in stories if s["hot"]]
+    digests = load_digests(store.dir)
 
     if out.exists():
         shutil.rmtree(out)
@@ -184,7 +227,7 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         target.write_text(html, encoding="utf-8")
 
     days = [(d, list(g)) for d, g in groupby(week, key=lambda i: i.published.date())]
-    render("index.html", "index.html", items=week, days=days, hooks=hooks[:6], hook_count=len(hooks),
+    render("index.html", "index.html", latest_digest=digests[0] if digests else None, items=week, days=days, hooks=hooks[:6], hook_count=len(hooks),
            hot=hot[:5], hot_count=len(hot), page="home")
     render("hot.html", "hot/index.html", hot=hot, developing=[s for s in stories if not s["hot"]],
            min_sources=settings["hot"]["min_sources"], page="hot")
@@ -196,6 +239,16 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     runs = store.load_stats()["runs"][-30:]
     render("stats.html", "stats/index.html", health=_source_health(store, settings), runs=runs,
            llm_week=_llm_summary(runs[-21:]), hidden=hidden[:80], threshold_for=config.threshold_for, excluded=config.excluded, page="stats")
+
+    for d in digests:
+        d["html"] = markdown.markdown(d["markdown"])
+        render("digest.html", f"digest/{d['week']}/index.html", digest=d, page="digest")
+    render("digests.html", "digest/index.html", digests=digests, page="digest")
+    archive = [i for i in store.load_items() if config.shown(i)]
+    trends = _trends(archive)
+    render("trends.html", "trends/index.html", months=trends, types=["news", "report", "policy", "opinion", "event"],
+           track_max=max((n for r in trends for n in r["tracks"].values()), default=1) or 1, page="trends")
+    render("search.html", "search/index.html", page="search")
 
     (out / "data").mkdir()
     (out / "data" / "recent.json").write_text(json.dumps([_item_json(i) for i in items], ensure_ascii=False), encoding="utf-8")
@@ -209,6 +262,7 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         )
     (out / "feed-hooks.xml").write_text(_rss(f"{title} – Blog hooks", link, hooks, now), encoding="utf-8")
     (out / "feed-hot.xml").write_text(_hot_rss(f"{title} – Hot stories", link, hot, now), encoding="utf-8")
+    (out / "feed-digest.xml").write_text(_digest_rss(f"{title} – Weekly digest", link, digests, now), encoding="utf-8")
 
 
 def _llm_summary(runs: list[dict]) -> dict:
@@ -218,6 +272,7 @@ def _llm_summary(runs: list[dict]) -> dict:
         hot_llm = (r.get("hot") or {}).get("llm") or {}
         total["headlines"] += hot_llm.get("ok", 0)
         total["cost_usd"] += hot_llm.get("cost_usd") or 0
+        total["cost_usd"] += (r.get("digest") or {}).get("cost_usd") or 0
         llm = r.get("llm") or {}
         if "attempted" not in llm:
             continue

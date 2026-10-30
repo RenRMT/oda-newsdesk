@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Trends · {{ site.title }}{% endblock %}
+{% block content %}
+<header class="page-head">
+  <h1>Trends</h1>
+  <p class="lead">Items shown on the newsdesk per month of publication. An item can count toward more than one track. Types, hooks and regions come from the language model, so they cover only the items it summarised.</p>
+</header>
+<section aria-labelledby="h-tracks">
+  <div class="section-head"><h2 id="h-tracks">Items per track</h2></div>
+  <div class="table-wrap">
+  <table class="trends">
+    <thead><tr><th>Month</th><th class="num">All</th>{% for key, t in tracks.items() %}<th><span class="tag tag-{{ key }}">{{ t.label }}</span></th>{% endfor %}</tr></thead>
+    <tbody>
+    {% for m in months %}
+    <tr><td>{{ m.month | date('%B %Y') }}</td><td class="num">{{ m.total }}</td>
+      {% for key, t in tracks.items() %}
+      {% set n = m.tracks[key] %}
+      <td><span class="bar-cell" title="{{ t.label }}, {{ m.month | date('%B %Y') }}: {{ n }} items">
+        <span class="bar bar-{{ key }}" style="width: {{ (100 * n / track_max) | round(1) }}%"></span><span class="n">{{ n }}</span></span></td>
+      {% endfor %}</tr>
+    {% else %}
+    <tr><td colspan="5">No items yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+<section aria-labelledby="h-types">
+  <div class="section-head"><h2 id="h-types">Type, hooks and regions</h2></div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Month</th><th class="num">Summarised</th>{% for t in types %}<th class="num">{{ t | capitalize }}</th>{% endfor %}<th class="num">Hooks</th><th>Most covered regions</th></tr></thead>
+    <tbody>
+    {% for m in months %}
+    <tr><td>{{ m.month | date('%B %Y') }}</td><td class="num">{{ m.enriched }}</td>
+      {% for t in types %}<td class="num">{{ m.types[t] or '' }}</td>{% endfor %}
+      <td class="num">{{ m.hooks or '' }}</td>
+      <td>{% for region, n in m.regions %}{{ region }} <span class="muted">{{ n }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}
