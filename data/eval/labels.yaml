@@ -14,9 +14,9 @@
   lang: nl
   excerpt: Op 16 oktober 1945 tekenden tientallen landen in Quebec de grondwet van de FAO, de Voedsel- en Landbouw…
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
+  hook: true
   aggregator: null
   note: ''
 
@@ -27,10 +27,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 42919dfb2059f6ef
@@ -40,10 +40,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: false
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: d6a88371f59cdd2b
@@ -53,10 +53,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 2ee7ad7419d53e12
@@ -66,10 +66,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: a49ed8d16a4a5748
@@ -79,11 +79,11 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: false
+  aggregator: false
+  note: 'This is a generic information page of the Belgian ministry of foreign affairs'
 
 - id: 85ed056626ad0669
   title: 'Advies: ontwikkelingssamenwerking is achterhaald en moet anders'
@@ -92,11 +92,11 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: true
+  aggregator: false
+  note: 'On topic, but source is a small local newspaper'
 
 - id: e4f0a6a9dce815c5
   title: 'UNHCR: tien veelbelovende huisvestingspraktijken voor vluchtelingen in Europa'
@@ -105,10 +105,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: e01b283ef054158b
@@ -118,10 +118,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: 817b42e30241a40b
@@ -131,10 +131,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 371e3976795b9651
@@ -144,10 +144,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 7a8144d295b381b4
@@ -157,10 +157,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: 3f4ce04d70ca7a86
@@ -170,10 +170,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: true
   note: ''
 
 - id: 4cb1f05ff2f82995
@@ -184,10 +184,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 9d7b939c0e936d77
@@ -197,10 +197,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 99f2946daf5b7a9e
@@ -210,10 +210,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 01b6d0e7dc2355a5
@@ -223,10 +223,10 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 2832ef18eee8612a
@@ -237,11 +237,11 @@
   lang: nl
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: false
+  aggregator: false
+  note: 'Belgian local newspaper'
 
 - id: ff3696987a064553
   title: Best practices for AI across the evaluation lifecycle
@@ -253,10 +253,10 @@
     post Best practices for AI across the evaluation lifecycle appeared first on Bond | The international development
     network .
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 989fa0e3752cdb64
@@ -266,10 +266,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: 8f6cd6c51053d686
@@ -282,10 +282,10 @@
     understanding, evidence quality, ethics, and accountability. This session will explore how evaluators can meaningfully
     integrate AI into their practice while keeping humans at the c
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 57100943eaaca47d
@@ -295,10 +295,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 1332be2d92fef2b3
@@ -311,10 +311,10 @@
     engagement. Fifteen years separate those two sentences. In between, the Rockefeller Foundation and the International
     Finance Corporation […] The post IFC Checked Sama’s Fire Exits. Nobod
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: false
   tracks: [data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: f7761cfd8258b4ed
@@ -324,11 +324,11 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: false
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: false
+  aggregator: false
+  note: 'Mind the use of term humanitarian in non-humanitarian context'
 
 - id: 0f3870475dba5980
   title: Rethinking Humanitarianism | Why the WFP cyber-attack matters
@@ -338,10 +338,10 @@
   excerpt: How the WFP Gaza data breach connects questions about surveillance, the rush for AI solutions, the pursuit
     of data, and corporate tech partnerships.
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: 8a0935b03fb2f7a6
@@ -354,10 +354,10 @@
     money to family. When the electricity or water bill comes due, many of them still pay in cash. The […] The post
     The Path to Mobile Money Growth Goes Through Utility Bills appeared first '
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: e4455f31bc787509
@@ -370,10 +370,10 @@
     is the problem MIT Solve wants applicants to close. The Funding Opportunity The 2027 Global Economic Prosperity
     Challenge wants technology-based solutions […] The post Apply Now: $150,000 for'
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: false
   tracks: [data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: e2a2e8c7402aee91
@@ -383,10 +383,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 79bd4193ebd09bff
@@ -396,10 +396,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai, nl]
-  on_topic: null
+  on_topic: true
   tracks: [data-ai, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 2726eca18bfa8b76
@@ -409,11 +409,11 @@
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: false
   tracks: [data-ai]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: false
+  aggregator: false
+  note: 'Vacancy posting'
 
 - id: 6d46b845a203f231
   title: The Social Good AI Hub
@@ -422,11 +422,11 @@
   lang: en
   excerpt: ''
   keyword_tracks: [data-ai]
-  on_topic: null
+  on_topic: false
   tracks: [data-ai]
-  hook: null
-  aggregator: null
-  note: ''
+  hook: false
+  aggregator: false
+  note: 'General information page'
 
 - id: 4041269f0656f1ae
   title: 'Devex Newswire: The high bar and hazy realities of AI in development'
@@ -435,10 +435,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: f0f67441f47bba2b
@@ -449,10 +449,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, data-ai]
-  on_topic: null
+  on_topic: true
   tracks: [aid, data-ai]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 0fcca70dc7d63e85
@@ -462,10 +462,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: dac0aa77756b15ce
@@ -476,10 +476,10 @@
   excerpt: 'Notes on aid: MSF didn’t report the full scale of abuse, everyone has something to “reset”, and how
     to break a secretary-general logjam.'
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 13950fab72089d7e
@@ -489,10 +489,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: fd3ed63d1481a9f1
@@ -502,10 +502,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 47c68f855016ce04
@@ -515,10 +515,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: b8b08e366c06d184
@@ -528,10 +528,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 6e558e37a125ad8a
@@ -541,10 +541,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: a51292f44c43c2ac
@@ -554,10 +554,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 40b96208a97407fa
@@ -567,10 +567,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: d7c214860f3d953e
@@ -580,10 +580,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 5e05acb179c04d62
@@ -595,10 +595,10 @@
     Wednesday, where nearly two dozen countries convened to discuss a pathway to a ceasefire and transition to peaceful
     governance that represents all Sudanese people.
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 3ffb8a112ce293ac
@@ -611,10 +611,10 @@
     are expected to press yet again for a ceasefire, safe aid access and an end to the weapons flows fuelling the
     brutal conflict.
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 7d8e417ed9eb168d
@@ -624,10 +624,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: ae44289020ff3406
@@ -637,10 +637,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: d64b25024b8664ec
@@ -650,10 +650,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 1f999c7d48ea9539
@@ -663,10 +663,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 7fb85515efb3cdce
@@ -676,10 +676,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: d47644d60faea893
@@ -689,10 +689,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: true
   note: ''
 
 - id: 6c1ed87a32f66d66
@@ -702,10 +702,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 23f6a129027098ac
@@ -715,10 +715,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: false
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 73a19d12dff56a2a
@@ -728,10 +728,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: b3a09397a8ba4188
@@ -741,10 +741,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: true
   note: ''
 
 - id: e026f8a902515886
@@ -754,10 +754,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 81b163af440c9078
@@ -767,10 +767,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
 
 - id: 96dcf7ca002e9349
@@ -781,10 +781,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid, nl]
-  on_topic: null
+  on_topic: true
   tracks: [aid, nl]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: true
   note: ''
 
 - id: a48b87e34f77b6ca
@@ -794,10 +794,10 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: true
+  aggregator: false
   note: ''
 
 - id: 6bd42c288a02a804
@@ -807,8 +807,8 @@
   lang: en
   excerpt: ''
   keyword_tracks: [aid]
-  on_topic: null
+  on_topic: true
   tracks: [aid]
-  hook: null
-  aggregator: null
+  hook: false
+  aggregator: false
   note: ''
