@@ -55,6 +55,7 @@ jobs:
           model: ${{ steps.llm.outputs.model }}
 
       - name: Run eval
+        shell: bash  # implies -o pipefail, so an eval failure isn't masked by tee
         run: |
           args=(--backend "${{ inputs.backend }}" --model "$MODEL")
           if [ -n "$LIMIT" ]; then args+=(--limit "$LIMIT"); fi
