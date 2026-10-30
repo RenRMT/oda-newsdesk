@@ -60,11 +60,20 @@ hot:
   max_llm_per_run: 20     # hot clusters (re)described per run; cached until membership changes
 
 # Items dropped at fetch time and hidden if already stored. Publishers are the ids shown
-# in data/items (slug of the Google News publisher name for catch-all queries).
+# in data/items (slug of the Google News publisher name for catch-all queries). Domains
+# also match their subdomains; use them for aggregators that repost other outlets' news.
 # Title patterns are case-insensitive regexes; the LLM's on_topic check catches the rest.
 exclude:
   publishers:
     - vietnam-vn          # machine-translated Vietnamese state media in the NL Google News results
+    - head-topics
+    - drimble
+  domains:
+    - headtopics.com      # reposts other outlets' stories, often as mixed local-news roundups
+    - drimble.nl          # Dutch news aggregator
+    - news.lavx.hu        # AI-rewritten news feed
+    - dagens.com          # content farm
+    - indiagazette.com    # syndicated reposts (Big News Network)
   title_patterns:
     - '\bvacature'
     - '\bvacanc(y|ies)\b'

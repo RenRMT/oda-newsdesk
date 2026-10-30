@@ -54,4 +54,5 @@ def test_exclusions_from_settings():
     blocked = item("Humanitarian update")
     blocked.publisher = "vietnam-vn"
     assert config.excluded(blocked) == "blocked publisher"
-    assert config.excluded(item("Humanitarian hiring freeze at WFP")) is None
+    assert config.excluded(item("Incidenten in Utrecht: noodhulp", lang="nl", domain="nl.headtopics.com")) == "blocked publisher"
+    assert config.excluded(item("Humanitarian hiring freeze at WFP", domain="notheadtopics.com")) is None
