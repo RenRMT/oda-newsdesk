@@ -151,3 +151,9 @@ def test_aggregator_is_hidden_like_off_topic():
     assert i.llm_status == "ok" and i.enrichment.aggregator
     assert not i.visible(0.4)
     assert "aggregator" in SCHEMA["required"]
+
+
+def test_ollama_aggregator_flag_is_ignored():
+    i = item("a")
+    apply_result(i, LLMResult("ok", data=GOOD | {"aggregator": True}), "ollama")
+    assert i.enrichment.aggregator and i.visible(0.4)

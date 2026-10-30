@@ -95,8 +95,11 @@ class Item(BaseModel):
         return max(self.relevance.get("aid", 0.0), self.relevance.get("data-ai", 0.0))
 
     def visible(self, threshold: float) -> bool:
-        if self.enrichment is not None and (not self.enrichment.on_topic or self.enrichment.aggregator):
-            return False
+        if self.enrichment is not None:
+            # gemma3:4b's aggregator flag is mostly false positives (eval 2026-10-30: precision 0.05), so ignore it.
+            aggregator = self.enrichment.aggregator and self.backend != "ollama"
+            if not self.enrichment.on_topic or aggregator:
+                return False
         return self.score is None or self.score >= threshold
 
 
