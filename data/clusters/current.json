@@ -4,7 +4,7 @@
    "first_seen": "2026-10-30T16:16:18Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.909,
+   "hot_score": 0.697,
    "id": "cca9d138865d42e8",
    "item_ids": [
     "cca9d138865d42e8",
@@ -23,32 +23,10 @@
    "velocity_24h": 2
   },
   {
-   "first_seen": "2026-10-24T03:09:17Z",
-   "headline": "",
-   "hook_angle": "",
-   "hot_score": 0.828,
-   "id": "9072827816d4f78a",
-   "item_ids": [
-    "9072827816d4f78a",
-    "7eb60cb784d14a05"
-   ],
-   "last_seen": "2026-10-30T12:00:00Z",
-   "llm_status": "skipped",
-   "publishers": [
-    "trt-world",
-    "un-news"
-   ],
-   "summary": "",
-   "tracks": [
-    "aid"
-   ],
-   "velocity_24h": 1
-  },
-  {
    "first_seen": "2026-10-25T21:00:00Z",
    "headline": "Dutch Advisory Council Calls for Radical Change in Development Cooperation",
    "hook_angle": "Could this advisory shift finally address long-standing criticisms about power dynamics within the international development sector?",
-   "hot_score": 0.782,
+   "hot_score": 0.599,
    "id": "cff7ab62fb93709b",
    "item_ids": [
     "cff7ab62fb93709b",
@@ -81,7 +59,7 @@
    "first_seen": "2026-10-29T02:10:00Z",
    "headline": "Nigerian Federal Executive Council Approves Framework for Humanitarian Response",
    "hook_angle": "Could this framework truly represent a shift in Nigeria’s approach to tackling poverty, or is it simply a reiteration of existing strategies?",
-   "hot_score": 0.669,
+   "hot_score": 0.513,
    "id": "a7cb6431b885a14f",
    "item_ids": [
     "a7cb6431b885a14f",
@@ -102,5 +80,5 @@
    "velocity_24h": 0
   }
  ],
- "generated": "2026-10-30T22:03:24+00:00"
+ "generated": "2026-10-31T10:48:11+00:00"
 }
