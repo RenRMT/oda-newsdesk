@@ -63,7 +63,8 @@ hot:
 # Items dropped at fetch time and hidden if already stored. Publishers are the ids shown
 # in data/items (slug of the Google News publisher name for catch-all queries). Domains
 # also match their subdomains; use them for aggregators that repost other outlets' news.
-# Title patterns are case-insensitive regexes; the LLM's on_topic check catches the rest.
+# Title patterns are case-insensitive regexes for vacancies and navigation pages. Small local
+# models rarely judge an item off topic, so don't rely on the LLM to catch these.
 exclude:
   publishers:
     - vietnam-vn          # machine-translated Vietnamese state media in the NL Google News results
@@ -83,5 +84,18 @@ exclude:
     - '\b\d+\s*(uur|hours) per (week|wk)\b'
     - '\((m/v|m/v/x|m/f|m/f/d|v/m)\)'
     - '\bcareer hub\b'
+    # Title-only job ads, mostly from job boards picked up by site: queries
+    - '^(individual|national|international|independent) consultant\b'
+    - '\b(entry|mid|senior)-level position\b'
+    - '\((hybrid|field[- ]based|office[- ]based|fixed-term contract)\b[^)]*\)'
+    - '\bP-\d\b|\bNOC\b.*#\d+'
+    - '\btemporary position\b'
+    # A role noun ending a short, headline-less title or followed by a comma, bracket or dash
+    - '^[^:?!.]{0,60}\b(officer|specialist|coordinator|manager|advis[eo]r|analyst|assistant|associate|trainee|engineer|consultant|consultancy|fellow|director|expert|medic)\s*(?:$|[,(–|]|- )'
+    # Navigation, account and author pages
+    - '^devex: login$'
+    - '\bauthors$'
+    - '^(join|unsubscribe\b.*|search for funding|finding jobs through devex|what is a community membership\?)$'
+    - '^© copyright'
 
 site_window_days: 30      # items exported to recent.json

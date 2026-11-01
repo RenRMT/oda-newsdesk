@@ -12,9 +12,13 @@ from newsdesk.models import Enrichment, Item
 log = logging.getLogger(__name__)
 
 TRACK_ENUM = ["aid", "data-ai", "nl"]
+KIND_ENUM = ["article", "event", "job", "funding_call", "navigation"]
+NOT_CONTENT = {"job", "funding_call", "navigation"}
 SCHEMA = {
     "type": "object",
     "properties": {
+        # First, so the model classifies the page before judging the topic.
+        "kind": {"type": "string", "enum": KIND_ENUM},
         "on_topic": {"type": "boolean"},
         "aggregator": {"type": "boolean"},
         "tracks": {"type": "array", "items": {"type": "string", "enum": TRACK_ENUM}},
@@ -33,7 +37,7 @@ SCHEMA = {
             "additionalProperties": False,
         },
     },
-    "required": ["on_topic", "aggregator", "tracks", "summary_en", "type", "region", "nl_flag", "hook"],
+    "required": ["kind", "on_topic", "aggregator", "tracks", "summary_en", "type", "region", "nl_flag", "hook"],
     "additionalProperties": False,
 }
 MAX_TOKENS = 4000  # includes thinking tokens at low effort
@@ -84,6 +88,9 @@ def apply_result(item: Item, result: LLMResult, backend: str) -> None:
     except ValidationError:
         item.llm_status = "invalid"
         return
+    # Small models call nearly everything on topic but do tell a job ad from an article.
+    if enrichment.kind in NOT_CONTENT:
+        enrichment.on_topic = False
     item.enrichment = enrichment
     item.llm_status = "ok"
     if enrichment.on_topic and enrichment.tracks:

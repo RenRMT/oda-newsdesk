@@ -49,7 +49,7 @@ def excluded(item) -> str | None:
         return "blocked publisher"
     pattern = _exclude_title()
     if pattern and pattern.search(item.title):
-        return "vacancy/job title"
+        return "vacancy/navigation title"
     return None
 
 

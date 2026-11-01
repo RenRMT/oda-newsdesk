@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field, model_validator
 
 Track = Literal["aid", "data-ai", "nl"]
 LLMStatus = Literal["ok", "skipped", "refused", "invalid", "error"]
+Kind = Literal["article", "event", "job", "funding_call", "navigation"]
 
 
 GNEWS_LOCALE = {"en": "hl=en&gl=US&ceid=US:en", "nl": "hl=nl&gl=NL&ceid=NL:nl"}
@@ -57,6 +58,7 @@ class Hook(BaseModel):
 
 
 class Enrichment(BaseModel):
+    kind: Kind = "article"  # items enriched before this field existed count as articles
     on_topic: bool = True
     aggregator: bool = False  # content farm, reposter or multi-topic roundup
     tracks: list[Track] = Field(default_factory=list)
