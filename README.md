@@ -25,24 +25,26 @@ python -m pytest -q
 
 | File | Purpose |
 |---|---|
-| `config/sources.yaml` | Feeds and Google News queries. Sites that block feed readers go through `site:` queries. |
+| `config/sources.yaml` | Feeds and Google News queries. Sites that block feed readers go through `site:` queries, scoped to their news path where the whole site also returns job ads (e.g. `site:devex.com/news`). Topic searches are limited to a curated list of established outlets. |
 | `config/keywords.yaml` | EN/NL keyword prefilter per track. |
 | `config/tracks.yaml` | Track labels, descriptions, and seed headlines for the embedding relevance score. |
 | `config/calendar.yaml` | Recurring dates shown under "Coming up". |
-| `config/settings.yaml` | Relevance thresholds, retention, excluded publishers and vacancy title patterns, hot-story tuning, and LLM backend, models and pricing. |
+| `config/settings.yaml` | Relevance thresholds, retention, excluded publishers, and title patterns for vacancies and navigation pages, hot-story tuning, and LLM backend, models and pricing. |
 | `prompts/enrich.md` | Editorial instructions for the LLM: on-topic test, summary, type, hook criteria. |
 | `prompts/cluster.md` | Instructions for the headline, summary and angle of a hot story. |
 | `prompts/digest.md` | Instructions for the weekly digest. |
 
 ## How items flow
 
-1. **Fetch.** Pull every source in `sources.yaml`.
+1. **Fetch.** Pull every source in `sources.yaml`. Items from blocked publishers or with vacancy or navigation-page titles (`exclude` in `settings.yaml`) are dropped here.
 2. **Keyword filter.** Keep matching items per track. Curated sources skip this step.
 3. **Deduplicate.** Drop repeated URLs and near-identical titles.
 4. **Relevance score.** Compare each item with the seed headlines using a multilingual MiniLM model running locally on CPU. Items below the threshold are stored but hidden.
 5. **LLM enrichment.** For relevant items, the LLM writes an English summary, decides whether the item is on topic, and assigns tracks, type and region, plus an optional blog hook. If it refuses, fails, or is unavailable, the item is still shown with its original excerpt. The Stats page shows these outcomes and the estimated cost.
 6. **Hot stories.** Group the visible items of the last 7 days into stories. An item joins a story when its embedding is close to the story's centroid, it shares a track, and it shares a rare word such as a place or organisation name. A story covered by at least 3 distinct publishers is "hot". Its score counts each publisher once, weighted by source and decayed with age. The LLM writes a neutral headline, summary and angle for each hot story, and these are reused until the story gains or loses items. Stories are saved in `data/clusters/current.json`.
 7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`. The site also has a search page (MiniSearch over the last 30 days, in the browser) and a monthly trends page.
+
+The LLM also classifies each item's `kind`. Jobs, funding calls and navigation pages are treated as off topic. Small local models such as gemma3:4b rarely judge anything off topic, so the deterministic filters above (source scoping, curated outlets, title patterns) do most of the filtering.
 
 Items the LLM judges to be from an aggregator, content farm or multi-topic roundup are hidden like off-topic ones and listed on Stats as "LLM: aggregator". The domain block list in `settings.yaml` (`exclude.domains`) stays the first filter, because items the LLM never sees are not checked. Add domains that keep showing up there.
 

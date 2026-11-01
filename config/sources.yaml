@@ -51,7 +51,7 @@
 - id: devex
   name: Devex
   type: gnews
-  q: site:devex.com
+  q: site:devex.com/news   # the whole site also returns job ads, profiles and account pages
   lang: en
   tracks: [aid]
   prefilter: false
@@ -104,7 +104,7 @@
 - id: oecd-dac
   name: OECD development finance (Google News)
   type: gnews
-  q: OECD ("official development assistance" OR "development assistance committee" OR "ODA")
+  q: OECD ("official development assistance" OR "development assistance committee" OR "ODA") (site:reuters.com OR site:apnews.com OR site:theguardian.com OR site:bbc.co.uk OR site:aljazeera.com OR site:ft.com OR site:ipsnews.net OR site:restofworld.org OR site:thenewhumanitarian.org OR site:news.un.org OR site:reliefweb.int OR site:devex.com/news OR site:oecd.org)
   lang: en
   tracks: [aid]
   weight: 0.5
@@ -153,6 +153,7 @@
   lang: en
   tracks: [data-ai]
   publisher: data-org
+  enabled: false   # Google News results are almost all job ads
 - id: cdac
   name: CDAC Network
   type: gnews
@@ -238,31 +239,34 @@
   publisher: thebroker
 
 # --- Catch-all Google News queries -------------------------------------------
+# Topic searches limited to a curated list of established outlets (EN or NL), so
+# local news, content farms and reposters stay out. The list is repeated per query;
+# extend it in each. The publisher is still taken per item.
 - id: gnews-nl-os
   name: Google News NL – ontwikkelingssamenwerking
   type: gnews
-  q: ontwikkelingssamenwerking OR ontwikkelingshulp OR noodhulp
+  q: (ontwikkelingssamenwerking OR ontwikkelingshulp OR noodhulp) (site:nos.nl OR site:nrc.nl OR site:volkskrant.nl OR site:trouw.nl OR site:fd.nl OR site:nd.nl OR site:rd.nl OR site:ad.nl OR site:oneworld.nl OR site:viceversaonline.nl)
   lang: nl
   tracks: [aid, nl]
   weight: 0.5
 - id: gnews-dutch-aid
   name: Google News – Dutch aid
   type: gnews
-  q: (Dutch OR Netherlands) ("development aid" OR "humanitarian aid" OR "development cooperation")
+  q: (Dutch OR Netherlands) ("development aid" OR "humanitarian aid" OR "development cooperation") (site:reuters.com OR site:apnews.com OR site:theguardian.com OR site:bbc.co.uk OR site:aljazeera.com OR site:ft.com OR site:ipsnews.net OR site:restofworld.org OR site:thenewhumanitarian.org OR site:news.un.org OR site:reliefweb.int OR site:devex.com/news)
   lang: en
   tracks: [aid, nl]
   weight: 0.5
 - id: gnews-humanitarian-ai
   name: Google News – humanitarian AI
   type: gnews
-  q: ("humanitarian" OR "development aid") ("AI" OR "artificial intelligence" OR "data")
+  q: ("humanitarian" OR "development aid") ("AI" OR "artificial intelligence" OR "data") (site:reuters.com OR site:apnews.com OR site:theguardian.com OR site:bbc.co.uk OR site:aljazeera.com OR site:ft.com OR site:ipsnews.net OR site:restofworld.org OR site:thenewhumanitarian.org OR site:news.un.org OR site:reliefweb.int OR site:devex.com/news)
   lang: en
   tracks: [data-ai]
   weight: 0.5
 - id: gnews-aid-cuts
   name: Google News – aid cuts
   type: gnews
-  q: '"aid cuts" OR "ODA cuts" OR "foreign aid budget"'
+  q: '("aid cuts" OR "ODA cuts" OR "foreign aid budget") (site:reuters.com OR site:apnews.com OR site:theguardian.com OR site:bbc.co.uk OR site:aljazeera.com OR site:ft.com OR site:ipsnews.net OR site:restofworld.org OR site:thenewhumanitarian.org OR site:news.un.org OR site:reliefweb.int OR site:devex.com/news)'
   lang: en
   tracks: [aid]
   weight: 0.5

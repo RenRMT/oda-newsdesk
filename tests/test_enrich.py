@@ -67,6 +67,16 @@ def test_apply_off_topic_keeps_keyword_tracks_and_hides():
     assert i.tracks == ["aid"] and not i.visible(0.4)
 
 
+@pytest.mark.parametrize("kind,shown", [
+    (None, True), ("article", True), ("event", True), ("job", False), ("funding_call", False), ("navigation", False),
+])
+def test_non_article_kinds_are_off_topic(kind, shown):
+    i = item("a")
+    data = GOOD if kind is None else GOOD | {"kind": kind}  # None: results from before the kind field
+    apply_result(i, LLMResult("ok", data=data), "ollama")
+    assert i.llm_status == "ok" and i.enrichment.on_topic is shown and i.visible(0.4) is shown
+
+
 @pytest.mark.parametrize("result,status", [
     (LLMResult("refused", error="refusal"), "refused"),
     (LLMResult("ok", data={"summary_en": "missing fields"}), "invalid"),

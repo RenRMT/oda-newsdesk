@@ -8,7 +8,14 @@ You receive one item at a time: title, publisher (with its web domain when known
 
 Return JSON with these fields:
 
-- `on_topic`: true only if the item substantively concerns aid, development cooperation, humanitarian action, or data/AI in that context. Set it to false for items that only mention a keyword in passing (e.g. sports, domestic politics without an aid angle, generic tech, or animal shelters receiving "noodhulp"). Job vacancies, tenders, procurement notices, author pages and site navigation pages are always off topic.
+- `kind`: what sort of page this is. Decide this first, from the title's shape:
+  - "article": a news story, analysis, report, blog post, opinion piece or newsletter. Headlines usually say what happened or ask a question.
+  - "event": an upcoming conference, webinar, consultation or deadline.
+  - "job": a vacancy or consultancy. These titles are usually just a role name, often with a grade, location or contract type and no verb, e.g. "Senior Social Safeguards Officer (Hybrid)", "Individual Consultant: Malaria Communications", "National Project Coordinator", "Technical Officer, P-2, Copenhagen".
+  - "funding_call": a grant, prize, tender or procurement call inviting applications, e.g. "Apply Now: $150,000 for Femtech Startups".
+  - "navigation": a site page that is not content: login, join, unsubscribe, search, author or profile pages, or a bare person's name, e.g. "Devex: Login", "Rory O'Neill Authors", "Gab M".
+  A headline *about* jobs or hiring ("UNDP targets jobs and investment with 2 new initiatives", "France's new development chief repositions the agency") is an "article".
+- `on_topic`: true only if `kind` is "article" or "event" and the item substantively concerns aid, development cooperation, humanitarian action, or data/AI in that context. Set it to false for items that only mention a keyword in passing (e.g. sports, domestic politics without an aid angle, generic tech, US domestic food or disaster aid, or animal shelters and shops receiving "noodhulp").
 - `aggregator`: true if the publisher is not the original source but a content farm, an aggregator or reposting site, or an AI-rewritten news feed, or if the item is a roundup of unrelated stories (e.g. "Incidenten in Utrecht: inbraak, ongevallen en noodhulp"). Judge from the publisher name and domain as well as the title. Established newsrooms, NGOs, governments and research institutes are never aggregators, even when they report on others' work. When in doubt, false.
 - `tracks`: the tracks that apply, from "aid", "data-ai" and "nl". Leave it empty if `on_topic` is false.
 - `summary_en`: one or two plain English sentences on what happened and why it matters for aid or development. Translate Dutch items. Do not start with "This article". Do not invent facts beyond the title and excerpt.

@@ -50,9 +50,36 @@ def test_exclusions_from_settings():
     from newsdesk import config
 
     vacancy = item("Stage lobby en advocacy humanitair, 32 uur per week", lang="nl")
-    assert config.excluded(vacancy) == "vacancy/job title" and not config.shown(vacancy)
+    assert config.excluded(vacancy) == "vacancy/navigation title" and not config.shown(vacancy)
     blocked = item("Humanitarian update")
     blocked.publisher = "vietnam-vn"
     assert config.excluded(blocked) == "blocked publisher"
     assert config.excluded(item("Incidenten in Utrecht: noodhulp", lang="nl", domain="nl.headtopics.com")) == "blocked publisher"
     assert config.excluded(item("Humanitarian hiring freeze at WFP", domain="notheadtopics.com")) is None
+
+
+# Titles seen from Devex's job board and site pages, and real headlines that must survive.
+@pytest.mark.parametrize("title,excluded", [
+    ("Individual Consultant: Malaria Communications", True),
+    ("Senior Communications Officer – North America (Digital Strategy & Campaigns)", True),
+    ("Director, Organizational Effectiveness & Change (Hybrid)", True),
+    ("Technical Officer, P-2, Temporary Position, 364 days, Supply Division, Copenhagen", True),
+    ("Senior-level position in Global Health", True),
+    ("Humanitarian Mine Action Field Medic - Specialist", True),
+    ("National Project Coordinator", True),
+    ("IT Assistant", True),
+    ("Devex: Login", True),
+    ("Rory O'Neill Authors", True),
+    ("Unsubscribe | Pro Insider | Newsletters", True),
+    ("France's new development chief repositions the agency for a new era", False),
+    ("Ending conflict is 'number one thing' to reduce world hunger, new WFP chief says", False),
+    ("UNDP targets jobs and investment with 2 new initiatives", False),
+    ("UN's Jorge Moreira da Silva rings alarm on coming food calamity", False),
+    ("'One Health' captures the spirit of 'Ubuntu,' says Africa CDC expert", False),
+    ("Devex CheckUp: Former Global Fund ED Mark Dybul returns for second term", False),
+    ("UN appoints new humanitarian coordinator for Sudan", False),
+])
+def test_job_and_navigation_titles(title, excluded):
+    from newsdesk import config
+
+    assert (config.excluded(item(title)) == "vacancy/navigation title") is excluded
