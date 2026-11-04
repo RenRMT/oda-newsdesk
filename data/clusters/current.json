@@ -4,7 +4,7 @@
    "first_seen": "2026-10-30T16:16:18Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.121,
+   "hot_score": 0.09,
    "id": "cca9d138865d42e8",
    "item_ids": [
     "cca9d138865d42e8",
@@ -26,7 +26,7 @@
    "first_seen": "2026-10-29T02:10:00Z",
    "headline": "Nigerian Federal Executive Council Approves Framework for Humanitarian Response",
    "hook_angle": "Could this framework truly represent a shift in Nigeria’s approach to tackling poverty, or is it simply a reiteration of existing strategies?",
-   "hot_score": 0.089,
+   "hot_score": 0.067,
    "id": "a7cb6431b885a14f",
    "item_ids": [
     "a7cb6431b885a14f",
@@ -45,29 +45,7 @@
     "aid"
    ],
    "velocity_24h": 0
-  },
-  {
-   "first_seen": "2026-10-28T01:21:00Z",
-   "headline": "",
-   "hook_angle": "",
-   "hot_score": 0.036,
-   "id": "64d0969d1622ad89",
-   "item_ids": [
-    "64d0969d1622ad89",
-    "207dcb192054a153"
-   ],
-   "last_seen": "2026-10-28T13:25:00Z",
-   "llm_status": "skipped",
-   "publishers": [
-    "reuters",
-    "ap-news"
-   ],
-   "summary": "",
-   "tracks": [
-    "aid"
-   ],
-   "velocity_24h": 0
   }
  ],
- "generated": "2026-11-03T23:01:46+00:00"
+ "generated": "2026-11-04T12:50:40+00:00"
 }
