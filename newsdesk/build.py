@@ -1,4 +1,3 @@
-import json
 import shutil
 from collections import Counter
 from datetime import datetime, timedelta
@@ -37,16 +36,10 @@ def _ago(d: datetime) -> str:
     return f"{hours // 24}d ago"
 
 
-def _item_json(item: Item) -> dict:
-    return item.model_dump(mode="json", exclude_none=True)
-
-
 def _rss(title: str, link: str, items: list[Item], now: datetime) -> str:
     entries = []
     for i in items[:FEED_SIZE]:
         desc = i.enrichment.summary_en if i.enrichment else i.excerpt
-        if i.enrichment and i.enrichment.hook.flag:
-            desc += f"\n\nHook: {i.enrichment.hook.angle} ({i.enrichment.hook.why_now})"
         entries.append(
             "<item>"
             f"<title>{escape(i.title)}</title>"
@@ -115,7 +108,7 @@ def _hot_rss(title: str, link: str, stories: list[dict], now: datetime) -> str:
         desc = s["summary"] or s["headline"]
         desc += f"\n\nCovered by {len(s['publishers'])} publishers: {', '.join(s['publishers'])}."
         if s["hook_angle"]:
-            desc += f"\n\nHook: {s['hook_angle']}"
+            desc += f"\n\nAngle: {s['hook_angle']}"
         entries.append(
             "<item>"
             f"<title>{escape(s['headline'])}</title>"
@@ -146,7 +139,7 @@ def _digest_rss(title: str, link: str, digests: list[dict], now: datetime) -> st
 
 
 def _trends(items: list[Item]) -> list[dict]:
-    """Per published month: shown items per track and type, hooks, and the most frequent regions."""
+    """Per published month: shown items per track and type, and the most frequent regions."""
     months: dict[str, list[Item]] = {}
     for i in items:
         months.setdefault(i.published.strftime("%Y-%m"), []).append(i)
@@ -161,7 +154,6 @@ def _trends(items: list[Item]) -> list[dict]:
             "tracks": {t: sum(t in i.tracks for i in group) for t in TRACKS},
             "types": Counter(e.type for e in enriched),
             "enriched": len(enriched),
-            "hooks": sum(e.hook.flag for e in enriched),
             "regions": regions.most_common(5),
         })
     return rows
@@ -198,7 +190,6 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     shown_ids = {i.id for i in items}
     hidden = [i for i in loaded if i.id not in shown_ids and i.fetched >= now - timedelta(days=3)]
     week = [i for i in items if i.published >= now - timedelta(days=7)]
-    hooks = [i for i in week if i.enrichment and i.enrichment.hook.flag]
     stories = _stories(store.load_clusters(), items, now, settings["hot"])
     hot = [s for s in stories if s["hot"]]
     digests = load_digests(store.dir)
@@ -227,11 +218,10 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         target.write_text(html, encoding="utf-8")
 
     days = [(d, list(g)) for d, g in groupby(week, key=lambda i: i.published.date())]
-    render("index.html", "index.html", latest_digest=digests[0] if digests else None, items=week, days=days, hooks=hooks[:6], hook_count=len(hooks),
+    render("index.html", "index.html", latest_digest=digests[0] if digests else None, items=week, days=days,
            hot=hot[:5], hot_count=len(hot), page="home")
     render("hot.html", "hot/index.html", hot=hot, developing=[s for s in stories if not s["hot"]],
            min_sources=settings["hot"]["min_sources"], page="hot")
-    render("hooks.html", "hooks/index.html", items=hooks, page="hooks")
     for t in TRACKS:
         render("track.html", f"track/{t}/index.html", items=[i for i in items if t in i.tracks], track=t, page=t)
     render("about.html", "about/index.html", sources=config.sources(), keywords=config.keywords(),
@@ -248,10 +238,6 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
     trends = _trends(archive)
     render("trends.html", "trends/index.html", months=trends, types=["news", "report", "policy", "opinion", "event"],
            track_max=max((n for r in trends for n in r["tracks"].values()), default=1) or 1, page="trends")
-    render("search.html", "search/index.html", page="search")
-
-    (out / "data").mkdir()
-    (out / "data" / "recent.json").write_text(json.dumps([_item_json(i) for i in items], ensure_ascii=False), encoding="utf-8")
 
     link = settings["site"].get("base_url") or ""
     title = settings["site"]["title"]
@@ -260,7 +246,6 @@ def build(store: Store, now: datetime, out: Path = SITE_DIR) -> None:
         (out / f"feed-{t}.xml").write_text(
             _rss(f"{title} – {tracks[t]['label']}", link, [i for i in items if t in i.tracks], now), encoding="utf-8"
         )
-    (out / "feed-hooks.xml").write_text(_rss(f"{title} – Blog hooks", link, hooks, now), encoding="utf-8")
     (out / "feed-hot.xml").write_text(_hot_rss(f"{title} – Hot stories", link, hot, now), encoding="utf-8")
     (out / "feed-digest.xml").write_text(_digest_rss(f"{title} – Weekly digest", link, digests, now), encoding="utf-8")
 

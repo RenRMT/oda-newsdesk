@@ -41,8 +41,7 @@
       btn.textContent = on ? "Starred" : "Star";
     } else if (btn.classList.contains("copy") && item) {
       const d = item.dataset;
-      let md = `**[${d.title}](${d.url})** — ${d.publisher}\n\n${d.summary || ""}`.trim() + "\n";
-      if (d.hook) md += `\n> Angle: ${d.hook}\n`;
+      const md = `**[${d.title}](${d.url})** — ${d.publisher}\n\n${d.summary || ""}`.trim() + "\n";
       navigator.clipboard.writeText(md).then(
         () => { btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy as Markdown"), 1200); },
         () => { btn.textContent = "Clipboard not available"; }

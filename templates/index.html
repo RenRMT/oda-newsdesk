@@ -29,21 +29,6 @@
 </section>
 {% endif %}
 
-{% if hooks %}
-<section class="hooks" aria-labelledby="h-hooks">
-  <div class="section-head">
-    <h2 id="h-hooks">Blog hooks</h2>
-    <a href="{{ root }}hooks/index.html">All {{ hook_count }} hooks this week</a>
-  </div>
-  <ul class="hook-list">
-    {% for i in hooks %}
-    <li><a href="{{ i.url }}" target="_blank" rel="noopener">{{ i.enrichment.hook.angle }}</a>
-      <span class="muted">{{ i.enrichment.hook.why_now }} · {{ i.publisher_name }}</span></li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}
-
 <section aria-labelledby="h-week">
   <div class="section-head">
     <h2 id="h-week">Last 7 days</h2>
