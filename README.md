@@ -42,7 +42,7 @@ python -m pytest -q
 4. **Relevance score.** Compare each item with the seed headlines using a multilingual MiniLM model running locally on CPU. Items below the threshold are stored but hidden.
 5. **LLM enrichment.** For relevant items, the LLM writes an English summary, decides whether the item is on topic, and assigns tracks, type and region, plus an optional blog hook. If it refuses, fails, or is unavailable, the item is still shown with its original excerpt. The Stats page shows these outcomes and the estimated cost.
 6. **Hot stories.** Group the visible items of the last 7 days into stories. An item joins a story when its embedding is close to the story's centroid, it shares a track, and it shares a rare word such as a place or organisation name. A story covered by at least 3 distinct publishers is "hot". Its score counts each publisher once, weighted by source and decayed with age. The LLM writes a neutral headline, summary and angle for each hot story, and these are reused until the story gains or loses items. Stories are saved in `data/clusters/current.json`.
-7. **Build.** Generate the static site and RSS feeds, including `feed-hooks.xml` and `feed-hot.xml`. The site also has a search page (MiniSearch over the last 30 days, in the browser) and a monthly trends page.
+7. **Build.** Generate the static site and RSS feeds, including `feed-hot.xml`. The site also has a monthly trends page.
 
 The LLM also classifies each item's `kind`. Jobs, funding calls and navigation pages are treated as off topic. Small local models such as gemma3:4b rarely judge anything off topic, so the deterministic filters above (source scoping, curated outlets, title patterns) do most of the filtering.
 
@@ -50,9 +50,9 @@ Items the LLM judges to be from an aggregator, content farm or multi-topic round
 
 ## Weekly digest
 
-The `digest` workflow runs on Monday at 05:30 UTC. It gives the digest model (Claude Sonnet, `llm.models.*.digest`) the past week's top 10 stories, the top 25 items per track, the item hooks and the next four weeks of calendar dates. The model returns trends, hot-story notes, an NL corner, notable publications and five blog hooks, citing material by reference only. The Markdown and its links are generated from those references, so the digest cannot link to anything that is not on the newsdesk. It is saved as `data/digests/YYYY-Www.md` and published under `/digest/` and in `feed-digest.xml`.
+The `digest` workflow runs on Monday at 05:30 UTC. It gives the digest model (Claude Sonnet, `llm.models.*.digest`) the past week's top 10 stories, the top 25 items per track and the next four weeks of calendar dates. The model returns trends, hot-story notes, an NL corner and notable publications, citing material by reference only. The Markdown and its links are generated from those references, so the digest cannot link to anything that is not on the newsdesk. It is saved as `data/digests/YYYY-Www.md` and published under `/digest/` and in `feed-digest.xml`.
 
-Without `ANTHROPIC_API_KEY` the workflow uses the local Ollama digest model (`llama3.1:8b`, about 20–40 minutes on the runner). If no model works, it writes a plain digest from the stories, item summaries and hooks.
+Without `ANTHROPIC_API_KEY` the workflow uses the local Ollama digest model (`llama3.1:8b`, about 20–40 minutes on the runner). If no model works, it writes a plain digest from the stories and item summaries.
 
 To get the digest by email, point an RSS-to-email service such as Buttondown or Blogtrottr at `<site>/feed-digest.xml`.
 

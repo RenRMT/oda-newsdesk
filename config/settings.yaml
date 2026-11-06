@@ -98,4 +98,4 @@ exclude:
     - '^(join|unsubscribe\b.*|search for funding|finding jobs through devex|what is a community membership\?)$'
     - '^© copyright'
 
-site_window_days: 30      # items exported to recent.json
+site_window_days: 30      # items shown on track pages and in feeds

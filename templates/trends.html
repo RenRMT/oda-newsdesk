@@ -3,7 +3,7 @@
 {% block content %}
 <header class="page-head">
   <h1>Trends</h1>
-  <p class="lead">Items shown on the newsdesk per month of publication. An item can count toward more than one track. Types, hooks and regions come from the language model, so they cover only the items it summarised.</p>
+  <p class="lead">Items shown on the newsdesk per month of publication. An item can count toward more than one track. Types and regions come from the language model, so they cover only the items it summarised.</p>
 </header>
 <section aria-labelledby="h-tracks">
   <div class="section-head"><h2 id="h-tracks">Items per track</h2></div>
@@ -26,15 +26,14 @@
   </div>
 </section>
 <section aria-labelledby="h-types">
-  <div class="section-head"><h2 id="h-types">Type, hooks and regions</h2></div>
+  <div class="section-head"><h2 id="h-types">Type and regions</h2></div>
   <div class="table-wrap">
   <table>
-    <thead><tr><th>Month</th><th class="num">Summarised</th>{% for t in types %}<th class="num">{{ t | capitalize }}</th>{% endfor %}<th class="num">Hooks</th><th>Most covered regions</th></tr></thead>
+    <thead><tr><th>Month</th><th class="num">Summarised</th>{% for t in types %}<th class="num">{{ t | capitalize }}</th>{% endfor %}<th>Most covered regions</th></tr></thead>
     <tbody>
     {% for m in months %}
     <tr><td>{{ m.month | date('%B %Y') }}</td><td class="num">{{ m.enriched }}</td>
       {% for t in types %}<td class="num">{{ m.types[t] or '' }}</td>{% endfor %}
-      <td class="num">{{ m.hooks or '' }}</td>
       <td>{% for region, n in m.regions %}{{ region }} <span class="muted">{{ n }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</td></tr>
     {% endfor %}
     </tbody>

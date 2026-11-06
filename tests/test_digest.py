@@ -70,19 +70,17 @@ def test_digest_with_llm_keeps_only_known_refs(tmp_path):
         "hot_stories": [{"ref": "S1", "note": "Watch the budget."}, {"ref": "S7", "note": "Invented."}],
         "nl_corner": [{"text": "Dutch debate.", "refs": [ref["n1"]]}],
         "publications": [{"ref": ref["r1"], "note": "Finds X."}, {"ref": "S1", "note": "Not an item."}],
-        "hooks": [{"angle": "What next?", "why_now": "Budget week", "refs": [ref["h1"], "S1"]},
-                  {"angle": "Made up?", "why_now": "", "refs": ["I42"]}],
     }
     backend = FakeBackend(LLMResult("ok", data=data, usage={"input_tokens": 10, "output_tokens": 5}))
     path, stats = digest.make_digest(store, NOW, backend)
     text = path.read_text(encoding="utf-8")
 
     assert path.name == "2026-W44.md" and stats["status"] == "ok"
-    assert "S1 |" in backend.user and "hook: Angle h1?" in backend.user
+    assert "S1 |" in backend.user and "Angle h1?" not in backend.user
     assert "- Cuts spread. ([Story headline](https://x/a1), [ODI](https://x/r1))" in text
-    assert "Invented" not in text and "Made up" not in text and "Not an item" not in text
+    assert "Invented" not in text and "Not an item" not in text
     assert "_Covered by 3 publishers: UN, NOS, TNH._" in text
-    assert "1. **What next?** _Budget week._ Start from: [DEVEX](https://x/h1), [Story headline](https://x/a1)." in text
+    assert "Blog hooks" not in text
 
     [d] = digest.load_digests(tmp_path)
     assert d["week"] == "2026-W44" and d["meta"]["status"] == "ok" and d["meta"]["model"] == "fake-1"
@@ -98,7 +96,7 @@ def test_digest_falls_back_without_model(tmp_path):
         assert "status: fallback" in text and "without the digest model" in text
         assert "## Big picture" not in text
         assert "[Title r1](https://x/r1)" in text  # reports become notable publications
-        assert "**Angle h1?**" in text  # item hooks carried over
+        assert "Blog hooks" not in text and "Angle h1?" not in text
 
 
 def test_markdown_special_characters_are_escaped():

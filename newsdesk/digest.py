@@ -1,4 +1,4 @@
-"""Weekly digest: one LLM call over the week's stories, top items and hooks, rendered as Markdown.
+"""Weekly digest: one LLM call over the week's stories and top items, rendered as Markdown.
 
 The model answers in JSON and cites material by reference (S1, I4); the Markdown, including every
 link, is rendered here from those references, so the digest can only link to items it was given.
@@ -24,7 +24,6 @@ log = logging.getLogger(__name__)
 
 MAX_STORIES = 10
 ITEMS_PER_TRACK = 25
-MAX_HOOK_ITEMS = 30
 CALENDAR_DAYS = 28
 MAX_TOKENS = 16000  # includes thinking
 
@@ -44,15 +43,11 @@ SCHEMA = {
         "publications": {"type": "array", "items": {
             "type": "object", "properties": {"ref": {"type": "string"}, "note": {"type": "string"}},
             "required": ["ref", "note"], "additionalProperties": False}},
-        "hooks": {"type": "array", "items": {
-            "type": "object",
-            "properties": {"angle": {"type": "string"}, "why_now": {"type": "string"}, "refs": _REFS},
-            "required": ["angle", "why_now", "refs"], "additionalProperties": False}},
     },
-    "required": ["big_picture", "hot_stories", "nl_corner", "publications", "hooks"],
+    "required": ["big_picture", "hot_stories", "nl_corner", "publications"],
     "additionalProperties": False,
 }
-LIMITS = {"big_picture": 5, "hot_stories": 5, "nl_corner": 5, "publications": 6, "hooks": 5}
+LIMITS = {"big_picture": 5, "hot_stories": 5, "nl_corner": 5, "publications": 6}
 
 
 @dataclass
@@ -89,8 +84,7 @@ def week_label(now: datetime) -> str:
 
 
 def _rank(i: Item) -> tuple:
-    hook = bool(i.enrichment and i.enrichment.hook.flag)
-    return (hook, i.enrichment is not None, i.score or 0)
+    return (i.enrichment is not None, i.score or 0)
 
 
 def gather(store: Store, now: datetime) -> Material:
@@ -116,8 +110,6 @@ def gather(store: Store, now: datetime) -> Material:
     for t in TRACKS:
         for i in [i for i in ranked if t in i.tracks][:ITEMS_PER_TRACK]:
             chosen[i.id] = i
-    for i in [i for i in ranked if i.enrichment and i.enrichment.hook.flag][:MAX_HOOK_ITEMS]:
-        chosen[i.id] = i
     ordered = sorted(chosen.values(), key=lambda i: i.published)
     m.items = {f"I{n}": i for n, i in enumerate(ordered, 1)}
 
@@ -163,8 +155,6 @@ def user_message(m: Material) -> str:
         if e:
             parts += [f"type: {e.type}"] + ([f"region: {e.region}"] if e.region else [])
         parts.append(i.title + (f" — {_summary(i)}" if _summary(i) else ""))
-        if e and e.hook.flag:
-            parts.append(f"hook: {e.hook.angle} ({e.hook.why_now})")
         lines.append(" | ".join(parts))
     lines += ["", "## Coming up"]
     lines += [f"- {e['when']:%Y-%m-%d}: {e['name']}" for e in m.events] or ["(nothing in the calendar)"]
@@ -185,8 +175,6 @@ def clean(data: dict, m: Material) -> dict:
         "nl_corner": [{"text": e["text"], "refs": refs(e.get("refs"))}
                       for e in data.get("nl_corner", []) if e.get("text")],
         "publications": [e for e in data.get("publications", []) if e.get("ref") in m.items],
-        "hooks": [{**e, "refs": refs(e.get("refs"))} for e in data.get("hooks", [])
-                  if e.get("angle") and refs(e.get("refs"))],
     }
     return {k: v[: LIMITS[k]] for k, v in out.items()}
 
@@ -204,7 +192,7 @@ def write_with_llm(m: Material, backend: LLMBackend) -> tuple[dict | None, dict]
         log.warning("digest LLM %s: %s", result.status, result.error)
         return None, stats | {"error": result.error}
     sections = clean(result.data or {}, m)
-    if not (sections["big_picture"] or sections["hooks"]):
+    if not sections["big_picture"]:
         return None, stats | {"status": "invalid", "error": "no usable sections"}
     return sections, stats
 
@@ -212,8 +200,6 @@ def write_with_llm(m: Material, backend: LLMBackend) -> tuple[dict | None, dict]
 def fallback(m: Material) -> dict:
     """A plain digest from the material alone, for weeks without a working model."""
     items = list(m.items.items())
-    hooks = sorted(((r, i) for r, i in items if i.enrichment and i.enrichment.hook.flag),
-                   key=lambda p: p[1].score or 0, reverse=True)
     pubs = [(r, i) for r, i in items if i.enrichment and i.enrichment.type in ("report", "policy")]
     nl = sorted(((r, i) for r, i in items if "nl" in i.tracks), key=lambda p: _rank(p[1]), reverse=True)
     return {
@@ -221,8 +207,6 @@ def fallback(m: Material) -> dict:
         "hot_stories": [{"ref": r, "note": s.cluster.summary} for r, s in list(m.stories.items())[:5]],
         "nl_corner": [{"text": i.enrichment.summary_en if i.enrichment else i.title, "refs": [r]} for r, i in nl[:5]],
         "publications": [{"ref": r, "note": i.enrichment.summary_en} for r, i in pubs[:6]],
-        "hooks": [{"angle": i.enrichment.hook.angle, "why_now": i.enrichment.hook.why_now, "refs": [r]}
-                  for r, i in hooks[:5]],
     }
 
 
@@ -283,13 +267,6 @@ def render(m: Material, sections: dict, meta: dict) -> str:
             i = m.items[e["ref"]]
             out.append(f"- **[{_md(i.title)}]({i.url})**, {_md(i.publisher_name)}."
                        + (f" {_md(e['note'])}" if e.get("note") else ""))
-        out.append("")
-
-    if sections["hooks"]:
-        out += ["## Blog hooks", ""]
-        for n, e in enumerate(sections["hooks"], 1):
-            why = f" _{_md(e['why_now'])}._" if e.get("why_now") else ""
-            out.append(f"{n}. **{_md(e['angle'])}**{why} Start from: {', '.join(_cite(r, m) for r in e['refs'])}.")
         out.append("")
 
     if m.events:

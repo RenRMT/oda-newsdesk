@@ -33,7 +33,7 @@
     <li><strong>Aid × data × AI:</strong> a data or AI keyword together with an aid signal, or any item from a data or AI source.</li>
     <li><strong>Netherlands:</strong> a Dutch signal (a keyword, Dutch language or a Dutch source) together with one of the tracks above.</li>
   </ul>
-  <p>A multilingual embedding model then scores every item that passes for similarity to example headlines for each track. Items from curated sources need a score of {{ thresholds.curated }}; keyword matches need {{ thresholds.keyword }}. A language model reads each item that clears the bar. It writes the summary, checks whether the item is really on topic, assigns tracks and a type, and flags possible blog hooks.</p>
+  <p>A multilingual embedding model then scores every item that passes for similarity to example headlines for each track. Items from curated sources need a score of {{ thresholds.curated }}; keyword matches need {{ thresholds.keyword }}. A language model reads each item that clears the bar. It writes the summary, checks whether the item is really on topic, and assigns tracks and a type.</p>
   {% for key, spec in keywords.items() %}
   <details><summary>{{ tracks[key].label }} keywords</summary>
     <p class="kw">{{ ((spec.terms or []) + (spec.terms_cs or [])) | join(' · ') }}</p>
