@@ -4,7 +4,7 @@
    "first_seen": "2026-11-03T01:12:10Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.636,
+   "hot_score": 0.585,
    "id": "ecc3b7e05eb00645",
    "item_ids": [
     "ecc3b7e05eb00645",
@@ -26,7 +26,7 @@
    "first_seen": "2026-11-02T10:25:00Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.306,
+   "hot_score": 0.282,
    "id": "df10b414b13a0723",
    "item_ids": [
     "df10b414b13a0723",
@@ -45,5 +45,5 @@
    "velocity_24h": 0
   }
  ],
- "generated": "2026-11-07T17:35:32+00:00"
+ "generated": "2026-11-07T21:36:39+00:00"
 }
