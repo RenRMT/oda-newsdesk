@@ -4,7 +4,7 @@
    "first_seen": "2026-11-03T01:12:10Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.94,
+   "hot_score": 0.721,
    "id": "ecc3b7e05eb00645",
    "item_ids": [
     "ecc3b7e05eb00645",
@@ -21,7 +21,29 @@
     "aid"
    ],
    "velocity_24h": 1
+  },
+  {
+   "first_seen": "2026-11-02T10:25:00Z",
+   "headline": "",
+   "hook_angle": "",
+   "hot_score": 0.347,
+   "id": "df10b414b13a0723",
+   "item_ids": [
+    "df10b414b13a0723",
+    "b5a357f59cd966c0"
+   ],
+   "last_seen": "2026-11-06T12:09:43Z",
+   "llm_status": "skipped",
+   "publishers": [
+    "al-jazeera",
+    "reuters"
+   ],
+   "summary": "",
+   "tracks": [
+    "aid"
+   ],
+   "velocity_24h": 1
   }
  ],
- "generated": "2026-11-06T22:51:48+00:00"
+ "generated": "2026-11-07T11:35:45+00:00"
 }
