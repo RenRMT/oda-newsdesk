@@ -3,39 +3,39 @@
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "alnap": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "bond": {
-  "etag": "W/\"7108b5088babce3cd9241d3ee77cec7c\"",
+  "etag": "W/\"1eb5a2a0f4c3a4bcbe20640a8049a231\"",
   "failures": 0,
-  "last_modified": "Tue, 10 Nov 2026 12:58:56 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_modified": "Tue, 10 Nov 2026 16:37:47 GMT",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "cdac": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "cgd": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "clingendael": {
-  "failures": 29,
+  "failures": 30,
   "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
   "last_status": "error"
  },
@@ -50,175 +50,176 @@
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "devinit": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "dra": {
   "etag": "\"e49e9c7e736c879cc6f98c51c9d80b41\"",
   "failures": 0,
   "last_modified": "Wed, 04 Nov 2026 13:59:51 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "not_modified"
  },
  "gnews-aid-cuts": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "gnews-dutch-aid": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "gnews-humanitarian-ai": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "gnews-nl-os": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "government-nl": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "humdata-centre": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "icrc-law-policy": {
   "etag": null,
   "failures": 0,
   "last_modified": "Tue, 10 Nov 2026 09:38:49 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
-  "last_status": "ok"
+  "last_ok": "2026-11-10T22:59:05+00:00",
+  "last_status": "not_modified"
  },
  "ictworks": {
   "etag": "W/\"14da656c298e64ce0afdfa4e14a9a2d9-br\"",
-  "failures": 0,
+  "failures": 1,
+  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://www.ictworks.org/feed/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
   "last_modified": "Tue, 10 Nov 2026 05:53:09 GMT",
   "last_ok": "2026-11-10T13:18:50+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "merltech": {
   "etag": "\"7edbd7d037b8610f8eecf998f6f3e405-gzip\"",
   "failures": 0,
   "last_modified": "Sun, 08 Nov 2026 09:18:21 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "nethope": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "odi": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "oecd-dac": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "oneworld": {
   "etag": null,
   "failures": 0,
-  "last_modified": "Tue, 10 Nov 2026 12:33:23 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_modified": "Tue, 10 Nov 2026 16:31:57 GMT",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "partos": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "reliefweb-data": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "reliefweb-policy": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "rijksoverheid-os": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "thebroker": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "tnh": {
   "etag": "W/\"1794315258\"",
   "failures": 0,
   "last_modified": "Tue, 10 Nov 2026 12:54:18 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
-  "last_status": "ok"
+  "last_ok": "2026-11-10T22:59:05+00:00",
+  "last_status": "not_modified"
  },
  "tweedekamer": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "un-news-humanitarian": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "ok"
  },
  "viceversa": {
   "etag": "\"4c6b766ad70670fa8542a810b8000ffe\"",
   "failures": 0,
   "last_modified": "Fri, 06 Nov 2026 06:07:25 GMT",
-  "last_ok": "2026-11-10T13:18:50+00:00",
+  "last_ok": "2026-11-10T22:59:05+00:00",
   "last_status": "not_modified"
  }
 }
