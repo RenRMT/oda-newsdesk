@@ -10200,6 +10200,22 @@
     }
    },
    "ts": "2026-11-16T13:26:58+00:00"
+  },
+  {
+   "digest": {
+    "backend": "ollama",
+    "cost_usd": null,
+    "input_tokens": 3290,
+    "items": 32,
+    "model": "llama3.1:8b",
+    "output_tokens": 862,
+    "status": "ok",
+    "stories": 1,
+    "week": "2026-W46"
+   },
+   "new_items": 0,
+   "sources": {},
+   "ts": "2026-11-16T13:58:25+00:00"
   }
  ]
 }
