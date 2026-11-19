@@ -1,29 +1,27 @@
 {
  "clusters": [
   {
-   "first_seen": "2026-11-12T09:26:16Z",
+   "first_seen": "2026-11-17T16:24:02Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.793,
-   "id": "6ba7c5ae91bb74e2",
+   "hot_score": 0.845,
+   "id": "f2cf9e79868b6873",
    "item_ids": [
-    "6ba7c5ae91bb74e2",
-    "83f99db3f06cc6ed",
-    "efebec6378e9100b"
+    "f2cf9e79868b6873",
+    "8a82daca25d68bf6"
    ],
-   "last_seen": "2026-11-18T10:35:13Z",
+   "last_seen": "2026-11-19T10:09:23Z",
    "llm_status": "skipped",
    "publishers": [
-    "viceversa",
-    "tnh"
+    "tnh",
+    "al-jazeera"
    ],
    "summary": "",
    "tracks": [
-    "aid",
-    "nl"
+    "aid"
    ],
-   "velocity_24h": 0
+   "velocity_24h": 1
   }
  ],
- "generated": "2026-11-19T00:01:32+00:00"
+ "generated": "2026-11-19T14:12:41+00:00"
 }
