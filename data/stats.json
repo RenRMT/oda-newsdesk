@@ -11185,6 +11185,254 @@
     }
    },
    "ts": "2026-11-18T13:44:16+00:00"
+  },
+  {
+   "hot": {
+    "clusters": 1,
+    "hot": 0
+   },
+   "llm": {
+    "attempted": 3,
+    "backend": "ollama",
+    "cache_read_input_tokens": 0,
+    "cost_usd": null,
+    "error": 0,
+    "input_tokens": 3759,
+    "invalid": 0,
+    "model": "gemma3:4b",
+    "ok": 3,
+    "output_tokens": 548,
+    "refused": 0
+   },
+   "new_items": 3,
+   "sources": {
+    "510": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "alnap": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "bond": {
+     "above_threshold": 0,
+     "fetched": 5,
+     "new": 0,
+     "relevant": 5,
+     "status": "ok"
+    },
+    "cdac": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "cgd": {
+     "above_threshold": 0,
+     "fetched": 42,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "clingendael": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "devex": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=site%3Adevex.com%2Fnews+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "devinit": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "dra": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "gnews-aid-cuts": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "gnews-dutch-aid": {
+     "above_threshold": 0,
+     "fetched": 2,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "gnews-humanitarian-ai": {
+     "above_threshold": 1,
+     "fetched": 76,
+     "new": 1,
+     "relevant": 3,
+     "status": "ok"
+    },
+    "gnews-nl-os": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp%29+%28site%3Anos.nl+OR+site%3Anrc.nl+OR+site%3Avolkskrant.nl+OR+site%3Atrouw.nl+OR+site%3Afd.nl+OR+site%3And.nl+OR+site%3Ard.nl+OR+site%3A",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "government-nl": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=site%3Agovernment.nl+%28%22development+cooperation%22+OR+%22development+aid%22+OR+%22humanitarian%22%29+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "humdata-centre": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "icrc-law-policy": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "ictworks": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 6,
+     "status": "ok"
+    },
+    "merltech": {
+     "above_threshold": 0,
+     "fetched": 5,
+     "new": 0,
+     "relevant": 5,
+     "status": "ok"
+    },
+    "nethope": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "odi": {
+     "above_threshold": 0,
+     "fetched": 28,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "oecd-dac": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "oneworld": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "partos": {
+     "above_threshold": 0,
+     "fetched": 1,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "reliefweb-data": {
+     "above_threshold": 0,
+     "error": "ValueError: unparseable feed: <unknown>:13:68: not well-formed (invalid token)",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "reliefweb-policy": {
+     "above_threshold": 0,
+     "error": "ValueError: unparseable feed: <unknown>:13:68: not well-formed (invalid token)",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "rijksoverheid-os": {
+     "above_threshold": 1,
+     "fetched": 4,
+     "new": 1,
+     "relevant": 4,
+     "status": "ok"
+    },
+    "thebroker": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "tnh": {
+     "above_threshold": 0,
+     "fetched": 10,
+     "new": 0,
+     "relevant": 10,
+     "status": "ok"
+    },
+    "tweedekamer": {
+     "above_threshold": 1,
+     "fetched": 24,
+     "new": 1,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "un-news-humanitarian": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "viceversa": {
+     "above_threshold": 0,
+     "error": "ValueError: unparseable feed: <unknown>:2:119: not well-formed (invalid token)",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    }
+   },
+   "ts": "2026-11-19T00:01:32+00:00"
   }
  ]
 }

@@ -3,39 +3,39 @@
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "alnap": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "bond": {
-  "etag": "W/\"e86c4e79449475f19daef1de927c9f4a\"",
+  "etag": "W/\"5496bc115e84a529e2b867c234cb8477\"",
   "failures": 0,
-  "last_modified": "Wed, 18 Nov 2026 09:59:21 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_modified": "Wed, 18 Nov 2026 20:17:02 GMT",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "cdac": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "cgd": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "clingendael": {
-  "failures": 46,
+  "failures": 47,
   "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
   "last_status": "error"
  },
@@ -48,168 +48,173 @@
  },
  "devex": {
   "etag": null,
-  "failures": 0,
+  "failures": 1,
+  "last_error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=site%3Adevex.com%2Fnews+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429",
   "last_modified": null,
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "devinit": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "dra": {
   "etag": "\"e49e9c7e736c879cc6f98c51c9d80b41\"",
   "failures": 0,
   "last_modified": "Wed, 04 Nov 2026 13:59:51 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "not_modified"
  },
  "gnews-aid-cuts": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "gnews-dutch-aid": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "gnews-humanitarian-ai": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "gnews-nl-os": {
   "etag": null,
-  "failures": 0,
+  "failures": 1,
+  "last_error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp%29+%28site%3Anos.nl+OR+site%3Anrc.nl+OR+site%3Avolkskrant.nl+OR+site%3Atrouw.nl+OR+site%3Afd.nl+OR+site%3And.nl+OR+site%3Ard.nl+OR+site%3A",
   "last_modified": null,
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "government-nl": {
   "etag": null,
-  "failures": 0,
+  "failures": 1,
+  "last_error": "HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=site%3Agovernment.nl+%28%22development+cooperation%22+OR+%22development+aid%22+OR+%22humanitarian%22%29+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-",
   "last_modified": null,
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "humdata-centre": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "icrc-law-policy": {
   "etag": null,
   "failures": 0,
   "last_modified": "Wed, 18 Nov 2026 08:58:21 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_ok": "2026-11-19T00:01:32+00:00",
+  "last_status": "not_modified"
  },
  "ictworks": {
   "etag": "W/\"31f1a14c769a5b693965ae733a6b31b8-br\"",
   "failures": 0,
   "last_modified": "Tue, 17 Nov 2026 05:27:03 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "merltech": {
   "etag": "\"51b7473a6d7c73a5474b69914d667dfc-gzip\"",
   "failures": 0,
   "last_modified": "Wed, 18 Nov 2026 11:27:44 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "nethope": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "odi": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "oecd-dac": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "oneworld": {
   "etag": null,
   "failures": 0,
-  "last_modified": "Wed, 18 Nov 2026 13:34:39 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_modified": "Wed, 18 Nov 2026 15:16:10 GMT",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "partos": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "reliefweb-data": {
   "etag": null,
-  "failures": 0,
+  "failures": 1,
+  "last_error": "ValueError: unparseable feed: <unknown>:13:68: not well-formed (invalid token)",
   "last_modified": null,
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "reliefweb-policy": {
   "etag": null,
-  "failures": 0,
+  "failures": 1,
+  "last_error": "ValueError: unparseable feed: <unknown>:13:68: not well-formed (invalid token)",
   "last_modified": null,
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "ok"
+  "last_status": "error"
  },
  "rijksoverheid-os": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "thebroker": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "tnh": {
-  "etag": "W/\"1795004953\"",
+  "etag": "W/\"1795026907\"",
   "failures": 0,
-  "last_modified": "Wed, 18 Nov 2026 12:29:13 GMT",
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_modified": "Wed, 18 Nov 2026 18:35:07 GMT",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "tweedekamer": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-18T13:44:16+00:00",
+  "last_ok": "2026-11-19T00:01:32+00:00",
   "last_status": "ok"
  },
  "un-news-humanitarian": {
   "etag": null,
-  "failures": 14,
+  "failures": 15,
   "last_error": "HTTPStatusError: Client error '404 Not Found' for url 'https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
   "last_modified": null,
   "last_ok": "2026-11-12T00:14:06+00:00",
@@ -217,9 +222,10 @@
  },
  "viceversa": {
   "etag": "\"095c915ffe7e059c4c992ba9319dd61e\"",
-  "failures": 0,
+  "failures": 1,
+  "last_error": "ValueError: unparseable feed: <unknown>:2:119: not well-formed (invalid token)",
   "last_modified": "Thu, 12 Nov 2026 09:26:16 GMT",
   "last_ok": "2026-11-18T13:44:16+00:00",
-  "last_status": "not_modified"
+  "last_status": "error"
  }
 }
