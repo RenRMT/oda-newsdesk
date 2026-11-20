@@ -12160,6 +12160,268 @@
     }
    },
    "ts": "2026-11-20T13:54:46+00:00"
+  },
+  {
+   "hot": {
+    "clusters": 1,
+    "hot": 0
+   },
+   "llm": {
+    "attempted": 2,
+    "backend": "ollama",
+    "cache_read_input_tokens": 0,
+    "cost_usd": null,
+    "error": 0,
+    "input_tokens": 2518,
+    "invalid": 0,
+    "model": "gemma3:4b",
+    "ok": 2,
+    "output_tokens": 387,
+    "refused": 0
+   },
+   "new_items": 2,
+   "sources": {
+    "510": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3A510.global+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "alnap": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Aalnap.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "bond": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 6,
+     "status": "ok"
+    },
+    "cdac": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acdacnetwork.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "cgd": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acgdev.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "clingendael": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "devex": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Adevex.com%2Fnews+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "devinit": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Adevinit.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "dra": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "gnews-aid-cuts": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28%22aid+cuts%22+OR+%22ODA+cuts%22+OR+%22foreign+aid+budget%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.uk+OR+site%3Aaljazeera.com+OR+site%3Aft.com+O",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "gnews-dutch-aid": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28Dutch+OR+Netherlands%29+%28%22development+aid%22+OR+%22humanitarian+aid%22+OR+%22development+cooperation%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.c",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "gnews-humanitarian-ai": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28%22humanitarian%22+OR+%22development+aid%22%29+%28%22AI%22+OR+%22artificial+intelligence%22+OR+%22data%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "gnews-nl-os": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp%29+%28site%3Anos.nl+OR+site%3Anrc.nl+OR+site%3Avolkskrant.nl+OR+site%3Atrouw.nl+OR+site%3Afd.nl+OR+site%3And.nl+OR+site%3Ard.nl+OR+site%",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "government-nl": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Agovernment.nl+%28%22development+cooperation%22+OR+%22development+aid%22+OR+%22humanitarian%22%29+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/e",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "humdata-centre": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acentre.humdata.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "icrc-law-policy": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "ictworks": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 6,
+     "status": "ok"
+    },
+    "merltech": {
+     "above_threshold": 0,
+     "fetched": 5,
+     "new": 0,
+     "relevant": 5,
+     "status": "ok"
+    },
+    "nethope": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Anethope.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "odi": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Aodi.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "oecd-dac": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=OECD+%28%22official+development+assistance%22+OR+%22development+assistance+committee%22+OR+%22ODA%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.uk+OR+si",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "oneworld": {
+     "above_threshold": 0,
+     "fetched": 7,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "partos": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Apartos.nl%2Fnieuws+OR+site%3Apartos.nl%2Fen+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "reliefweb-data": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "reliefweb-policy": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "rijksoverheid-os": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Arijksoverheid.nl+%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp+OR+%22buitenlandse+handel+en+ontwikkelingshulp%22%29+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information che",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "thebroker": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Athebrokeronline.eu+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "tnh": {
+     "above_threshold": 2,
+     "fetched": 10,
+     "new": 2,
+     "relevant": 10,
+     "status": "ok"
+    },
+    "tweedekamer": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Atweedekamer.nl+%28ontwikkelingshulp+OR+%22buitenlandse+handel+en+ontwikkelingshulp%22+OR+noodhulp%29+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information check: https://developer.mozilla.o",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "un-news-humanitarian": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "viceversa": {
+     "above_threshold": 0,
+     "error": "ValueError: unparseable feed: <unknown>:2:119: not well-formed (invalid token)",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    }
+   },
+   "ts": "2026-11-20T23:47:32+00:00"
   }
  ]
 }
