@@ -1,45 +1,41 @@
 {
  "510": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3A510.global+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "alnap": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Aalnap.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "bond": {
   "etag": "W/\"a572c4129270ba17671240d4feee3b3a\"",
   "failures": 0,
   "last_modified": "Fri, 20 Nov 2026 18:52:04 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "cdac": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acdacnetwork.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "cgd": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acgdev.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "clingendael": {
-  "failures": 51,
+  "failures": 52,
   "last_error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
   "last_status": "error"
  },
@@ -52,183 +48,168 @@
  },
  "devex": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Adevex.com%2Fnews+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "devinit": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Adevinit.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "dra": {
   "etag": "\"e49e9c7e736c879cc6f98c51c9d80b41\"",
   "failures": 0,
   "last_modified": "Wed, 04 Nov 2026 13:59:51 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "not_modified"
  },
  "gnews-aid-cuts": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28%22aid+cuts%22+OR+%22ODA+cuts%22+OR+%22foreign+aid+budget%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.uk+OR+site%3Aaljazeera.com+OR+site%3Aft.com+O",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "gnews-dutch-aid": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28Dutch+OR+Netherlands%29+%28%22development+aid%22+OR+%22humanitarian+aid%22+OR+%22development+cooperation%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.c",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "gnews-humanitarian-ai": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28%22humanitarian%22+OR+%22development+aid%22%29+%28%22AI%22+OR+%22artificial+intelligence%22+OR+%22data%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "gnews-nl-os": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp%29+%28site%3Anos.nl+OR+site%3Anrc.nl+OR+site%3Avolkskrant.nl+OR+site%3Atrouw.nl+OR+site%3Afd.nl+OR+site%3And.nl+OR+site%3Ard.nl+OR+site%",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "government-nl": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Agovernment.nl+%28%22development+cooperation%22+OR+%22development+aid%22+OR+%22humanitarian%22%29+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/e",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "humdata-centre": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Acentre.humdata.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "icrc-law-policy": {
   "etag": null,
   "failures": 0,
   "last_modified": "Thu, 19 Nov 2026 07:45:20 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "not_modified"
  },
  "ictworks": {
   "etag": "W/\"00622b7e98c5117f7d763fbe84dccbf8-br\"",
   "failures": 0,
   "last_modified": "Thu, 19 Nov 2026 05:09:39 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "merltech": {
   "etag": "\"7c0c3a3716a139d6ecc0a3ffcd6ff710-gzip\"",
   "failures": 0,
   "last_modified": "Fri, 20 Nov 2026 06:44:13 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "nethope": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Anethope.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "odi": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Aodi.org+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "oecd-dac": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=OECD+%28%22official+development+assistance%22+OR+%22development+assistance+committee%22+OR+%22ODA%22%29+%28site%3Areuters.com+OR+site%3Aapnews.com+OR+site%3Atheguardian.com+OR+site%3Abbc.co.uk+OR+si",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "oneworld": {
   "etag": null,
   "failures": 0,
-  "last_modified": "Fri, 20 Nov 2026 16:22:19 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_modified": "Sat, 21 Nov 2026 08:41:02 GMT",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "partos": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Apartos.nl%2Fnieuws+OR+site%3Apartos.nl%2Fen+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "reliefweb-data": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "reliefweb-policy": {
   "etag": null,
   "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T23:47:32+00:00",
+  "last_ok": "2026-11-21T13:18:01+00:00",
   "last_status": "ok"
  },
  "rijksoverheid-os": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Arijksoverheid.nl+%28ontwikkelingssamenwerking+OR+ontwikkelingshulp+OR+noodhulp+OR+%22buitenlandse+handel+en+ontwikkelingshulp%22%29+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information che",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "thebroker": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Athebrokeronline.eu+when%3A14d&hl=en&gl=US&ceid=US:en'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "tnh": {
   "etag": "W/\"1795191557\"",
   "failures": 0,
   "last_modified": "Fri, 20 Nov 2026 16:19:17 GMT",
-  "last_ok": "2026-11-20T23:47:32+00:00",
-  "last_status": "ok"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "not_modified"
  },
  "tweedekamer": {
   "etag": null,
-  "failures": 1,
-  "last_error": "HTTPStatusError: Server error '503 Service Unavailable' for url 'https://news.google.com/rss/search?q=site%3Atweedekamer.nl+%28ontwikkelingshulp+OR+%22buitenlandse+handel+en+ontwikkelingshulp%22+OR+noodhulp%29+when%3A14d&hl=nl&gl=NL&ceid=NL:nl'\nFor more information check: https://developer.mozilla.o",
+  "failures": 0,
   "last_modified": null,
-  "last_ok": "2026-11-20T13:54:46+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "ok"
  },
  "un-news-humanitarian": {
   "etag": null,
-  "failures": 19,
+  "failures": 20,
   "last_error": "HTTPStatusError: Client error '404 Not Found' for url 'https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
   "last_modified": null,
   "last_ok": "2026-11-12T00:14:06+00:00",
@@ -236,10 +217,9 @@
  },
  "viceversa": {
   "etag": "\"095c915ffe7e059c4c992ba9319dd61e\"",
-  "failures": 2,
-  "last_error": "ValueError: unparseable feed: <unknown>:2:119: not well-formed (invalid token)",
+  "failures": 0,
   "last_modified": "Thu, 12 Nov 2026 09:26:16 GMT",
-  "last_ok": "2026-11-20T00:24:37+00:00",
-  "last_status": "error"
+  "last_ok": "2026-11-21T13:18:01+00:00",
+  "last_status": "not_modified"
  }
 }
