@@ -12893,6 +12893,248 @@
     }
    },
    "ts": "2026-11-21T22:54:22+00:00"
+  },
+  {
+   "hot": {
+    "clusters": 1,
+    "hot": 0
+   },
+   "llm": {
+    "attempted": 2,
+    "backend": "ollama",
+    "cache_read_input_tokens": 0,
+    "cost_usd": null,
+    "error": 0,
+    "input_tokens": 2470,
+    "invalid": 0,
+    "model": "gemma3:4b",
+    "ok": 2,
+    "output_tokens": 357,
+    "refused": 0
+   },
+   "new_items": 2,
+   "sources": {
+    "510": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "alnap": {
+     "above_threshold": 0,
+     "fetched": 4,
+     "new": 0,
+     "relevant": 4,
+     "status": "ok"
+    },
+    "bond": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 6,
+     "status": "ok"
+    },
+    "cdac": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "cgd": {
+     "above_threshold": 0,
+     "fetched": 38,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "clingendael": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '403 Forbidden' for url 'https://www.clingendael.org/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "devex": {
+     "above_threshold": 1,
+     "fetched": 69,
+     "new": 1,
+     "relevant": 64,
+     "status": "ok"
+    },
+    "devinit": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "dra": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "gnews-aid-cuts": {
+     "above_threshold": 0,
+     "fetched": 38,
+     "new": 0,
+     "relevant": 2,
+     "status": "ok"
+    },
+    "gnews-dutch-aid": {
+     "above_threshold": 0,
+     "fetched": 1,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "gnews-humanitarian-ai": {
+     "above_threshold": 1,
+     "fetched": 100,
+     "new": 1,
+     "relevant": 7,
+     "status": "ok"
+    },
+    "gnews-nl-os": {
+     "above_threshold": 0,
+     "fetched": 11,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "government-nl": {
+     "above_threshold": 0,
+     "fetched": 4,
+     "new": 0,
+     "relevant": 4,
+     "status": "ok"
+    },
+    "humdata-centre": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "icrc-law-policy": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "ictworks": {
+     "above_threshold": 0,
+     "fetched": 6,
+     "new": 0,
+     "relevant": 6,
+     "status": "ok"
+    },
+    "merltech": {
+     "above_threshold": 0,
+     "fetched": 5,
+     "new": 0,
+     "relevant": 5,
+     "status": "ok"
+    },
+    "nethope": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "odi": {
+     "above_threshold": 0,
+     "fetched": 25,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "oecd-dac": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "oneworld": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    },
+    "partos": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "reliefweb-data": {
+     "above_threshold": 0,
+     "fetched": 7,
+     "new": 0,
+     "relevant": 7,
+     "status": "ok"
+    },
+    "reliefweb-policy": {
+     "above_threshold": 0,
+     "fetched": 20,
+     "new": 0,
+     "relevant": 16,
+     "status": "ok"
+    },
+    "rijksoverheid-os": {
+     "above_threshold": 0,
+     "fetched": 4,
+     "new": 0,
+     "relevant": 4,
+     "status": "ok"
+    },
+    "thebroker": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "ok"
+    },
+    "tnh": {
+     "above_threshold": 0,
+     "fetched": 10,
+     "new": 0,
+     "relevant": 10,
+     "status": "ok"
+    },
+    "tweedekamer": {
+     "above_threshold": 0,
+     "fetched": 27,
+     "new": 0,
+     "relevant": 1,
+     "status": "ok"
+    },
+    "un-news-humanitarian": {
+     "above_threshold": 0,
+     "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://news.un.org/feed/subscribe/en/news/topic/humanitarian-aid/feed/rss.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "error"
+    },
+    "viceversa": {
+     "above_threshold": 0,
+     "fetched": 0,
+     "new": 0,
+     "relevant": 0,
+     "status": "not_modified"
+    }
+   },
+   "ts": "2026-11-22T13:09:32+00:00"
   }
  ]
 }
