@@ -13619,6 +13619,22 @@
     }
    },
    "ts": "2026-11-23T15:45:47+00:00"
+  },
+  {
+   "digest": {
+    "backend": "ollama",
+    "cost_usd": null,
+    "input_tokens": 5230,
+    "items": 49,
+    "model": "llama3.1:8b",
+    "output_tokens": 709,
+    "status": "ok",
+    "stories": 1,
+    "week": "2026-W47"
+   },
+   "new_items": 0,
+   "sources": {},
+   "ts": "2026-11-23T16:25:40+00:00"
   }
  ]
 }
