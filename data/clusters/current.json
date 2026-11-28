@@ -1,4 +1,27 @@
 {
- "clusters": [],
- "generated": "2026-11-27T14:48:23+00:00"
+ "clusters": [
+  {
+   "first_seen": "2026-11-27T09:04:02Z",
+   "headline": "",
+   "hook_angle": "",
+   "hot_score": 0.747,
+   "id": "40dd3d473fc8d123",
+   "item_ids": [
+    "40dd3d473fc8d123",
+    "9acf0284950f0810"
+   ],
+   "last_seen": "2026-11-27T13:22:58Z",
+   "llm_status": "skipped",
+   "publishers": [
+    "reuters",
+    "al-jazeera"
+   ],
+   "summary": "",
+   "tracks": [
+    "aid"
+   ],
+   "velocity_24h": 2
+  }
+ ],
+ "generated": "2026-11-28T01:15:51+00:00"
 }
