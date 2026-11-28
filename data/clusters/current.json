@@ -4,7 +4,7 @@
    "first_seen": "2026-11-27T09:04:02Z",
    "headline": "",
    "hook_angle": "",
-   "hot_score": 0.747,
+   "hot_score": 0.573,
    "id": "40dd3d473fc8d123",
    "item_ids": [
     "40dd3d473fc8d123",
@@ -20,8 +20,8 @@
    "tracks": [
     "aid"
    ],
-   "velocity_24h": 2
+   "velocity_24h": 0
   }
  ],
- "generated": "2026-11-28T01:15:51+00:00"
+ "generated": "2026-11-28T13:59:22+00:00"
 }
